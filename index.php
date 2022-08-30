@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['id'])){
+	header('location: login.php');
+	exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +32,7 @@
 				<i class="icon las la-home"></i>
 				<i class="icon las la-plus"></i>
 				<i class="icon las la-user"></i>
-				<i class="icon las la-sign-out-alt"></i>
+				<a href="logout.php"><i class="logout icon las la-sign-out-alt"></i></a>
 			</div>
 		</div>
 	</nav>

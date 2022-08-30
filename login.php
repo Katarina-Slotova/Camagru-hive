@@ -1,3 +1,15 @@
+<?php 
+
+session_start();
+// Check if user is logged in by checking whether the user id is in session
+if(isset($_SESSION['id'])){
+	header('location: index.php');
+	exit;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +20,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 	<link rel="stylesheet" href="assets/line-awesome/css/line-awesome.min.css"> 
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-	<title>Sign in</title>
+	<title>Log in</title>
 </head>
 <body>
 	<div class="container">
@@ -18,8 +30,10 @@
 					<div class="logo">
 						<img src="assets/imgs/camagru_logo.png" class="logo-img" alt="camagru-logo">
 					</div>
-					<form class="login-form" id="signup_form">
-						<p id="error_msg" class="message is-danger has-text-centered"></p>
+					<form class="login-form" id="login_form" method="POST" action="process_login.php">
+						<?php if(isset($_GET['error_msg'])){ ?>
+							<p id="error_msg" class="message is-danger has-text-centered"><?php echo($_GET['error_msg']);?></p>
+						<?php } ?>
 						<div class="form-info">
 							<div class="login-input">
 								<input type="email" name="email" placeholder="Your email" required>
@@ -27,26 +41,16 @@
 						</div>
 						<div class="form-info">
 							<div class="login-input">
-								<input type="text" name="username" placeholder="Your username" required>
-							</div>
-						</div>
-						<div class="form-info">
-							<div class="login-input">
 								<input type="password" name="password" id="password" placeholder="Your password" required>
 							</div>
 						</div>
-						<div class="form-info">
-							<div class="login-input">
-								<input type="password" name="password_conf" id="password_conf" placeholder="Your password again" required>
-							</div>
-						</div>
 						<div class="btn-part">
-							<button type="submit" class="login-btn" id="signup_btn">Sign up</button>
+							<button type="submit" name="login_btn" class="login-btn" id="login_btn">Log in</button>
 						</div>
 					</form>
 					<div class="not-user-yet">
 						<hr>
-						<p>Already a user? <a href="login.html">Log in!</a></p>
+						<p>Not a user yet? <a href="signup.php">Create an account!</a></p>
 					</div>
 				</div>
 			</div>
@@ -59,25 +63,19 @@
 	<script>
 		function verifyForm(){
 			var password = document.getElementById('password').value;
-			var password_conf = document.getElementById('password_conf').value;
 			var error_msg = document.getElementById('error_msg');
 
 			if (password.length < 8){
 				error_msg.innerHTML = "Password is shorter than 8 characters."
 				return false;
 			}
-
-			if (password !== password_conf){
-				error_msg.innerHTML = "Passwords do not match."
-				return false;
-			}
 			return true;
 		}
 
-		document.getElementById('signup_form').addEventListener('submit',(e)=>{
+/* 		document.getElementById('login_form').addEventListener('submit',(e)=>{
 			e.preventDefault();
 			verifyForm();
-		}) 
+		})  */
 	</script>
 </body>
 </html>

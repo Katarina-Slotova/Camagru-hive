@@ -1,0 +1,40 @@
+<?php
+
+session_start();
+
+include('connection.php');
+
+if(isset($_POST['login_btn'])){
+	$email = $_POST['email'];
+	$password = md5($_POST['password']);
+
+	$stmt = $conn->prepare("SELECT id, username, email, password, image, followers, following, posts FROM users WHERE email = ? AND password = ?");
+	$stmt->bind_param("ss", $email, $password);
+	$stmt->execute();
+	$stmt->store_result();
+	
+	// Check if user with this email and passwd is in db
+	if($stmt->num_rows > 0){
+		$stmt->bind_result($id, $username, $email, $password, $image, $followers, $following, $posts);
+		$stmt->fetch();
+
+		// Save the result in session
+		$_SESSION['id'] = $id;
+		$_SESSION['username'] = $username;
+		$_SESSION['email'] = $email;
+		$_SESSION['password'] = $password;
+		$_SESSION['image'] = $image;
+		$_SESSION['followers'] = $followers;
+		$_SESSION['following'] = $following;
+		$_SESSION['posts'] = $posts;
+
+		header('location: index.php');
+	}else{
+		header('location: login.php?error_msg=Incorrect email or password.');
+		exit;
+	}
+}else{
+	header('location: login.php?error_msg=Error occured.');
+	exit;
+}
+?>
