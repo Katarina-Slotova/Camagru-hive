@@ -1,53 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<style type="text/css"></style>
-	<title>Camagru</title>
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-	<link rel="stylesheet" href="assets/line-awesome/css/line-awesome.min.css"> 
-	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-</head>
-<body>
-	<nav class="navbar">
-		<div class="navbar-wrapper">
-			<img src="assets/imgs/camagru_logo.png" class="logo">
-			<form>
-				<input type="text" class="search-box" placeholder="Search">
-			</form>
-			<div class="nav-items">
-				<i class="icon las la-home"></i>
-				<i class="icon las la-plus"></i>
-				<i class="icon las la-user"></i>
-				<i class="icon las la-sign-out-alt"></i>
-			</div>
-		</div>
-	</nav>
+<?php include('header.php'); ?>
+
 	<header class="profile-header">
 		<div class="profile-container">
+			<?php if(isset($_GET['ok_message'])){ ?>
+				<p class="is-success has-text-centered"><?php echo $_GET['ok_message']; ?></p>
+			<?php } ?>
 			<div class="profile">
 				<div class="profile-img">
-					<img src="assets/imgs/dog.png" alt="">
+					<img src="<?php echo "assets/imgs/".$_SESSION['image']; ?>" alt=""> 
 				</div>
 				<div class="profile-user-settings">
-					<h1 class="profile-user-name">username</h1>
-					<button class="profile-btn profile-edit-btn">Edit profile</button>
+					<h1 class="profile-user-name"><?php echo $_SESSION['username']; ?></h1>
+					<form action="edit_profile.php" method="GET" style="display:inline-block">
+						<button class="profile-btn profile-edit-btn" type="submit">Edit profile</button>
+					</form>
 					<button class="profile-btn profile-settings-btn">
 						<i class="las la-tools"></i>
 					</button>
 				</div>
 				<div class="profile-stats">
 					<ul>
-						<li><span class="profile-stat-count">234</span> posts</li>
-						<li><span class="profile-stat-count">234</span> followers</li>
-						<li><span class="profile-stat-count">234</span> following</li>
+						<li><span class="profile-stat-count"><?php echo $_SESSION['posts']; ?></span> posts</li>
+						<li><span class="profile-stat-count"><?php echo $_SESSION['followers']; ?></span> followers</li>
+						<li><span class="profile-stat-count"><?php echo $_SESSION['following']; ?></span> following</li>
 					</ul>
 				</div>
 			</div>
 			<div class="profile-bio">
-				<p><span class="profile-real-name">Name</span> This is the bio area that I designed and used html and css.</p>
+				<p><span class="profile-real-name"><?php echo $_SESSION['username']; ?></span></p>
+				<p>About me: <?php echo $_SESSION['bio']?></p>
 			</div>
 		</div>
 	</header>

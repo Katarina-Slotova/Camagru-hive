@@ -460,6 +460,7 @@ body{
 }
 .profile-real-name, .profile-stat-count, .profile-edit-btn{
 	font-weight: 600;
+	font-size: 18px;
 }
 
 .gallery{

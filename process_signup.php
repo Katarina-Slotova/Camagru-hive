@@ -29,7 +29,7 @@ if(isset($_POST['signup_btn'])){
 		// Store the result
 	$stmt->store_result();
 
-	if($stmt->num_rows > 0){
+	if($stmt->num_rows() > 0){
 		header('location: signup.php?error_msg=this user already exists');
 		exit;
 	}else{
@@ -37,11 +37,11 @@ if(isset($_POST['signup_btn'])){
 		$stmt->bind_param("sss", $username, $email, md5($password));
 		// If user account created, return the user information to frontend
 		if($stmt->execute()){
-			$stmt = $conn->prepare("SELECT id, username, email, image, following, followers, posts FROM users WHERE username = ?");
+			$stmt = $conn->prepare("SELECT id, username, email, image, following, followers, posts, bio FROM users WHERE username = ?");
 			$stmt->bind_param("s", $username);
 			$stmt->execute();
-			// Binds variables to a prepared statement for result storage
-			$stmt->bind_result($id, $username, $email, $image, $following, $followers, $posts);
+			// Bind variables to a prepared statement for result storage
+			$stmt->bind_result($id, $username, $email, $image, $following, $followers, $posts, $bio);
 			// Fetch the data from db
 			$stmt->fetch();
 
@@ -53,6 +53,7 @@ if(isset($_POST['signup_btn'])){
 			$_SESSION['following'] = $following;
 			$_SESSION['followers'] = $followers;
 			$_SESSION['posts'] = $posts;
+			$_SESSION['bio'] = $bio;
 
 			header('location: index.php');
 		}else{
