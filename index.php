@@ -116,33 +116,41 @@
 					<p class="usrname">username</p>
 				</div>
 			</div>
+
+			<?php include('get_latest_posts.php'); ?>
+
+			<?php foreach($posts as $post){?>
+
 			<!--POSTS--->
 			<div class="posts">
 				<div class="info">
 					<div class="user">
 						<div class="profile-pic">
-							<img src="assets/imgs/dog.png" alt="image">
+							<img src="<?php echo "assets/imgs/".$post['profile_image'];  ?>" alt="profile-image">
 						</div>
-						<p class="usrname">username</p>
+						<p class="usrname"><?php echo $post['username'];?></p>
 					</div>
 					<i class="las la-ellipsis-v options"></i>
 				</div>
 				<!--POST CONTENT-->
-				<img class="post-img" src="assets/imgs/flower.jpg" alt="flower">
+				<img class="post-img" src="<?php echo "assets/imgs/".$post['image'];?>" alt="flower">
 				<div class="post-content">
 					<div class="reaction-wrapper">
 						<i class="icon lar la-heart"></i>
 						<i class="icon las la-comments"></i>
 					</div>
-					<p class="likes">1679 likes</p>
-					<p class="description"><span>username</span> this is a description</p>
-					<p class="time">2028/8/9</p>
+					<p class="likes"><?php echo $post['likes']?> likes</p>
+					<p class="description"><span><?php echo $post['caption']; ?></span><?php echo $post['hashtags']; ?></p>
+					<p class="time"><?php echo $post['date']; ?></p>
 				</div>
 				<div class="comment-wrapper">
 					<img class="icon" src="assets/imgs/dog.png" alt="profile-pic">
 					<input class="comment-box" type="text" placeholder="Write a comment">
 					<button class="comment-button">Post</button>
 				</div>
+
+				<?php } ?>
+
 				<nav class="pagination mt-6" role="navigation" aria-label="pagination">
 					<a class="pagination-previous is-disabled" title="This is the first page">Previous</a>
 					<a class="pagination-next">Next page</a>

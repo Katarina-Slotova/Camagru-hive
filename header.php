@@ -29,10 +29,10 @@ if(!isset($_SESSION['id'])){
 				<input type="text" class="search-box" placeholder="Search">
 			</form>
 			<div class="nav-items">
-				<i class="icon las la-home"></i>
-				<i class="icon las la-plus"></i>
-				<i class="icon las la-user"></i>
-				<a href="logout.php"><i class="logout icon las la-sign-out-alt"></i></a>
+				<a href="index.php"><i class="icon las la-home"></i></a>
+				<a href="camera.php"><i class="icon las la-plus"></i></a>
+				<a href="profile.php"><i class="icon las la-user"></i></a>
+				<a href="logout.php"><i class="icon las la-sign-out-alt"></i></a>
 			</div>
 		</div>
 	</nav>

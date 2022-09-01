@@ -14,7 +14,7 @@ if(isset($_POST['update_profile_btn'])){
 	$bio = $_POST['bio'];
 
 	if($image != ""){
-		$image_name = $username . ".png";
+		$image_name = $_SESSION['username'] . ".jpg";
 	}else{
 		$image_name = $_SESSION['image'];
 	}
@@ -31,6 +31,7 @@ if(isset($_POST['update_profile_btn'])){
 		$stmt->bind_param("s", $username);
 		$stmt->execute();
 		$stmt->store_result();
+		$image_name = $_POST['username'] . ".jpg";
 	
 		if($stmt->num_rows() > 0){
 			header("location: edit_profile.php?error_message=Username already exists.");
@@ -52,17 +53,17 @@ if(isset($_POST['update_profile_btn'])){
 		$bio = $_SESSION['bio'];
 	}
 
-	$stmt = $conn->prepare("UPDATE users SET image = ?, email = ?, username = ?, password = ?, bio = ? WHERE id = ?");
-	$stmt->bind_param("sssssi", $image_name, $email, $username, md5($password), $bio, $id);
+	$stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, image = ?, bio = ? WHERE id = ?");
+	$stmt->bind_param("sssssi", $username, md5($password), $email, $image_name, $bio, $id);
 	if($stmt->execute()){
 		if($image != ""){
 			move_uploaded_file($image, "assets/imgs/".$image_name); //Store image in the imgs folder
 		}
 		// Update session with the new updated data (from variables)
-		$_SESSION['image'] = $image_name;
-		$_SESSION['email'] = $email;
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
+		$_SESSION['email'] = $email;
+		$_SESSION['image'] = $image_name;
 		$_SESSION['bio'] = $bio;
 
 		header('location: profile.php?ok_message=Profile updated.');

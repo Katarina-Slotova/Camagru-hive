@@ -14,9 +14,6 @@
 					<form action="edit_profile.php" method="GET" style="display:inline-block">
 						<button class="profile-btn profile-edit-btn" type="submit">Edit profile</button>
 					</form>
-					<button class="profile-btn profile-settings-btn">
-						<i class="las la-tools"></i>
-					</button>
 				</div>
 				<div class="profile-stats">
 					<ul>
@@ -35,61 +32,22 @@
 	<main>
 		<div class="profile-container">
 			<div class="gallery">
-				<div class="gallery-item">
-					<img src="assets/imgs/space.jpg" class="gallery-img" alt="space">
-					<div class="gallery-item-info">
-						<ul>
-							<li class="gallery-item-likes"><span>99</span>
-								<i class="lar la-heart"></i>
-							</li>
-							<li class="gallery-item-comments"><span>23</span>
-								<i class="las la-comments"></i>
-							</li>
-						</ul>
+			<?php include('user_posts.php'); ?>
+				<?php foreach($get_posts as $post){ ?>
+					<div class="gallery-item">
+					<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
+						<div class="gallery-item-info">
+							<ul>
+								<li class="gallery-item-likes"><span><?php echo $post['likes'];?></span>
+									<i class="lar la-heart"></i>
+								</li>
+								<li class="gallery-item-comments"><span></span>
+									<i class="las la-comments"></i>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-
-				<div class="gallery-item">
-					<img src="assets/imgs/berries.jpg" class="gallery-img" alt="berries">
-					<div class="gallery-item-info">
-						<ul>
-							<li class="gallery-item-likes"><span>99</span>
-								<i class="lar la-heart"></i>
-							</li>
-							<li class="gallery-item-comments"><span>45</span>
-								<i class="las la-comments"></i>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="gallery-item">
-					<img src="assets/imgs/city.jpg" class="gallery-img" alt="city">
-					<div class="gallery-item-info">
-						<ul>
-							<li class="gallery-item-likes"><span>45</span>
-								<i class="lar la-heart"></i>
-							</li>
-							<li class="gallery-item-comments"><span>12</span>
-								<i class="las la-comments"></i>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="gallery-item">
-					<img src="assets/imgs/fencing.jpg" class="gallery-img" alt="fencing">
-					<div class="gallery-item-info">
-						<ul>
-							<li class="gallery-item-likes"><span>12</span>
-								<i class="lar la-heart"></i>
-							</li>
-							<li class="gallery-item-comments"><span>56</span>
-								<i class="las la-comments"></i>
-							</li>
-						</ul>
-					</div>
-				</div>
+			<?php } ?>
 			</div>
 		</div>
 	</main>

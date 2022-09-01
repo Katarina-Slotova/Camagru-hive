@@ -12,21 +12,8 @@
 				<div class="mb-3">
 					<label for="image" class="label">Profile picture</label>
 					<img src="<?php echo "assets/imgs/".$_SESSION['image']; ?>" class="edit-profile-img" alt="profile-img">
-					<div class="file has-name mb-5">
-						<label class="file-label">
-							<input class="file-input" type="file" name="image">
-							<span class="file-cta">
-								<span class="file-icon">
-									<i class="las la-upload"></i>
-								</span>
-								<span class="file-label">
-									Choose a file…
-								</span>
-							</span>
-							<span class="file-name">
-								e.g. Screen Shot 2017-07-29 at 15.54.25.png
-							</span>
-						</label>
+					<div class="control">
+						<input type="file" class="my-input input" name="image">
 					</div>
 					<div class="mb-5 field">
 						<label for="email" class="label">Email</label>
