@@ -663,3 +663,13 @@ body{
 	margin-top: 5px;
 }
 
+/*Pagination*/
+.my-pagination {
+	list-style-type: none;
+}
+
+.my-pagination-list{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

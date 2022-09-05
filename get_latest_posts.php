@@ -14,7 +14,7 @@ $stmt->bind_result($all_posts);
 $stmt->store_result();
 $stmt->fetch();
 
-$posts_per_page = 5;
+$posts_per_page = 1;
 // where to continue posting the posts on the main feed
 $offset = ($page_no - 1) * $posts_per_page;
 $all_pages = ceil($all_posts / $posts_per_page);
