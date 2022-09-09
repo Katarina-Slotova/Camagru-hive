@@ -39,12 +39,7 @@ if(isset($_POST['update_profile_btn'])){
 		}
 	}else{
 		$username = $_SESSION['username'];
-	}
-
-	if($password != ""){
-		$password = $password;
-	}else{
-		$password = $_SESSION['password'];
+		updateUserProfile($conn, $username, $password, $email, $image, $image_name, $bio, $id);
 	}
 
 	if($bio != ""){
@@ -53,18 +48,42 @@ if(isset($_POST['update_profile_btn'])){
 		$bio = $_SESSION['bio'];
 	}
 
-	$stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, image = ?, bio = ? WHERE id = ?");
-	$stmt->bind_param("sssssi", $username, md5($password), $email, $image_name, $bio, $id);
+	updateUserProfile($conn, $username, $password, $email, $image, $image_name, $bio, $id);
+
+}else{
+	header('location: edit_profile.php?error_message=Error occured.');
+	exit;
+}
+
+function updateUserProfile($conn, $username, $password, $email, $image, $image_name, $bio, $id){
+	if($password){
+		if(strlen($password) < 8){
+			header('location: edit_profile.php?error_message=password is shorter than 8 characters');
+			exit;
+		}
+		if(strlen($password) > 20){
+			header('location: edit_profile.php?error_message=password too long, maximum 20 characters allowed.');
+			exit;
+		}
+		$stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, image = ?, bio = ? WHERE id = ?");
+		$stmt->bind_param("sssssi", $username, md5($password), $email, $image_name, $bio, $id);
+	}else{
+		$stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, image = ?, bio = ? WHERE id = ?");
+		$stmt->bind_param("ssssi", $username,  $email, $image_name, $bio, $id);
+	}
+
 	if($stmt->execute()){
 		if($image != ""){
 			move_uploaded_file($image, "assets/imgs/".$image_name); //Store image in the imgs folder
 		}
 		// Update session with the new updated data (from variables)
 		$_SESSION['username'] = $username;
-		$_SESSION['password'] = $password;
 		$_SESSION['email'] = $email;
 		$_SESSION['image'] = $image_name;
 		$_SESSION['bio'] = $bio;
+
+		updateCommentsTable($conn, $username, $image_name, $id);
+		updatePostsTable($conn, $username, $image_name, $id);
 
 		header('location: profile.php?ok_message=Profile updated.');
 		exit;
@@ -72,13 +91,20 @@ if(isset($_POST['update_profile_btn'])){
 		header('location: edit_profile.php?error_message=Error occured, profile not updated.');
 		exit;
 	}
-}else{
-	header('location: edit_profile.php?error_message=Error occured.');
-	exit;
 }
 
+// Update comments table when user changes username or profile pic
+function updateCommentsTable($conn, $username, $image_name, $id){
+	$stmt = $conn->prepare("UPDATE comments SET username = ?, profile_image = ? WHERE user_id = ?");
+	$stmt->bind_param("ssi", $username, $image_name, $id);
+	$stmt->execute();
+}
 
-
-
+// Update posts table when user changes username or profile pic
+function updatePostsTable($conn, $username, $image_name, $id){
+	$stmt = $conn->prepare("UPDATE posts SET username = ?, profile_image = ? WHERE user_id = ?");
+	$stmt->bind_param("ssi", $username, $image_name, $id);
+	$stmt->execute();
+}
 
 ?>

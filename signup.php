@@ -18,10 +18,10 @@
 					<div class="logo">
 						<img src="assets/imgs/camagru_logo.png" class="logo-img" alt="camagru-logo">
 					</div>
-					<?php if(isset($_GET['error_msg'])){ ?>
-						<p id="error_msg" class="message is-danger has-text-centered"><?php echo $_GET['error_msg'];?></p>
-					<?php } ?>
 					<form class="login-form" id="signup_form" action="process_signup.php" method="POST">
+						<?php if(isset($_GET['error_message'])){ ?>
+							<p id="error_message" class="message is-danger has-text-centered"><?php echo $_GET['error_message'];?></p>
+						<?php } ?>
 						<div class="form-info">
 							<div class="login-input">
 								<input type="text" name="username" placeholder="Your username" required>
@@ -57,29 +57,5 @@
 			<p><em>Made with ❤️ by Katarina Slotova. Hive Helsinki 2022.</em></p>
 		</div>
 	</div>
-
-	<script>
-		function verifyForm(){
-			var password = document.getElementById('password').value;
-			var password_conf = document.getElementById('password_conf').value;
-			var error_msg = document.getElementById('error_msg');
-
-			if (password.length < 8){
-				error_msg.innerHTML = "Password is shorter than 8 characters."
-				return false;
-			}
-
-			if (password !== password_conf){
-				error_msg.innerHTML = "Passwords do not match."
-				return false;
-			}
-			return true;
-		}
-
-/* 		document.getElementById('signup_form').addEventListener('submit',(e)=>{
-			e.preventDefault();
-			verifyForm();
-		})  */
-	</script>
 </body>
 </html>

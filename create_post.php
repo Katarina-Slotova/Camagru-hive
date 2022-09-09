@@ -27,6 +27,12 @@ if(isset($_POST['upload_img_btn'])){
 	if($stmt->execute()){
 		move_uploaded_file($image,"assets/imgs/".$image_name); //Store image in folder
 		
+		//increase the number of posts and update session with the new number of posts
+		$stmt = $conn->prepare("UPDATE users SET posts = posts+1 WHERE id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$_SESSION['posts'] = $_SESSION['posts'] + 1;
+
 		header('location: camera.php?ok_message=Post created&image_name='.$image_name);
 		exit;
 	}else{

@@ -127,7 +127,13 @@ body{
 	width: 100%;
 	height: auto;
 	margin-top: 15px;
+	margin-bottom: 15px;
+	/* border: 1px solid #F9F5EB; */
+}
+
+.single-post{
 	border: 1px solid #F9F5EB;
+	border-radius: 10px;
 }
 
 .info{
@@ -201,6 +207,8 @@ body{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	border-radius: 10px;
+	border-bottom: none;
 }
 
 .comment-wrapper .icon{
@@ -222,14 +230,51 @@ body{
 .comment-button{
 	height: 100%;
 	width: 70px;
-	background: none;
+	background: linear-gradient(0deg, rgb(192, 192, 228), rgb(203, 232, 203));
+	border-radius: 10px;
 	border: none;
-	outline: none;
 	text-transform: capitalize;
 	font-size: 16px;
-	color: black;
 	opacity: 0.5;
 	cursor: pointer;
+}
+
+.comment-item{
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+}
+
+.comment-item p{
+	margin-top: 10px;
+	padding: 10px ;
+	/*Prevent too long comment to go outside the parent*/
+	word-break: break-all;
+}
+
+.comment-item span{
+	font-size: 10px;
+	padding: 10px ;
+}
+
+.comment-item img{
+	margin: 10px;
+	border-radius: 50%;
+}
+
+.load-comment-button{
+	height: 100%;
+	width: 30%;
+	background: linear-gradient(0deg, rgb(192, 192, 228), rgb(203, 232, 203));
+	border-radius: 10px;
+	border: none;
+	text-transform: capitalize;
+	font-size: 16px;
+	opacity: 0.5;
+	cursor: pointer;
+	margin: 10px;
+	border: 1px solid grey;
 }
 
 .reaction-wrapper{
@@ -240,12 +285,16 @@ body{
 	align-items: center;
 }
 
+.comment-wrapper form{
+	border-left: 0px;
+	padding-left: 10px;
+}
+
 .reaction-wrapper .icon{
 	height: 35px;
 	margin: 0;
 	margin-right: 20px;
 }
-
 
 /*responsive design for medium-sized screens*/
 @media (max-width:1100px){
@@ -483,8 +532,21 @@ body{
 	font-weight: 400;
 }
 
-.gallery-item-likes{
+.gallery-item-style{
 	margin-right: 2.2rem;
+}
+
+.delete-btn{
+	display: inline-block;
+	background: linear-gradient(0deg, rgb(192, 192, 228), rgb(203, 232, 203));
+	color: rgb(61, 60, 60);
+	font-size: 16px;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
 }
 
 @media screen and (max-width:800px){

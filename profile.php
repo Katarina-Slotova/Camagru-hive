@@ -5,6 +5,9 @@
 			<?php if(isset($_GET['ok_message'])){ ?>
 				<p class="is-success has-text-centered"><?php echo $_GET['ok_message']; ?></p>
 			<?php } ?>
+			<?php if(isset($_GET['error_msg'])){ ?>
+				<p class="message is-danger has-text-centered"><?php echo($_GET['error_msg']);?></p>
+			<?php } ?>
 			<div class="profile">
 				<div class="profile-img">
 					<img src="<?php echo "assets/imgs/".$_SESSION['image']; ?>" alt=""> 
@@ -32,23 +35,57 @@
 	<main>
 		<div class="profile-container">
 			<div class="gallery">
-			<?php include('user_posts.php'); ?>
-				<?php foreach($get_posts as $post){ ?>
-					<div class="gallery-item">
-					<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
-						<div class="gallery-item-info">
-							<ul>
-								<li class="gallery-item-likes"><span><?php echo $post['likes'];?></span>
-									<i class="lar la-heart"></i>
-								</li>
-								<li class="gallery-item-comments"><span></span>
-									<i class="las la-comments"></i>
-								</li>
-							</ul>
+				<?php include('user_posts.php'); ?>
+					<?php foreach($get_posts as $post){ ?>
+						<div class="gallery-item">
+							<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
+								<div class="gallery-item-info">
+									<ul>
+										<li class="gallery-item-style"><span><?php echo $post['likes'];?></span>
+											<i class="lar la-heart"></i>
+										</li>
+										<li class="gallery-item-style"><span></span>
+											<i class="las la-comments"></i>
+										</li>
+										<li>
+											<form action="delete_post.php" method="POST">
+												<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+												<input class="delete-btn" type="submit" name="delete_post_btn" value="Delete">
+												<!-- <a href="delete_post.php" name="delete_post_btn"><i class="las la-trash-alt"></i></a> --> 
+											</form>
+										</li>
+									</ul>
+								</div>
 						</div>
-					</div>
-			<?php } ?>
+				<?php } ?>
 			</div>
+			<nav class="pagination mt-6" role="navigation" aria-label="pagination">
+				<ul class="my-pagination-list" class="pagination-list">
+					<li class="my-pagination">
+						<a <?php if($page_no <= 1){echo 'is-disabled';}?> class="pagination-previous" title="This is the first page" href="<?php if($page_no <= 1){echo '#';}else{echo '?page_no='.$page_no-1;}?>">Previous</a>
+					</li>
+					<li>
+						<a class="pagination-link" aria-label="Page 1" aria-current="page" href="?page_no=1">1</a>
+					</li>
+					<li>
+						<a class="pagination-link" aria-label="Goto page 2" href="?page_no=2">2</a>
+					</li>
+					<li>
+						<a class="pagination-link" aria-label="Goto page 3" href="?page_no=3">3</a>
+					</li>
+					<?php if($page_no >= 3){ ?>
+						<li>
+							<a class="pagination-link" aria-label="Pages after page 3" href="#">...</a>
+						</li>
+						<li>
+							<a class="pagination-link" aria-label="Goto pages after page 3" href="<?php echo "?page_no=".$page_no; ?>"></a>
+						</li>
+					<?php } ?>
+					<li class="my-pagination">
+						<a <?php if($page_no >= $all_posts){echo 'is-disabled';}?> class="pagination-next" href="<?php if($page_no >= $all_posts){echo '#';}else{echo '?page_no='.$page_no+1;}?>">Next</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</main>
 </body>

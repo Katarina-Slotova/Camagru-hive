@@ -15,7 +15,17 @@ if(isset($_POST['signup_btn'])){
 
 	// Check if the passwords match
 	if($password !== $password_conf){
-		header('location: signup.php?error_msg=passwords do not match');
+		header('location: signup.php?error_message=passwords do not match');
+		exit;
+	}
+
+	if(strlen($password) < 8){
+		header('location: signup.php?error_message=password is shorter than 8 characters');
+		exit;
+	}
+
+	if(strlen($password) > 20){
+		header('location: signup.php?error_message=password too long, maximum 20 characters allowed.');
 		exit;
 	}
 
@@ -30,7 +40,7 @@ if(isset($_POST['signup_btn'])){
 	$stmt->store_result();
 
 	if($stmt->num_rows() > 0){
-		header('location: signup.php?error_msg=this user already exists');
+		header('location: signup.php?error_message=this user already exists');
 		exit;
 	}else{
 		$stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
@@ -57,12 +67,12 @@ if(isset($_POST['signup_btn'])){
 
 			header('location: index.php');
 		}else{
-			header('location: signup.php?error_msg=error occured');
+			header('location: signup.php?error_message=error occured');
 			exit;
 		}
 	}
 }else{
-	header('location: signup.php?error_msg=error occured');
+	header('location: signup.php?error_message=error occured');
 	exit;
 }
 
