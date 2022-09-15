@@ -21,8 +21,12 @@
 				<div class="profile-stats">
 					<ul>
 						<li><span class="profile-stat-count"><?php echo $_SESSION['posts']; ?></span> posts</li>
-						<li><span class="profile-stat-count"><?php echo $_SESSION['followers']; ?></span> followers</li>
-						<li><span class="profile-stat-count"><?php echo $_SESSION['following']; ?></span> following</li>
+						<form style="display: inline-block" action="my_followers.php" method="POST">
+							<li><span class="profile-stat-count"><?php echo $_SESSION['followers']; ?></span> <input type="submit" value="followers" style="background: none; border: none; cursor: pointer; font-family: inherit; font-size:18px; color:rgb(70, 70, 70);"></li>
+						</form>
+						<form style="display: inline-block" action="my_followings.php" method="POST">
+							<li><span class="profile-stat-count"><?php echo $_SESSION['following']; ?></span> <input type="submit" value="following" style="background: none; border: none; cursor: pointer; font-family: inherit; font-size:18px; color:rgb(70, 70, 70);"></li>
+						</form>
 					</ul>
 				</div>
 			</div>
@@ -51,7 +55,6 @@
 											<form action="delete_post.php" method="POST">
 												<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
 												<input class="delete-btn" type="submit" name="delete_post_btn" value="Delete">
-												<!-- <a href="delete_post.php" name="delete_post_btn"><i class="las la-trash-alt"></i></a> --> 
 											</form>
 										</li>
 									</ul>

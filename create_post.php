@@ -20,6 +20,11 @@ if(isset($_POST['upload_img_btn'])){
 	$username = $_SESSION['username'];
 	// Create a unique image name by using strval unction that converts the timestamp  into a string
 	$image_name = strval(time()) . ".jpeg"; 
+
+	if(strlen($caption) > 300 || strlen($hashtags) > 100  ){
+		header('location: camera.php?error_message=Caption or hashtags too long.');
+		exit;
+	}
 	
 	// Create post
 	$stmt = $conn->prepare("INSERT INTO posts (user_id,likes,image,caption,hashtags,date,username,profile_image) VALUES (?,?,?,?,?,?,?,?)");

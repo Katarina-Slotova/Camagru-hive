@@ -17,15 +17,17 @@ while($row = $result->fetch_array(MYSQLI_NUM)){
 	}
 }
 
+// No followings
 if(empty($ids_array)){
-	$ids_array = [1];
+	
+}else{
+	$following_ids = join(",", $ids_array);
+	
+	$stmt = $conn->prepare("SELECT * FROM users WHERE id in ($following_ids) ORDER BY RAND() LIMIT 20");
+	$stmt->execute();
+	$other_users = $stmt->get_result();
 }
 
-$following_ids = join(",", $ids_array);
-
-$stmt = $conn->prepare("SELECT * FROM users WHERE id in ($following_ids) ORDER BY RAND() LIMIT 20");
-$stmt->execute();
-$other_users = $stmt->get_result();
 
 
 ?>

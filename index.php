@@ -55,7 +55,22 @@
 					<img class="post-img" src="<?php echo "assets/imgs/".$post['image'];?>" alt="post-image">
 					<div class="post-content">
 						<div class="reaction-wrapper">
-							<i class="icon lar la-heart"></i>
+							<?php include('check_if_liked.php'); ?>
+							<?php if($post_liked){ ?>
+								<form action="unlike_post.php" method="POST">
+									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+									<button class="heart" type="submit" name="like_btn">
+										<i class="icon las la-heart"></i>
+									</button>
+								</form> 
+							<?php }else{ ?>
+								<form action="like_post.php" method="POST">
+									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+									<button class="heart" type="submit" name="like_btn">
+										<i class="icon lar la-heart"></i>
+									</button>
+								</form>
+							<?php } ?>
 							<i class="icon las la-comments"></i>
 						</div>
 						<p class="likes"><?php echo $post['likes']?> likes</p>
@@ -88,6 +103,13 @@
 						<div class="comment-item">
 							<img src="<?php echo "assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
 							<p><?php echo $comment['text']; ?><span><?php echo $comment['date']; ?></span></p>
+							<?php if($comment['user_id'] == $_SESSION['id']){ ?>
+								<form action="delete_comment.php" method="POST">
+									<input type="hidden" name="comment_id" value="<?php echo $comment['id'];?>">
+									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+									<input class="delete-comment-btn" type="submit" name="delete_comment_btn" value="Delete">
+								</form>
+							<?php } ?>
 						</div>
 					<?php } ?>
 

@@ -4,45 +4,50 @@
 
 include('connection.php');
 
-if(isset($_POST['other_user_id'])){ 
-	$other_user_id = $_POST['other_user_id'];
+if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
+	if(isset($_POST['other_user_id'])){
+		$other_user_id = $_POST['other_user_id'];
+		$_SESSION['other_user_id'] = $other_user_id;
+	}else{
+		$other_user_id = $_SESSION['other_user_id'];
+	}
 	$stmt = $conn->prepare('SELECT * FROM users WHERE id = ?');
 	$stmt->bind_param("i", $other_user_id);
 	if($stmt->execute()){
-		$user = $stmt->get_result();
+		$result = $stmt->get_result();
+		$user = $result->fetch_assoc();
 	}else{
 		header('location: index.php');
-	exit;
-}
+		exit;
+	}
 }
 
 ?>
 
 	<header class="profile-header">
 		<div class="profile-container">
-			<?php foreach($user as $u){?>
 				<div class="profile">
 					<div class="profile-img">
-						<img src="<?php echo "assets/imgs/".$u['image'];?>" alt="profile-picture">
+						<img src="<?php echo "assets/imgs/".$user['image'];?>" alt="profile-picture">
 					</div>
 					<div class="profile-user-settings">
-						<h1 class="profile-user-name"><?php echo $u['username'];?></h1>
+						<h1 class="profile-user-name"><?php echo $user['username'];?></h1>
 					</div>
 					<div class="profile-stats">
 						<ul>
-							<li><span class="profile-stat-count"><?php echo $u['posts'];?></span> posts</li>
-							<li><span class="profile-stat-count"><?php echo $u['followers'];?></span> followers</li>
-							<li><span class="profile-stat-count"><?php echo $u['following'];?></span> following</li>
+							<li><span class="profile-stat-count"><?php echo $user['posts'];?></span> posts</li>
+							<li><span class="profile-stat-count"><?php echo $user['followers'];?></span> followers</li>
+							<li><span class="profile-stat-count"><?php echo $user['following'];?></span> following</li>
 						</ul>
-						<form action="">
-							<button class="follow-btn" type="submit">Follow</button>
+						<form action="follow_user.php" method="POST">
+							<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
+							<button class="follow-btn" type="submit" name="follow_btn">Follow</button>
 						</form>
 					</div>
 				</div>
 				<div class="profile-bio">
-					<p><span class="profile-real-name"><?php echo $u['username'];?></span><?php echo $u['bio'];?></p>
+					<p><span class="profile-real-name"><?php echo $user['username'];?></span><?php echo $user['bio'];?></p>
 				</div> 
-			<?php } ?>
 		</div>
 	</header>
 	<main>
