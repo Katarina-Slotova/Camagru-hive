@@ -54,6 +54,7 @@
 										<li>
 											<form action="delete_post.php" method="POST">
 												<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+												<input type="hidden" name="my_id" value="<?php echo $_SESSION['id'];?>">
 												<input class="delete-btn" type="submit" name="delete_post_btn" value="Delete">
 											</form>
 										</li>
