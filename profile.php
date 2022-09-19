@@ -32,7 +32,7 @@
 			</div>
 			<div class="profile-bio">
 				<p><span class="profile-real-name"><?php echo $_SESSION['username']; ?></span></p>
-				<p>About me: <?php echo $_SESSION['bio']?></p>
+				<p>About me: <?php echo $_SESSION['bio']; ?></p>
 			</div>
 		</div>
 	</header>
@@ -45,7 +45,7 @@
 							<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
 								<div class="gallery-item-info">
 									<ul>
-										<li class="gallery-item-style"><span><?php echo $post['likes'];?></span>
+										<li class="gallery-item-style"><span><?php echo $post['likes']; ?></span>
 											<i class="lar la-heart"></i>
 										</li>
 										<li class="gallery-item-style"><span></span>
@@ -53,8 +53,8 @@
 										</li>
 										<li>
 											<form action="delete_post.php" method="POST">
-												<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
-												<input type="hidden" name="my_id" value="<?php echo $_SESSION['id'];?>">
+												<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+												<input type="hidden" name="my_id" value="<?php echo $_SESSION['id']; ?>">
 												<input class="delete-btn" type="submit" name="delete_post_btn" value="Delete">
 											</form>
 										</li>
