@@ -39,14 +39,23 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 							<li><span class="profile-stat-count"><?php echo $user['followers'];?></span> followers</li>
 							<li><span class="profile-stat-count"><?php echo $user['following'];?></span> following</li>
 						</ul>
-						<form action="follow_user.php" method="POST">
-							<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
-							<button class="follow-btn" type="submit" name="follow_btn">Follow</button>
-						</form>
+						<?php include ('following_status.php'); ?>
+						<?php if($following){ ?>
+							<form action="unfollow_user.php" method="POST">
+								<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
+								<button class="follow-btn" type="submit" name="unfollow_btn">Unfollow</button>
+							</form>
+						<?php }else{ ?>
+							<form action="follow_user.php" method="POST">
+								<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
+								<button class="follow-btn" type="submit" name="follow_btn">Follow</button>
+							</form>
+						<?php } ?>
 					</div>
 				</div>
 				<div class="profile-bio">
-					<p><span class="profile-real-name"><?php echo $user['username'];?></span><?php echo $user['bio'];?></p>
+					<p class="profile-real-name"><?php echo $user['username']; ?></p>
+					<p><?php echo $user['bio']; ?></p>
 				</div> 
 		</div>
 	</header>

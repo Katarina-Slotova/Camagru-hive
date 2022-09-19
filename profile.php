@@ -3,7 +3,7 @@
 	<header class="profile-header">
 		<div class="profile-container">
 			<?php if(isset($_GET['ok_message'])){ ?>
-				<p class="is-success has-text-centered"><?php echo $_GET['ok_message']; ?></p>
+				<p class="message is-success has-text-centered"><?php echo $_GET['ok_message']; ?></p>
 			<?php } ?>
 			<?php if(isset($_GET['error_msg'])){ ?>
 				<p class="message is-danger has-text-centered"><?php echo($_GET['error_msg']);?></p>
