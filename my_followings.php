@@ -8,7 +8,7 @@ $user_id = $_SESSION['id'];
 
 // Get all my followers from followings table in db 
 $stmt = $conn->prepare("SELECT other_user_id FROM followings WHERE user_id = ?");
-$stmt->bind_param("i", $find_this);
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 
 // Store the ids in an array  
@@ -53,24 +53,26 @@ if(empty($ids_array)){
 
 	<div class="mt-5 mx-5">
 		<ul class="list">
-		<?php if(isset($_POST['search_input'])){?>
-			<?php foreach($users as $user){ ?>
-				<li class="list-item search-result-item">
-					<img src="<?php echo "assets/imgs/".$user['image']; ?>" alt="profile-img">
-					<div>
-						<p><?php echo $user['username']; ?></p>
-						<span><?php echo substr($user['bio'],0,20); ?></span>
-					</div>
-					<div class="search-result-item-btn">
-						<form action="user_profile.php" method="POST ">
-							<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
-							<button type="submit">See profile</button>
-						</form>
-					</div>
-				</li>
-			<?php } ?>
-		<?php }else{ ?>
+		<?php if (!isset($users)){ ?>
 			<p class="has-text-centered" style="font-size:20px"><?php echo $info; ?></p>
+		<?php }else{ ?>
+			<?php foreach($users as $user){ ?>
+				<?php if($user['id'] != $_SESSION['id']){ ?>
+					<li class="list-item search-result-item">
+						<img src="<?php echo "assets/imgs/".$user['image']; ?>" alt="profile-img">
+						<div>
+							<p><?php echo $user['username']; ?></p>
+							<span><?php echo substr($user['bio'],0,20); ?></span>
+						</div>
+						<div class="search-result-item-btn">
+							<form action="user_profile.php" method="POST ">
+								<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
+								<button type="submit">See profile</button>
+							</form>
+						</div>
+					</li>
+				<?php } ?>
+			<?php } ?>
 		<?php } ?>
 		</ul>
 	</div>

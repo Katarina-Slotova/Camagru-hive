@@ -53,8 +53,11 @@ if(empty($ids_array)){
 
 	<div class="mt-5 mx-5">
 		<ul class="list">
-		<?php if(isset($_POST['search_input'])){?>
+		<?php if (!isset($users)){ ?>
+			<p class="has-text-centered" style="font-size:20px"><?php echo $info; ?></p>
+		<?php }else{ ?>
 			<?php foreach($users as $user){ ?>
+				<?php if($user['id'] != $_SESSION['id']){ ?> 
 				<li class="list-item search-result-item">
 					<img src="<?php echo "assets/imgs/".$user['image']; ?>" alt="profile-img">
 					<div>
@@ -69,8 +72,7 @@ if(empty($ids_array)){
 					</div>
 				</li>
 			<?php } ?>
-		<?php }else{ ?>
-			<p class="has-text-centered" style="font-size:20px"><?php echo $info; ?></p>
+		<?php } ?>
 		<?php } ?>
 		</ul>
 	</div>
