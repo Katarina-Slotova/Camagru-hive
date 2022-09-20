@@ -15,13 +15,10 @@ include('header.php');
 			<div class="camera-img">
 				<?php if(isset($_GET['image_name'])) { ?>
 					<img style="width: 400px" src="<?php echo "assets/imgs/".$_GET['image_name'];?>" alt="my-img">
-				<?php }else{ ?>
-					<img style="width: 400px" src="assets/imgs/flower.jpg" alt="default-img">
 				<?php } ?>
-				<form action="create_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
-					<div class="control">
-						<input type="file" class="my-input input" name="image" required>
-					</div>
+				<form runat="server" action="create_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
+					<img style="width: 400px" id="blah" >
+					<input accept="image/*" type="file" class="my-input input" id="imgInp" name="image" required>
 					<div class="control">
 						<input type="text" class="my-input input" name="caption" placeholder="Write a caption here" required>
 					</div>
@@ -35,5 +32,14 @@ include('header.php');
 			</div>
 		</div>
 	</div>
+
+	<script>
+		imgInp.onchange = evt => {
+			const [file] = imgInp.files
+			if (file) {
+				blah.src = URL.createObjectURL(file)
+			}
+		}
+	</script>
 </body>
 </html>
