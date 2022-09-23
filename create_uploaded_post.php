@@ -21,6 +21,23 @@ if(isset($_POST['upload_img_btn'])){
 	// Create a unique image name by using strval function that converts the timestamp into a string
 	$image_name = strval(time()) . ".jpg";
 
+	$max_height = 500;
+	$max_width = 500;
+	list($orig_width, $orig_height) = getimagesize($image);
+	if ($orig_width > $max_width || $orig_height > $max_height) {
+		$ratio = $orig_width/$orig_height;
+		if($ratio > 1) {
+			$width = $max_width;
+			$height = $max_height/$ratio;
+		} else {
+			$width = $max_width*$ratio;
+			$height = $max_height;
+		}
+	  $source = imagecreatefromstring(file_get_contents($image));
+	  $destination = imagecreatetruecolor($width, $height);
+	  imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $orig_width, $orig_height);
+	}
+
 	// Grab the stickers, if no stickers selected by user, this if statement will be skipped
 	$upload_file = $_POST['upload_file'];
 	if($upload_file){
@@ -29,8 +46,8 @@ if(isset($_POST['upload_img_btn'])){
 		//$data_url = explode(',', $upload_file);
 		$decoded_url = base64_decode($data_url);
 		$dest = imagecreatefromstring($decoded_url);
-		$src = imagecreatefromstring(file_get_contents($image));
-		imagecopy($src, $dest, 0, 0, 25, 30, 700, 500);
+		// $src = imagecreatefromstring(file_get_contents($image));
+		imagecopy($destination, $dest, 0, 0, 25, 30, 700, 500);
 	}
 
 /* 	header('Content-Type: image/png');
@@ -56,9 +73,8 @@ if(isset($_POST['upload_img_btn'])){
 		if($stmt->execute()){
 			if($src){
 				imagepng($src, "assets/imgs/".$image_name); //Store image in folder
-			}
-			else{
-				move_uploaded_file($image, "assets/imgs/".$image_name);
+			} else {
+				imagepng($destination, "assets/imgs/".$image_name);
 			}
 			
 			//increase the number of posts and update session with the new number of posts

@@ -56,17 +56,19 @@ require_once('header.php');
 			if (file) {
 				picture.src = URL.createObjectURL(file);
 				setTimeout(() => {
-					let maxHeight = 700;
-					let maxWidth = 500;
-					if (picture.width > maxWidth || picture.height > maxHeight) {
-						let ratio = picture.width/picture.height;
-							if( ratio > 1) {
-									picture.width = maxWidth;
-									picture.height = maxHeight/ratio;
-								} else {
-									picture.width = maxWidth*ratio;
-									picture.height = maxHeight;
-							}
+						if(picture.width < picture.height){
+						let maxHeight = 700;
+						let maxWidth = 500;
+						if (picture.width > maxWidth || picture.height > maxHeight) {
+							let ratio = picture.width/picture.height;
+								if(ratio > 1) {
+										picture.width = maxWidth;
+										picture.height = maxHeight/ratio;
+									} else {
+										picture.width = maxWidth*ratio;
+										picture.height = maxHeight;
+								}
+					}
 				}
 				}, 50);
 			}
@@ -89,19 +91,19 @@ require_once('header.php');
 					ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
 					break;
 				case 'sticker2':
-					ctx.drawImage(Selectedsticker, 550, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
 					break;
 				case 'sticker3':
-					ctx.drawImage(Selectedsticker, 30, 350, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 150, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
 					break;
 				case 'sticker4':
-					ctx.drawImage(Selectedsticker, 550, 350, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 150, 80, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
 					break;
 				case 'sticker5':
-					ctx.drawImage(Selectedsticker, 400, 250, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
 					break;
 				case 'sticker6':
-					ctx.drawImage(Selectedsticker, 80, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
 					break;
 			}
 			let canvasUrl = c.toDataURL();
