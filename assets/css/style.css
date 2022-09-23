@@ -635,8 +635,8 @@ body{
 	position: relative;
 	flex: 1 0 22rem;
 	margin: 1rem;
-	cursor: pointer;
-	text-align: center;
+/* 	cursor: pointer;
+ */	text-align: center;
 }
 
 .camera-form{
@@ -652,7 +652,7 @@ body{
 	font-size: 16px;
 	border: none;
 	display: block;
-	margin: 0 auto;
+	margin: 10px auto;
 	border-radius: 5px;
 }
 
@@ -752,4 +752,66 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.search-icon{
+	height: 100%;
+	cursor: pointer;
+	color: rgb(82, 82, 82);
+	border: 1px solid rgb(143, 138, 138);
+	border-radius: 10px;
+	padding: 5px;
+}
+
+/*Stickers*/
+
+.sticker-description{
+	font-size: 18px;
+	text-align: center;
+	margin: 10px 0;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: bold;
+}
+
+.stickers-box{
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	width: 100%;
+	border: 1px solid #F9F5EB;
+	border-radius: 3px;
+}
+
+.stickers-container{
+	display: flex;
+	align-items: center;
+	width: calc(18% - 1rem);
+	margin: 10px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.stickers-container img{
+	padding: 5px;
+}
+
+.canvas-container{
+	border-radius: 10px; 
+    box-shadow: 0 5px 40px #333;
+    margin: 30px 0;
+    position:relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.canvas-container img{
+	position:absolute;
+	z-index:1;
+}
+
+#myCanvas{
+	position:relative;
+    z-index:20;
 }
