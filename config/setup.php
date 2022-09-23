@@ -1,15 +1,14 @@
 <?php 
-include('database.php');
+require_once('database.php');
 
 // create connection to db using the PDO class and
 // check if successfully connected to the database
 try {
-	$conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+	$conn = new PDO($DB_HOST, $DB_USER, $DB_PASSWORD);
 	// set an attribute so PDO will throw exceptions on errors 
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = "CREATE DATABASE IF NOT EXISTS camagru_db";
     $conn->exec($stmt);
-	echo "Connection successful.";
 } catch (PDOException $error) {
 	// getMessage() method retrieves a cleaner error message than if this method was not there
     echo "Connection failed: " . $error->getMessage(); 
@@ -32,7 +31,8 @@ try {
 		`followers` int(11) DEFAULT 0,
 		`following` int(11) DEFAULT 0,
 		`posts` int(11) DEFAULT 0,
-		`token` varchar(250) NOT NULL,
+		`bio` varchar(250) DEFAULT 'none',
+		`token` varchar(250) DEFAULT NULL,
 		PRIMARY KEY (`id`)
 	)";
 	$conn->exec($stmt);

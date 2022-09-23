@@ -1,4 +1,4 @@
-<?php include('header.php'); ?>
+<?php require_once('header.php'); ?>
 
 	<header class="profile-header">
 		<div class="profile-container">
@@ -39,7 +39,7 @@
 	<main>
 		<div class="profile-container">
 			<div class="gallery">
-				<?php include('user_posts.php'); ?>
+				<?php require_once('user_posts.php'); ?>
 					<?php foreach($get_posts as $post){ ?>
 						<div class="gallery-item">
 							<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">

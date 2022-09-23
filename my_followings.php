@@ -1,53 +1,75 @@
-<?php include('header.php');?>
+<?php require_once('header.php');?>
 
 <?php
 
-include('connection.php');
+require_once('connection.php');
 
 $user_id = $_SESSION['id'];
 
-// Get all my followers from followings table in db 
-$stmt = $conn->prepare("SELECT other_user_id FROM followings WHERE user_id = ?");
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
+// Get all my followers from followings table in db
+try{
+	$conn = connect_db();
+	$stmt = $conn->prepare("SELECT other_user_id FROM followings WHERE user_id = ?");
+	$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
+	$stmt->execute();
+	$ids_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	// Store the ids in an array  
+/* 	$ids_array = array();
+	$result = $stmt->get_result();
+	while($row = $result->fetch_array(MYSQLI_NUM)){
+		foreach($row as $r){
+			$ids_array[] = $r;
+		}
+	} */
 
-// Store the ids in an array  
-$ids_array = array();
-$result = $stmt->get_result();
-while($row = $result->fetch_array(MYSQLI_NUM)){
-	foreach($row as $r){
-		$ids_array[] = $r;
-	}
-}
-
-
-if(empty($ids_array)){
-	$info = "You are not following anyone yet.";
-}else{
-	$following_ids = join(",", $ids_array);
-	
-	// Pagination of my followers list 
-	if(isset($_GET['page_no']) && $_GET['page_no'] != ""){
-		$page_no = $_GET['page_no'];
+	if(empty($ids_array)){
+		$info = "You are not following anyone yet.";
 	}else{
-		$page_no = 1;
+		//$following_ids = join(",", $ids_array);
+		
+		// Pagination of my followers list 
+		if(isset($_GET['page_no']) && $_GET['page_no'] != ""){
+			$page_no = $_GET['page_no'];
+		}else{
+			$page_no = 1;
+		}
+		
+		try{
+			$conn = connect_db();
+			$following_ids = str_repeat('?,', count($ids_array) - 1) . '?';
+			$stmt = $conn->prepare("SELECT COUNT(*) as all_users FROM users WHERE id in ($following_ids)");
+			$stmt->execute($ids_array);
+/* 			$stmt->bind_result($all_users);
+			$stmt->store_result();
+			$stmt->fetch(); */
+			$all_users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		} catch (PDOException $error) {
+			echo $error->getMessage(); 
+			exit;
+		}
+		$conn = null;
+		
+		$users_per_page = 2;
+		// where to continue posting the posts on the main feed
+		$offset = ($page_no - 1) * $users_per_page;
+		//$all_pages = ceil($all_users / $users_per_page);
+		
+		try{
+			$conn = connect_db();
+			$stmt = $conn->prepare("SELECT * FROM users WHERE id in ($following_ids) LIMIT $offset, $users_per_page");
+			$stmt->execute();
+			$users = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+		} catch (PDOException $error) {
+			echo $error->getMessage(); 
+			exit;
+		}
+		$conn = null;
 	}
-	
-	$stmt = $conn->prepare("SELECT COUNT(*) as all_users FROM users WHERE id in ($following_ids)");
-	$stmt->execute();
-	$stmt->bind_result($all_users);
-	$stmt->store_result();
-	$stmt->fetch();
-	
-	$users_per_page = 2;
-	// where to continue posting the posts on the main feed
-	$offset = ($page_no - 1) * $users_per_page;
-	$all_pages = ceil($all_users / $users_per_page);
-	
-	$stmt = $conn->prepare("SELECT * FROM users WHERE id in ($following_ids) LIMIT $offset, $users_per_page");
-	$stmt->execute();
-	$users = $stmt->get_result(); 
+} catch (PDOException $error) {
+	echo $error->getMessage(); 
+	exit;
 }
+$conn = null;
 
 ?>
 

@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['id'])){
-	header('location: login.php');
+	header('location: home.php');
 	exit;
 }
 
@@ -26,11 +26,23 @@ if(!isset($_SESSION['id'])){
 		<div class="navbar-wrapper">
 			<img src="assets/imgs/camagru_logo.png" class="logo">
 			<form>
-				<input type="text" class="search-box" placeholder="Search">
+				<a class="search-icon" href="search.php"><i class="las la-search"></i> SEARCH</a>
 			</form>
 			<div class="nav-items">
-				<a href="index.php"><i class="icon las la-home"></i></a>
-				<a href="camera.php"><i class="icon las la-plus"></i></a>
+				<a href="home.php"><i class="icon las la-home"></i></a>
+				<div class="dropdown is-hoverable">
+					<div class="dropdown-trigger">
+						<i class="icon las la-plus" aria-hidden="true"></i>
+					</div>
+					<div class="dropdown-menu" id="dropdown-menu4" role="menu">
+						<div class="dropdown-content">
+						<div class="dropdown-item">
+								<p><a style="color: rgb(82, 82, 82);" href="upload.php">Upload a photo</i></a></p>
+								<p><a style="color: rgb(82, 82, 82);" href="#">Take a photo</i></a></p>						
+						</div>
+						</div>
+					</div>
+				</div>				
 				<a href="profile.php"><i class="icon las la-user"></i></a>
 				<a href="logout.php"><i class="icon las la-sign-out-alt"></i></a>
 			</div>

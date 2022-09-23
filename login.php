@@ -3,7 +3,7 @@
 session_start();
 // Check if user is logged in by checking whether the user id is in session
 if(isset($_SESSION['id'])){
-	header('location: index.php');
+	header('location: home.php');
 	exit;
 }
 

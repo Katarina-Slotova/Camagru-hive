@@ -1,4 +1,4 @@
-<?php include('header.php'); ?>
+<?php require_once('header.php'); ?>
 
 	<section class="main">
 		<div class="main-wrapper">

@@ -1,17 +1,24 @@
-<?php include('header.php');?>
+<?php require_once('header.php');?>
 
 <?php
 
-include('connection.php');
+require_once('connection.php');
 
 if(isset($_POST['search_input'])){
 	$search_input = $_POST['search_input'];
 	$find_this = strval("%".$search_input."%");
 
-	$stmt = $conn->prepare("SELECT * FROM users WHERE username like ? LIMIT 10");
-	$stmt->bind_param("s", $find_this);
-	$stmt->execute();
-	$results = $stmt->get_result();
+	try{
+		$conn = connect_db();
+		$stmt = $conn->prepare("SELECT * FROM users WHERE username like ? LIMIT 10");
+		$stmt->bindParam(1, $find_this, PDO::PARAM_STR);
+		$stmt->execute();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	} catch (PDOException $error) {
+		echo $error->getMessage(); 
+		exit;
+	}
+	$conn = null;
 }
 
 ?>
@@ -26,6 +33,7 @@ if(isset($_POST['search_input'])){
 		<ul class="list">
 		<?php if(isset($_POST['search_input'])){?>
 			<?php foreach($results as $user){ ?>
+				<?php if(($user['id']) != $_SESSION['id']) { ?>
 				<li class="list-item search-result-item">
 					<img src="<?php echo "assets/imgs/".$user['image']; ?>" alt="profile-img">
 					<div>
@@ -39,6 +47,7 @@ if(isset($_POST['search_input'])){
 						</form>
 					</div>
 				</li>
+				<?php } ?>
 			<?php } ?>
 		<?php } ?>
 		</ul>

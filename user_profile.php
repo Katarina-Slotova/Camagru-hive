@@ -1,8 +1,8 @@
-<?php include('header.php');?>
+<?php require_once('header.php');?>
 
 <?php 
 
-include('connection.php');
+require_once('connection.php');
 
 if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 	if(isset($_POST['other_user_id'])){
@@ -11,15 +11,21 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 	}else{
 		$other_user_id = $_SESSION['other_user_id'];
 	}
-	$stmt = $conn->prepare('SELECT * FROM users WHERE id = ?');
-	$stmt->bind_param("i", $other_user_id);
-	if($stmt->execute()){
-		$result = $stmt->get_result();
-		$user = $result->fetch_assoc();
-	}else{
-		header('location: index.php');
+	try {
+		$conn = connect_db();
+		$stmt = $conn->prepare('SELECT * FROM users WHERE id = ?');
+		$stmt->bindParam(1, $other_user_id, PDO::PARAM_INT);
+		if($stmt->execute()){
+			$user = $stmt->fetch(PDO::FETCH_ASSOC);
+		}else{
+			header('location: home.php');
+			exit;
+		}
+	} catch (PDOException $error) {
+		echo $error->getMessage(); 
 		exit;
 	}
+	$conn = null;
 }
 
 ?>
@@ -39,7 +45,7 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 							<li><span class="profile-stat-count"><?php echo $user['followers'];?></span> followers</li>
 							<li><span class="profile-stat-count"><?php echo $user['following'];?></span> following</li>
 						</ul>
-						<?php include ('following_status.php'); ?>
+						<?php require_once('following_status.php'); ?>
 						<?php if($following){ ?>
 							<form action="unfollow_user.php" method="POST">
 								<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
@@ -62,7 +68,7 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 	<main>
 		<div class="profile-container">
 			<div class="gallery">
-			<?php include('other_user_posts.php'); ?>
+			<?php require_once('other_user_posts.php'); ?>
 				<?php foreach($get_posts as $post){ ?>
 					<div class="gallery-item">
 						<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
