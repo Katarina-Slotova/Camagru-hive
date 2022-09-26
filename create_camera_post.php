@@ -1,0 +1,80 @@
+<?php
+
+session_start();
+
+require_once("connection.php");
+
+// Check if user clicked the publish button
+if(isset($_POST['webcam_img_btn'])){
+	$id = $_SESSION['id'];
+	$profile_image = $_SESSION['image']; 
+	$caption = $_POST['caption'];
+	$hashtags = $_POST['hashtags'];
+	$likes = 0;
+	$tz = 'Europe/Helsinki';
+	$timestamp = time();
+	$date = new DateTime("now", new DateTimeZone($tz));
+	$date->setTimestamp($timestamp);
+	$date = $date->format('Y-m-d H:i:s');
+	$username = $_SESSION['username'];
+
+	// Create a unique image name by using strval function that converts the timestamp into a string
+	$image_name = strval(time()) . ".jpg";
+
+	// Grab the photo with the stickers
+	$webcam_file = $_POST['webcam_file'];
+	list($type, $data_url) = explode(';', $webcam_file);
+	list(, $data_url) = explode(',', $data_url); 
+	$decoded_url = base64_decode($data_url);
+	// Create post
+	try {
+		$conn = connect_db();
+		$stmt = $conn->prepare("INSERT INTO posts (user_id,likes,image,caption,hashtags,date,username,profile_image) VALUES (?,?,?,?,?,?,?,?)");
+		$stmt->bindParam(1, $id, PDO::PARAM_INT);
+		$stmt->bindParam(2, $likes, PDO::PARAM_INT);
+		$stmt->bindParam(3, $image_name, PDO::PARAM_STR);
+		$stmt->bindParam(4, $caption, PDO::PARAM_STR);
+		$stmt->bindParam(5, $hashtags, PDO::PARAM_STR);
+		$stmt->bindParam(6, $date, PDO::PARAM_STR);
+		$stmt->bindParam(7, $username, PDO::PARAM_STR);
+		$stmt->bindParam(8, $profile_image, PDO::PARAM_STR);
+		if($stmt->execute()){
+			file_put_contents("assets/imgs/".$image_name, $decoded_url);
+			
+			//increase the number of posts and update session with the new number of posts
+			try {
+				$conn = connect_db();
+				$stmt = $conn->prepare("UPDATE users SET posts = posts+1 WHERE id = ?");
+				$stmt->bindParam(1, $id, PDO::PARAM_INT);
+				$stmt->execute();
+			} catch (PDOException $error) {
+				echo $error->getMessage(); 
+				exit;
+			}
+			$conn = null;
+	
+			$_SESSION['posts'] = $_SESSION['posts']+1;
+	
+			header('location: camera.php?ok_message=Post created&image_name='.$image_name);
+			exit;
+		}else{
+			header('location: camera.php?error_message=Error occured.');
+			exit;
+		}
+	} catch (PDOException $error) {
+		echo $error->getMessage(); 
+		exit;
+	}
+	$conn = null;
+
+	if(strlen($caption) > 300 || strlen($hashtags) > 100){
+		header('location: camera.php?error_message=Caption or hashtags too long.');
+		exit;
+	}
+	
+}else{
+	header('location: camera.php?error_message=Error occured.');
+	exit;
+}
+
+?>

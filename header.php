@@ -38,7 +38,7 @@ if(!isset($_SESSION['id'])){
 						<div class="dropdown-content">
 						<div class="dropdown-item">
 								<p><a style="color: rgb(82, 82, 82);" href="upload.php">Upload a photo</i></a></p>
-								<p><a style="color: rgb(82, 82, 82);" href="#">Take a photo</i></a></p>						
+								<p><a style="color: rgb(82, 82, 82);" href="camera.php">Take a photo</i></a></p>						
 						</div>
 						</div>
 					</div>
