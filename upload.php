@@ -114,30 +114,3 @@ require_once('header.php');
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- if (picture.clientWidth > maxDim || picture.clientHeight > maxDim) {
-					let ratio = picture.width/picture.height;
-					if( ratio > 1) {
-							picture.width = maxDim;
-							picture.height = maxDim/ratio;
-							canvas.height = maxDim/ratio;
-							canvas.width = maxDim;
-						} else {
-							picture.width = maxDim*ratio;
-							picture.height = maxDim;
-							canvas.width = maxDim*ratio;
-							canvas.height = maxDim;
-					}
-				} -->
