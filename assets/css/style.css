@@ -466,7 +466,7 @@ body{
 
 .profile-img{
 	float: left;
-	width: calc(33.333% - 1rem );
+	width: calc(33.333% - 1rem);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -640,8 +640,8 @@ body{
 }
 
 .camera-form{
-	width: 50%;
-	margin: 5px auto;
+	width: 80%;
+	margin: 0px 0;
 }
 
 .upload-btn{
@@ -826,4 +826,13 @@ body{
 	display: block;
 	margin: 10px auto;
 	border-radius: 5px;
+}
+
+canvas {
+	float: center;
+	width: calc(100%);
+	margin-left: calc(18%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
