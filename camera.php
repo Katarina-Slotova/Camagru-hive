@@ -27,13 +27,29 @@ require_once('header.php');
 							</div>
 						</div>
 					</div>
-					<p style="margin-top: 30px;" class="sticker-description">2. Take an awesome photo!</p>
+					<p style="margin-top: 30px;" class="sticker-description">2. Take an awesome awesome photo!</p>
 					<div>
 						<button class="capture-btn" id="start-camera">Start Camera</button>
-						<video id="video" width="700" height="500" autoplay></video>
+						<div class="canvas-container">
+							<video id="video" width="700" height="500" autoplay></video>
+						</div>
 						<button class="capture-btn" id="click-photo">Capture Photo</button>
-						<canvas width="700" height="500" id="canvas"></canvas>
-						<input type="hidden" id="webcam-file" value="" name="webcam_file">
+						<p style="margin-top: 30px;" class="sticker-description">The photo you have taken:</p>
+						<div class="canvas-container">
+							<canvas width="700" height="500" id="canvas"></canvas>
+							<input type="hidden" id="webcam-file" value="" name="webcam_file">
+						</div>
+						<p style="margin-top: 30px;" class="sticker-description">The stickers you have chosen:</p>
+						<div class="canvas-container">
+							<canvas width="700" height="500" id="stickers_canvas"></canvas>
+							<input type="hidden" id="sticker-canvas" value="" name="sticker-canvas">
+							<input type="hidden" id="sticker1_path" value="" name="sticker1_path">
+							<input type="hidden" id="sticker2_path" value="" name="sticker2_path">
+							<input type="hidden" id="sticker3_path" value="" name="sticker3_path">
+							<input type="hidden" id="sticker4_path" value="" name="sticker4_path">
+							<input type="hidden" id="sticker5_path" value="" name="sticker5_path">
+							<input type="hidden" id="sticker6_path" value="" name="sticker6_path">
+						</div>
 					</div>
 					<div class="control">
 						<input type="text" class="my-input input" name="caption" placeholder="Write a caption here" required>
@@ -55,7 +71,15 @@ require_once('header.php');
 		let camera_button = document.querySelector("#start-camera");
 		let video = document.querySelector("#video");
 		let capture_button = document.querySelector("#click-photo");
-		
+		let canvas = document.querySelector("#canvas");
+
+		let sticker1 = document.getElementById("sticker1_path");
+		let sticker2 = document.getElementById("sticker2_path");
+		let sticker3 = document.getElementById("sticker3_path");
+		let sticker4 = document.getElementById("sticker4_path");
+		let sticker5 = document.getElementById("sticker5_path");
+		let sticker6 = document.getElementById("sticker6_path");
+
 		camera_button.disabled = true;
 		capture_button.disabled = true;
 
@@ -72,37 +96,58 @@ require_once('header.php');
 			video.srcObject = stream;
 		});
 		
-		function myCanvas(sticker) {		
-			let canvas = document.getElementById("canvas");
-			let ctx = canvas.getContext("2d");
+		function myCanvas(sticker) {
+			let stickers_canvas = document.getElementById("stickers_canvas");
+			let stickers_ctx = stickers_canvas.getContext("2d");
 			let Selectedsticker = document.getElementById(sticker);
-			capture_button.addEventListener('click', function() {
-				ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-				switch (sticker){
-					case 'sticker1':
-						ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
-						break;
-					case 'sticker2':
-						ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
-						break;
-					case 'sticker3':
-						ctx.drawImage(Selectedsticker, 150, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
-						break;
-					case 'sticker4':
-						ctx.drawImage(Selectedsticker, 150, 80, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
-						break;
-					case 'sticker5':
-						ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
-						break;
-					case 'sticker6':
-						ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
-						break;
-				}
-			});
-			let canvasUrl = canvas.toDataURL();
-			let finalImage = document.getElementById("webcam-file");
-			finalImage.value = canvasUrl;
+
+			switch (sticker){
+				case 'sticker1':
+					stickers_ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					sticker1.value = "assets/stickers/bee.png"
+					break;
+				case 'sticker2':
+					stickers_ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					sticker2.value = "assets/stickers/kitten.png"
+					break;
+				case 'sticker3':
+					stickers_ctx.drawImage(Selectedsticker, 150, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					sticker3.value = "assets/stickers/monster.png"
+					break;
+				case 'sticker4':
+					stickers_ctx.drawImage(Selectedsticker, 150, 80, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					sticker4.value = "assets/stickers/so-hot.png"
+					break;
+				case 'sticker5':
+					stickers_ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					sticker5.value = "assets/stickers/unicorn.png"
+					break;
+				case 'sticker6':
+					stickers_ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					sticker6.value = "assets/stickers/watermelon.png"
+					break;
+			}
+			let stickersUrl = stickers_canvas.toDataURL();	
+			let finalStickers = document.getElementById("sticker-canvas");
+			finalStickers.value = stickersUrl;		
 		}
+
+		capture_button.addEventListener('click', function() {
+			let canvas = document.getElementById("canvas");
+			
+			let ctx = canvas.getContext("2d");
+
+			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+			
+			let canvasUrl = canvas.toDataURL();
+			
+
+			let finalImage = document.getElementById("webcam-file");
+			
+
+			finalImage.value = canvasUrl;
+			
+		});
 
 
 

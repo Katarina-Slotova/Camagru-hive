@@ -26,6 +26,16 @@ if(isset($_POST['webcam_img_btn'])){
 	list($type, $data_url) = explode(';', $webcam_file);
 	list(, $data_url) = explode(',', $data_url); 
 	$decoded_url = base64_decode($data_url);
+	$destination = imagecreatefromstring($decoded_url);
+
+	$stickers_canvas = $_POST['sticker-canvas'];
+	list($type, $data) = explode(';', $stickers_canvas);
+	list(, $data) = explode(',', $data); 
+	$decoded_stickers_url = base64_decode($data);
+	$dest = imagecreatefromstring($decoded_stickers_url);
+
+	imagecopy($destination, $dest, 0, 0, 0, 0, 700, 500);
+	
 	// Create post
 	try {
 		$conn = connect_db();
@@ -39,7 +49,7 @@ if(isset($_POST['webcam_img_btn'])){
 		$stmt->bindParam(7, $username, PDO::PARAM_STR);
 		$stmt->bindParam(8, $profile_image, PDO::PARAM_STR);
 		if($stmt->execute()){
-			file_put_contents("assets/imgs/".$image_name, $decoded_url);
+			imagepng($destination, "assets/imgs/".$image_name);
 			
 			//increase the number of posts and update session with the new number of posts
 			try {
