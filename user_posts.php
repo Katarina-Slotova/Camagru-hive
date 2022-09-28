@@ -16,9 +16,6 @@ try {
 	$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 	$stmt->execute();
 	$all_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-/* 	$stmt->bind_result($all_posts);
-	$stmt->store_result();
-	$stmt->fetch(); */
 } catch (PDOException $error) {
 	echo $error->getMessage(); 
 	exit;
@@ -41,15 +38,5 @@ try {
 	exit;
 }
 $conn = null;
-
-
-/* $stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? LIMIT 6");
-$stmt->bind_param("i", $user_id);
-if($stmt->execute()){
-	$get_posts = $stmt->get_result(); // Get result from prepared statement
-}else{
-	$get_posts = [];
-} */
-
 
 ?>

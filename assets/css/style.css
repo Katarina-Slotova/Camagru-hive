@@ -836,3 +836,19 @@ canvas {
 	justify-content: center;
 	align-items: center;
 }
+
+.thumbnails-box{
+	display: inline-block;
+	vertical-align: middle;
+	padding: 10px;
+	width: calc(30%);
+	height: calc(100%);
+	border: 1px solid #F9F5EB;
+	border-radius: 3px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.thumbnails-box p{
+	padding-bottom: 5px;
+}

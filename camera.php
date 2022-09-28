@@ -14,7 +14,7 @@ require_once('header.php');
 		<div class="camera">
 			<div class="camera-img" style="display:flex;">
 				<div style="width:90%;">
-					<form action="create_camera_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
+					<form style="width:95%;" action="create_camera_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
 						<div>
 							<p class="sticker-description">1. Choose a sticker to jazz up your awesome photo!</p>
 							<div class="stickers-box">
@@ -63,8 +63,14 @@ require_once('header.php');
 						</div>
 					</form>
 				</div>
-				<div>
-					<p>here is div</p>
+				<div class="thumbnails-box">
+					<p>🌟 Your previous awesome photos 🌟</p>
+						<?php require_once('user_posts.php'); ?>
+							
+								<?php foreach($get_posts as $post){ ?>
+									<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
+								<?php } ?>
+							
 				</div>
 			</div>
 		</div>
