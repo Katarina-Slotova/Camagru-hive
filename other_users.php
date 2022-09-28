@@ -4,6 +4,7 @@
 	
 <?php }else{ ?>
 	<div class="status-wrapper">
+		
 		<?php foreach($other_users as $user){?>
 			<form action="user_profile.php" method="POST" id="other_user_form<?php echo $user['id'];?>">
 				<div class="status-card">

@@ -13,7 +13,7 @@ try{
 	$stmt->bindParam(2, $post_id, PDO::PARAM_INT);
 	$stmt->execute();
 	
-	if ($stmt->fetch(PDO::FETCH_ASSOC)){
+	if ($stmt->fetch()){
 		$post_liked = true;
 	}else{
 		$post_liked = false;

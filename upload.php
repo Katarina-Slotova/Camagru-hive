@@ -12,9 +12,11 @@ require_once('header.php');
 			<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
 		<?php } ?>
 		<div class="camera">
-			<div class="camera-img">
+			<div class="camera-img" style="display:flex;">
+			<div style="width:90%;">
+
 				<form runat="server" action="create_uploaded_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
-					<p class="sticker-description">🌟 Your awesome photo 🌟</p>
+					<p class="sticker-description">🌟 Your awesome picture 🌟</p>
 					<div class="canvas-container">
 						<img id="picture">
 						<canvas width="700" height="500" id="myCanvas"></canvas>
@@ -28,7 +30,7 @@ require_once('header.php');
 						<input type="text" class="my-input input" name="hashtags" placeholder="Add hastags here" required>
 					</div>
 					<div>
-						<p class="sticker-description">Wanna jazz up your awesome photo? Add a sticker!</p>
+						<p class="sticker-description">Wanna jazz up your awesome picture? Add a sticker!</p>
 						<div class="stickers-box">
 							<div class="stickers-container">
 								<img class="sticker" src="assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
@@ -44,6 +46,35 @@ require_once('header.php');
 						<button type="submit" class="upload-btn" name="upload_img_btn">Publish</button>
 					</div>
 				</form>
+			</div>
+				<div class="thumbnails-box">
+					<p>🌟 Your previous awesome pictures 🌟</p>
+						<?php
+							 
+							require_once('connection.php');
+							
+							$user_id = $_SESSION['id'];
+							$webcam = 0;
+
+							try {
+								$conn = connect_db();
+								$stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? AND webcam = ? ORDER BY date DESC");
+								$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
+								$stmt->bindParam(2, $webcam, PDO::PARAM_INT);
+								$stmt->execute();
+								$get_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+							} catch (PDOException $error) {
+								echo $error->getMessage(); 
+								exit;
+							}
+							$conn = null;
+
+							foreach($get_posts as $post){ 
+						?>
+							<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
+						<?php } ?>
+							
+				</div>
 			</div>
 		</div>
 	</div>
@@ -88,22 +119,22 @@ require_once('header.php');
 			let Selectedsticker = document.getElementById(sticker);
 			switch (sticker){
 				case 'sticker1':
-					ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker2':
-					ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker3':
-					ctx.drawImage(Selectedsticker, 150, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 150, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker4':
-					ctx.drawImage(Selectedsticker, 150, 80, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 150, 80, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker5':
-					ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker6':
-					ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 1.20, Selectedsticker.height * 1.20);
+					ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 			}
 			let canvasUrl = c.toDataURL();

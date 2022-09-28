@@ -1,7 +1,6 @@
 <?php
-require_once('header.php'); 
-require_once('connection.php');
-
+	require_once('header.php'); 
+	require_once('connection.php');
 ?>
 	<section class="main">
 		<div class="main-wrapper">
@@ -14,13 +13,12 @@ require_once('connection.php');
 					<?php } ?>
 					
 			<!--OTHER USERS-->
-			<?php 
-			require_once('other_users.php');
-			require_once('get_latest_posts.php');
-			try {
-				foreach($posts as $post){
+			<?php
+				require_once('other_users.php');
+				require_once('get_latest_posts.php');
 			?>
 
+			<?php try{ foreach($posts as $post){ ?>
 				<!--POSTS--->
 				<div class="posts">
 					<div class="single-post">
@@ -36,7 +34,7 @@ require_once('connection.php');
 					<img class="post-img" src="<?php echo "assets/imgs/".$post['image'];?>" alt="post-image">
 					<div class="post-content">
 						<div class="reaction-wrapper">
-							<?php require_once('check_if_liked.php'); ?>
+							<?php require('check_if_liked.php'); ?>
 							<?php if($post_liked){ ?>
 								<form action="unlike_post.php" method="POST">
 									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
@@ -52,7 +50,6 @@ require_once('connection.php');
 									</button>
 								</form>
 							<?php } ?>
-							<i class="icon las la-comments"></i>
 						</div>
 						<p class="likes"><?php echo $post['likes']?> likes</p>
 						<p class="description"><span><?php echo $post['caption']; ?></span><?php echo $post['hashtags']; ?></p>
@@ -66,19 +63,19 @@ require_once('connection.php');
 						$stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
 						$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 						$stmt->execute();
-						$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						$posts = $stmt->fetchAll();
 						
 						$conn = connect_db();
 						$stmt = $conn->prepare("SELECT COUNT(*) as all_comments FROM comments WHERE post_id = ?");
 						$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 						$stmt->execute();
-						$stmt->fetchAll(PDO::FETCH_ASSOC);
+						$stmt->fetchAll();
 
 						$conn = connect_db();
 						$stmt = $conn->prepare("SELECT * FROM comments WHERE post_id = ?");
 						$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 						$stmt->execute();
-						$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						$comments = $stmt->fetchAll();
 
 					?>
 

@@ -12,10 +12,7 @@ try {
 	$conn = connect_db();
 	$stmt = $conn->prepare("SELECT COUNT(*) as all_posts FROM posts");
 	$stmt->execute();
-	$all_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-/* 	$stmt->bind_result($all_posts);
-	$stmt->store_result();
-	$stmt->fetch(); */
+	$all_posts = $stmt->fetch();
 } catch (PDOException $error) {
 	echo $error->getMessage(); 
 	exit;
@@ -31,7 +28,7 @@ try {
 	$conn = connect_db();
 	$stmt = $conn->prepare("SELECT * FROM posts ORDER BY date DESC LIMIT $offset, $posts_per_page");
 	$stmt->execute();
-	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$posts = $stmt->fetchAll();
 } catch (PDOException $error) {
 	echo $error->getMessage(); 
 	exit;

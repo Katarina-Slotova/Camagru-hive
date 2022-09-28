@@ -74,7 +74,7 @@ require_once('header.php');
 
 							try {
 								$conn = connect_db();
-								$stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? AND webcam = ? ORDER BY date ASC");
+								$stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? AND webcam = ? ORDER BY date DESC");
 								$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 								$stmt->bindParam(2, $webcam, PDO::PARAM_INT);
 								$stmt->execute();
