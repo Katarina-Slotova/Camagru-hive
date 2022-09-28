@@ -41,7 +41,7 @@ require_once('header.php');
 								<input type="hidden" id="webcam-file" value="" name="webcam_file">
 							</div>
 							<!-- <p style="margin-top: 30px;" class="sticker-description">The stickers you have chosen:</p> -->
-							<div style="position:absolute; ">
+							<div style="position:relative; ">
 								<canvas class="is-hidden" width="700" height="500" id="stickers_canvas"></canvas>
 								<input type="hidden" id="sticker-canvas" value="" name="sticker-canvas">
 								<input type="hidden" id="sticker1_path" value="" name="sticker1_path">
@@ -65,11 +65,30 @@ require_once('header.php');
 				</div>
 				<div class="thumbnails-box">
 					<p>🌟 Your previous awesome photos 🌟</p>
-						<?php require_once('user_posts.php'); ?>
+						<?php
+							 
+							require_once('connection.php');
 							
-								<?php foreach($get_posts as $post){ ?>
-									<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
-								<?php } ?>
+							$user_id = $_SESSION['id'];
+							$webcam = 1;
+
+							try {
+								$conn = connect_db();
+								$stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? AND webcam = ? ORDER BY date ASC");
+								$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
+								$stmt->bindParam(2, $webcam, PDO::PARAM_INT);
+								$stmt->execute();
+								$get_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+							} catch (PDOException $error) {
+								echo $error->getMessage(); 
+								exit;
+							}
+							$conn = null;
+
+							foreach($get_posts as $post){ 
+						?>
+							<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
+						<?php } ?>
 							
 				</div>
 			</div>
@@ -154,15 +173,6 @@ require_once('header.php');
 			let finalImage = document.getElementById("webcam-file");
 			finalImage.value = canvasUrl;
 		});
-
-
-
-/* 		capture_button.addEventListener('click', function() {
-			canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-			let image_data_url = canvas.toDataURL();
-			let completeImage = document.getElementById("webcam-file");
-			completeImage.value = image_data_url;
-		}); */
 
 	</script>
 

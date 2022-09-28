@@ -17,6 +17,7 @@ if(isset($_POST['webcam_img_btn'])){
 	$date->setTimestamp($timestamp);
 	$date = $date->format('Y-m-d H:i:s');
 	$username = $_SESSION['username'];
+	$webcam = true;
 
 	// Create a unique image name by using strval function that converts the timestamp into a string
 	$image_name = strval(time()) . ".jpg";
@@ -39,7 +40,7 @@ if(isset($_POST['webcam_img_btn'])){
 	// Create post
 	try {
 		$conn = connect_db();
-		$stmt = $conn->prepare("INSERT INTO posts (user_id,likes,image,caption,hashtags,date,username,profile_image) VALUES (?,?,?,?,?,?,?,?)");
+		$stmt = $conn->prepare("INSERT INTO posts (user_id,likes,image,caption,hashtags,date,username,profile_image,webcam) VALUES (?,?,?,?,?,?,?,?,?)");
 		$stmt->bindParam(1, $id, PDO::PARAM_INT);
 		$stmt->bindParam(2, $likes, PDO::PARAM_INT);
 		$stmt->bindParam(3, $image_name, PDO::PARAM_STR);
@@ -48,6 +49,7 @@ if(isset($_POST['webcam_img_btn'])){
 		$stmt->bindParam(6, $date, PDO::PARAM_STR);
 		$stmt->bindParam(7, $username, PDO::PARAM_STR);
 		$stmt->bindParam(8, $profile_image, PDO::PARAM_STR);
+		$stmt->bindParam(9, $webcam, PDO::PARAM_STR);
 		if($stmt->execute()){
 			imagepng($destination, "assets/imgs/".$image_name);
 			
