@@ -32,7 +32,11 @@ try {
 		`following` int(11) DEFAULT 0,
 		`posts` int(11) DEFAULT 0,
 		`bio` varchar(250) DEFAULT 'none',
-		`token` varchar(250) DEFAULT NULL,
+/* 		`token` varchar(250) DEFAULT NULL, */
+		`active` tinyint(1) DEFAULT 0,
+    	`activation_code` varchar(255) NOT NULL,
+    	`activation_expiry` datetime NOT NULL,
+    	`activated_at` datetime DEFAULT NULL,
 		PRIMARY KEY (`id`)
 	)";
 	$conn->exec($stmt);

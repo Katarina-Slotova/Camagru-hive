@@ -43,7 +43,7 @@
 							</div>
 						</div>
 						<div class="btn-part">
-							<button type="submit" name="signup_btn" class="login-btn" id="signup_btn">Sign up</button>
+							<button type="submit" name="signup_btn" class="login-btn" id="signup_btn" value="signup">Sign up</button>
 						</div>
 					</form>
 					<div class="not-user-yet">
