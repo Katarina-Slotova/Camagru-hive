@@ -82,6 +82,7 @@
 					<?php foreach($comments as $comment){?>
 						<div class="comment-item">
 							<img src="<?php echo "assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
+							<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo $comment['username']; ?></p>
 							<p><?php echo $comment['comment_text']; ?><span><?php echo $comment['date']; ?></span></p>
 							<?php if($comment['user_id'] == $_SESSION['id']){ ?>
 								<form action="delete_comment.php" method="POST">
@@ -98,9 +99,9 @@
 					</div>
 
 					<div class="comment-wrapper">
-						<img class="icon" src="<?php echo "assets/imgs/".$post['profile_image']; ?>" alt="profile-pic">
 						<form class="comment-wrapper" action="comment.php" method="POST">
 							<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+							<input type="hidden" name="author_id" value="<?php echo $post['user_id'];?>">
 							<input name="text" class="comment-box" type="text" placeholder="Write a comment">
 							<button class="comment-button" name="comment_btn" type="submit">Publish</button>
 						</form>

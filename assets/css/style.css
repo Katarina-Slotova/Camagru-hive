@@ -58,6 +58,7 @@ body{
 
 .icon{
 	height: 100%;
+	padding-right: 1px;
 	cursor: pointer;
 	color: rgb(82, 82, 82);
 }

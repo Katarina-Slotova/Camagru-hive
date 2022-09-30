@@ -9,7 +9,7 @@
 			<?php } ?>
 			
 			<form action="update_profile.php" method="POST" enctype="multipart/form-data">
-				<div class="mb-3">
+				<div class="mb-5">
 					<label for="image" class="label">Profile picture</label>
 					<img src="<?php echo "assets/imgs/".$_SESSION['image']; ?>" class="edit-profile-img" alt="profile-img">
 					<div class="control">
@@ -30,6 +30,10 @@
 					<div class="mb-5">
 						<label for="bio" class="label">Bio</label>
 						<textarea name="bio" id="bio" cols="30" rows="3" class="textarea"><?php echo $_SESSION['bio'];?></textarea>
+					</div>
+					<div class="field">
+						<label for="password" class="label">Notifications</label>
+						<label class="checkbox"><input type="checkbox" name="notif" id="password" checked> Send me comment notifications via email</label>
 					</div>
 					<div class="mb-5">
 						<button name="update_profile_btn" id="update_profile_btn" class="update-profile-btn">Update</button>

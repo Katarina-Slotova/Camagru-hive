@@ -12,6 +12,13 @@ if(isset($_POST['update_profile_btn'])){
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$bio = $_POST['bio'];
+	$notif = $_POST['notif'];
+
+	if(isset($notif)){
+		$notif = true;
+	}else{
+		$notif = false;
+	}
 
 	if($image != ""){
 		$image_name = $_SESSION['username'] . ".jpg";
