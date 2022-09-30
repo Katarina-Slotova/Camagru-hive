@@ -24,7 +24,8 @@ if(isset($_POST['login_btn'])){
 		$stmt->execute();
 		
 		// Check if user with this email and passwd is in db
-		if($row = $stmt->fetch(PDO::FETCH_ASSOC) && is_user_active($email)){
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($row && is_user_active($email)){
 			
 			// Save the result in session
 			$_SESSION['id'] = $row['id'];
