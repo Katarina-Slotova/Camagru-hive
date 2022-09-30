@@ -4,12 +4,13 @@ session_start();
 
 require_once('connection.php');
 
-function is_user_active($email)
+function is_user_active($username)
 {
 	$conn = connect_db();
-	$stmt = $conn->prepare("SELECT active FROM users WHERE email = ?");
-	$stmt->bindParam(1, $email, PDO::PARAM_STR);
-	return $stmt->execute();
+	$stmt = $conn->prepare("SELECT active FROM users WHERE username = ?");
+	$stmt->bindParam(1, $username, PDO::PARAM_STR);
+	$stmt->execute();
+	return $stmt->fetchColumn();
 }
 
 if(isset($_POST['login_btn'])){
@@ -25,7 +26,8 @@ if(isset($_POST['login_btn'])){
 		
 		// Check if user with this email and passwd is in db
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($row && is_user_active($email)){
+		$result = is_user_active($row['username']);
+		if($row && $result){
 			
 			// Save the result in session
 			$_SESSION['id'] = $row['id'];
@@ -39,7 +41,7 @@ if(isset($_POST['login_btn'])){
 			
 			header('location: home.php');
 		}else{
-			header('location: login.php?error_msg=Incorrect email or password.');
+			header('location: login.php?error_msg=Incorrect email or password.'.$result);
 			exit;
 		}
 	} catch (PDOException $error) {
