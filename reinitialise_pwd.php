@@ -1,6 +1,5 @@
 <?php
 	require_once('connection.php');
-	session_start();
 
 	function send_reset_email(string $email, string $reset_code): void
 	{	
@@ -35,7 +34,8 @@
 		try
 		{
 			$conn = connect_db();
-			$stmt = $conn->prepare("SELECT username FROM users WHERE email='$email'");
+			$stmt = $conn->prepare("SELECT username FROM users WHERE email = ?");
+			$stmt->bindParam(1, $email, PDO::PARAM_STR);
 			$stmt->execute();
 			if ($stmt->rowCount()){
 				send_reset_email($email, $reset_code);
@@ -49,6 +49,7 @@
 			exit;
 		}
 		$conn = null;
+
 	} else {
 		header('location: reset_password.php?error_message=Error occured.');
 	}

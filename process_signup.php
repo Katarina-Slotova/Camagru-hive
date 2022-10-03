@@ -92,7 +92,7 @@ if(isset($_POST['signup_btn'])){
 
 
 				// If user account created, return the user information to frontend
-				if($stmt->execute([$username, $email, md5($password), password_hash($activation_code, PASSWORD_DEFAULT), $activation_expiry])){
+				if($stmt->execute([$username, $email, hash("whirlpool", $password), password_hash($activation_code, PASSWORD_DEFAULT), $activation_expiry])){
 					send_activation_email($email, $activation_code);
 					header("location: login.php?ok_message=Verify your account by clicking the verification link sent to your mailbox.");
 					require_once('auth.php');

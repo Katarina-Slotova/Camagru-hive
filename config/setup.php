@@ -25,7 +25,7 @@ try {
 	$stmt ="CREATE TABLE IF NOT EXISTS `users`(
 		`id` int(11) NOT NULL AUTO_INCREMENT,
 		`username` varchar(50) NOT NULL,
-		`password` varchar(50) NOT NULL,
+		`password` varchar(1000) NOT NULL,
 		`email` varchar(50) NOT NULL,
 		`image` text DEFAULT 'dog.png',
 		`followers` int(11) DEFAULT 0,

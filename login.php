@@ -55,13 +55,13 @@ session_start();
 								<button type="submit" name="login_btn" class="login-btn" id="login_btn">Log in</button>
 							</div>
 						</form>
-						<div class="not-user-yet">
+						<div class="has-text-centered">
+							<hr>
+							<a href="reset_password.php">Did you forget your password?</a>
+						</div>
+						<div class="not-user-yet has-text-centered">
 							<hr>
 							<p>Not a user yet? <a href="signup.php">Create an account!</a></p>
-						</div>
-						<hr>
-						<div class="">
-							<a href="reset_password.php">Did you forget your password?</a>
 						</div>
 					</div>
 				</div>

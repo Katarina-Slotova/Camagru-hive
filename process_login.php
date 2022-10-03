@@ -15,7 +15,7 @@ function is_user_active($username)
 
 if(isset($_POST['login_btn'])){
 	$email = $_POST['email'];
-	$password = md5($_POST['password']);
+	$password = hash("whirlpool", $_POST['password']);
 	
 	try {
 		$conn = connect_db();

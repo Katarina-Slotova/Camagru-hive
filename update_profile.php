@@ -75,7 +75,7 @@ function updateUserProfile($conn, $username, $password, $email, $image, $image_n
 			$conn = connect_db();
 			$stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, image = ?, bio = ? WHERE id = ?");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
-			$stmt->bindParam(2, md5($password), PDO::PARAM_STR);
+			$stmt->bindParam(2, hash("whirlpool", $password), PDO::PARAM_STR);
 			$stmt->bindParam(3, $email, PDO::PARAM_STR);
 			$stmt->bindParam(4, $image_name, PDO::PARAM_STR);
 			$stmt->bindParam(5, $bio, PDO::PARAM_STR);
