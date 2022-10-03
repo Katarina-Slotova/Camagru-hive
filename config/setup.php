@@ -37,6 +37,7 @@ try {
     	`activation_code` varchar(255) NOT NULL,
     	`activation_expiry` datetime NOT NULL,
     	`activated_at` datetime DEFAULT NULL,
+		`notifications` tinyint(1) DEFAULT 1,
 		PRIMARY KEY (`id`)
 	)";
 	$conn->exec($stmt);

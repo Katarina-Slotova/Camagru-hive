@@ -4,10 +4,19 @@
 		<div class="main-wrapper">
 			<h1 class="title mb-6">Edit Profile</h1>
 
+			<?php if(isset($_GET['ok_message'])){ ?>
+				<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+			<?php } ?>
 			<?php if(isset($_GET['error_message'])){ ?>
 				<p class="message is-danger has-text-centered"><?php echo $_GET['error_message']; ?></p>
 			<?php } ?>
-			
+			<form action="notifications.php" method="POST">
+				<div class="mb-5">
+					<label for="notification" class="label">Comment Notifications via Email</label>
+					<input class="notif-btn" type="submit" name="yes_notif" value="Send notifications" />
+					<input class="notif-btn" type="submit" name="no_notif" value="Do not send notifications" />
+				</div>
+			</form>
 			<form action="update_profile.php" method="POST" enctype="multipart/form-data">
 				<div class="mb-5">
 					<label for="image" class="label">Profile picture</label>
@@ -30,10 +39,6 @@
 					<div class="mb-5">
 						<label for="bio" class="label">Bio</label>
 						<textarea name="bio" id="bio" cols="30" rows="3" class="textarea"><?php echo $_SESSION['bio'];?></textarea>
-					</div>
-					<div class="field">
-						<label for="password" class="label">Notifications</label>
-						<label class="checkbox"><input type="checkbox" name="notif" id="password" checked> Send me comment notifications via email</label>
 					</div>
 					<div class="mb-5">
 						<button name="update_profile_btn" id="update_profile_btn" class="update-profile-btn">Update</button>

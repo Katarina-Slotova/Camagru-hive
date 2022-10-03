@@ -6,7 +6,6 @@ require_once('connection.php');
 
 function send_notification_email(string $email): void
 {	
-	//$APP_URL = 'http://localhost:8000';
 	$SENDER_EMAIL_ADDRESS = 'no-reply@email.com';
 	// create the activation link
 
@@ -45,6 +44,7 @@ if(isset($_POST['comment_btn'])){
 		
 		$stmt = $conn->prepare("INSERT INTO comments (post_id, user_id, username, profile_image, comment_text, date) VALUES (?, ?, ?, ?, ?, ?)");
 		$stmt1 = $conn->prepare("SELECT email FROM users WHERE id = ?");
+		$stmt2 = $conn->prepare("SELECT notifications FROM users WHERE id = ?");
 		
 		$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 		$stmt->bindParam(2, $user_id, PDO::PARAM_INT);
@@ -55,9 +55,13 @@ if(isset($_POST['comment_btn'])){
 
 		$stmt1->bindParam(1, $author_id, PDO::PARAM_INT);
 
-		if($stmt->execute() && $stmt1->execute()){
+		$stmt2->bindParam(1, $author_id, PDO::PARAM_INT);
+
+		if($stmt->execute() && $stmt1->execute() && $stmt2->execute()){
 			$email = $stmt1->fetchColumn();
-			send_notification_email($email);
+			$notif = $stmt2->fetchColumn();
+			if ($notif === 1)
+				send_notification_email($email);
 			header('location: home.php?post_id='.$post_id.'ok_message=Comment posted');
 		}else{
 			header('location: home.php?post_id='.$post_id.'error_message=Comment posting failed');

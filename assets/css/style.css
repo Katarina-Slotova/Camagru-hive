@@ -746,6 +746,19 @@ body{
 	cursor: pointer;
 }
 
+.notif-btn{
+	display: inline-block;
+	background: linear-gradient(0deg, rgb(192, 192, 228), rgb(203, 232, 203));
+	color: rgb(61, 60, 60);
+	font-size: 14px;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	text-align: center;
+	margin-bottom: 30px;
+	cursor: pointer;
+}
+
 /*Single post page*/
 .single-post-container{
 	margin-top: 5px;
