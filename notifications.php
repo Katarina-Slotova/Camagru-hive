@@ -20,7 +20,7 @@ if ($_POST['yes_notif']){
 	}
 	$conn = null;
 
-	header("location: edit_profile.php?ok_message=Comment notifications via email enabled!.");
+	header("location: edit_profile.php?ok_message=Comment notifications via email enabled!");
 } else if ($_POST['no_notif']){
 	try{
 		$conn = connect_db();
@@ -34,7 +34,7 @@ if ($_POST['yes_notif']){
 	}
 	$conn = null;
 
-	header("location: edit_profile.php?error_message=Comment notifications via email disabled!.");
+	header("location: edit_profile.php?ok_message=Comment notifications via email disabled!");
 }
 
 

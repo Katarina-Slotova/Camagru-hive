@@ -6,11 +6,10 @@
 		<div class="main-wrapper">
 			<?php if(isset($_GET['ok_message'])) { ?>
 				<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
-				<?php } ?>
-				
-				<?php if(isset($_GET['error_message'])) { ?>
-					<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
-					<?php } ?>
+			<?php } ?>
+			<?php if(isset($_GET['error_message'])) { ?>
+				<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
+			<?php } ?>
 					
 			<!--OTHER USERS-->
 			<?php

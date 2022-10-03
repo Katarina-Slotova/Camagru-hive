@@ -2,14 +2,14 @@
 
 	<section class="main">
 		<div class="main-wrapper">
-			<h1 class="title mb-6">Edit Profile</h1>
-
 			<?php if(isset($_GET['ok_message'])){ ?>
 				<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
 			<?php } ?>
 			<?php if(isset($_GET['error_message'])){ ?>
 				<p class="message is-danger has-text-centered"><?php echo $_GET['error_message']; ?></p>
 			<?php } ?>
+			<h1 class="title is-3 mb-6">Edit Profile</h1>
+			<h4 class="title is-4 mb-5">Update your notification preferences</h4>
 			<form action="notifications.php" method="POST">
 				<div class="mb-5">
 					<label for="notification" class="label">Comment Notifications via Email</label>
@@ -17,6 +17,7 @@
 					<input class="notif-btn" type="submit" name="no_notif" value="Do not send notifications" />
 				</div>
 			</form>
+			<h4 class="title is-4 mb-5">Update your personal information</h4>
 			<form action="update_profile.php" method="POST" enctype="multipart/form-data">
 				<div class="mb-5">
 					<label for="image" class="label">Profile picture</label>
@@ -34,7 +35,7 @@
 					</div>
 					<div class="mb-5">
 						<label for="password" class="label">Password</label>
-						<input type="text" name="password" id="password" class="input" placeholder="Password"></input>
+						<input type="password" name="password" id="password" class="input" placeholder="Password"></input>
 					</div>
 					<div class="mb-5">
 						<label for="bio" class="label">Bio</label>

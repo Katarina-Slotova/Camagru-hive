@@ -41,7 +41,7 @@ if(isset($_POST['login_btn'])){
 			
 			header('location: home.php');
 		}else{
-			header('location: login.php?error_msg=Incorrect email or password.'.$result);
+			header('location: login.php?error_msg=Incorrect email or password.');
 			exit;
 		}
 	} catch (PDOException $error) {
