@@ -44,15 +44,10 @@ if(isset($_POST['upload_img_btn'])){
 	if($upload_file){
 		list($type, $data_url) = explode(';', $upload_file);
 		list(, $data_url) = explode(',', $data_url); 
-		//$data_url = explode(',', $upload_file);
 		$decoded_url = base64_decode($data_url);
 		$dest = imagecreatefromstring($decoded_url);
-		// $src = imagecreatefromstring(file_get_contents($image));
 		imagecopy($destination, $dest, 0, 0, 25, 30, 700, 500);
 	}
-
-/* 	header('Content-Type: image/png');
-	imagepng($src); */
 
 	if(strlen($caption) > 300 || strlen($hashtags) > 100){
 		header('location: upload.php?error_message=Caption or hashtags too long.');

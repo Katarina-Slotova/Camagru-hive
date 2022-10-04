@@ -131,7 +131,6 @@
 					<?php } ?>
 					<li class="my-pagination">
 						<a <?php if($page_no >= $all_pages){ ?> disabled <?php } ?> class="pagination-next" href="<?php if($page_no >= $all_pages){echo '#';}else{echo 'home.php?page_no='.$page_no+1;}?>">Next</a>
-						<?php echo $all_pages;?>
 					</li>
 				</ul>
 			</nav>

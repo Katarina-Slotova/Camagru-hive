@@ -54,21 +54,33 @@ if(isset($_POST['signup_btn'])){
 		return $statement->execute();
 	}
 
-	// Check if the passwords match
+	// Check if the passwords match and are of proper length
 	if($password !== $password_conf){
-		header('location: signup.php?error_message=passwords do not match');
+		header('location: signup.php?error_message=Passwords do not match');
 		exit;
 	}
 
 	if(strlen($password) < 8){
-		header('location: signup.php?error_message=password is shorter than 8 characters');
+		header('location: signup.php?error_message=Password is shorter than 8 characters');
 		exit;
 	}
 
 	if(strlen($password) > 20){
-		header('location: signup.php?error_message=password too long, maximum 20 characters allowed.');
+		header('location: signup.php?error_message=Password too long, maximum 20 characters allowed.');
 		exit;
 	}
+
+	// Check the length of username
+	if(strlen($username) > 50){
+		header('location: signup.php?error_message=Username too long, maximum 50 characters allowed.');
+		exit;
+	}
+
+	// Check validity of email
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		header('location: signup.php?error_message=Invalid email format.');
+		exit;
+	  }
 
 	//  Check if user with this email address has already signed up
 	try {

@@ -22,8 +22,8 @@ if(isset($_POST['like_btn'])){
 	
 		$stmt->execute();
 		$stmt1->execute();
-	
-		header('location:'.$_SERVER['HTTP_REFERER'].'&ok_message=Post unliked!');
+		
+		header('location:'.$_SERVER['HTTP_REFERER']);
 	} catch (PDOException $error) {
 		echo $error->getMessage(); 
 		exit;

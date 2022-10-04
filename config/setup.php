@@ -83,7 +83,7 @@ try {
 		`user_id` int(11) NOT NULL,
 		`username` varchar(50) NOT NULL,
 		`profile_image` text  NOT NULL,
-		`comment_text` text  NOT NULL,
+		`comment_text` MEDIUMTEXT  NOT NULL,
 		`date` DATETIME  NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		PRIMARY KEY (`id`)
 	)";

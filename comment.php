@@ -62,9 +62,9 @@ if(isset($_POST['comment_btn'])){
 			$notif = $stmt2->fetchColumn();
 			if ($notif === 1)
 				send_notification_email($email);
-			header('location:'.$_SERVER['HTTP_REFERER'].'&ok_message=Comment posted');
+			header('location:'.$_SERVER['HTTP_REFERER']);
 		}else{
-			header('location:'.$_SERVER['HTTP_REFERER'].'&error_message=Comment posting failed');
+			header('location:'.$_SERVER['HTTP_REFERER']);
 		}
 		exit;
 	} catch (PDOException $error) {
