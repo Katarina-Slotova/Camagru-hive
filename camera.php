@@ -88,10 +88,12 @@ require_once('header.php');
 							foreach($get_posts as $post){ 
 						?>
 							<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
-						<?php } ?>
-							
+						<?php } ?>		
 				</div>
 			</div>
+		</div>
+		<div style="padding-bottom: 20px;">
+			<?php require_once('footer.php');?>
 		</div>
 	</div>
 

@@ -48,5 +48,8 @@
 			</form>
 		</div>
 	</section>
+	<div style="padding-bottom: 20px;">
+		<?php require_once('footer.php');?>
+	</div>
 </body>
 </html>

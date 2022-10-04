@@ -33,5 +33,8 @@
 				</form>
 			</div>
 		</section>
+		<div style="padding-top:300px;">
+			<?php require_once('footer.php');?>
+		</div>
 	</body>
 </html>

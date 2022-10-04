@@ -13,7 +13,9 @@
 					
 			<!--OTHER USERS-->
 			<?php
-				require_once('other_users.php');
+				if (isset($_SESSION['id'])){
+					require_once('other_users.php');
+				}
 				require_once('get_latest_posts.php');
 			?>
 
@@ -32,24 +34,26 @@
 					<!--POST CONTENT-->
 					<img class="post-img" src="<?php echo "assets/imgs/".$post['image'];?>" alt="post-image">
 					<div class="post-content">
-						<div class="reaction-wrapper">
-							<?php require('check_if_liked.php'); ?>
-							<?php if($post_liked){ ?>
-								<form action="unlike_post.php" method="POST">
-									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
-									<button class="heart" type="submit" name="like_btn">
-										<i class="icon las la-heart"></i>
-									</button>
-								</form> 
-							<?php }else{ ?>
-								<form action="like_post.php" method="POST">
-									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
-									<button class="heart" type="submit" name="like_btn">
-										<i class="icon lar la-heart"></i>
-									</button>
-								</form>
-							<?php } ?>
-						</div>
+						<?php if(isset($_SESSION['id'])){ ?>
+							<div class="reaction-wrapper">
+								<?php require('check_if_liked.php'); ?>
+								<?php if($post_liked){ ?>
+									<form action="unlike_post.php" method="POST">
+										<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+										<button class="heart" type="submit" name="like_btn">
+											<i class="icon las la-heart"></i>
+										</button>
+									</form> 
+								<?php }else{ ?>
+									<form action="like_post.php" method="POST">
+										<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
+										<button class="heart" type="submit" name="like_btn">
+											<i class="icon lar la-heart"></i>
+										</button>
+									</form>
+								<?php } ?>
+							</div>
+						<?php } ?>
 						<p class="likes"><?php echo $post['likes']?> likes</p>
 						<p class="description"><span><?php echo $post['caption']; ?></span><?php echo $post['hashtags']; ?></p>
 						<p class="time"><?php echo $post['date']; ?></p>
@@ -83,7 +87,7 @@
 							<img src="<?php echo "assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
 							<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo $comment['username']; ?></p>
 							<p><?php echo $comment['comment_text']; ?><span><?php echo $comment['date']; ?></span></p>
-							<?php if($comment['user_id'] == $_SESSION['id']){ ?>
+							<?php if(isset($_SESSION['id']) && $comment['user_id'] == $_SESSION['id']){ ?>
 								<form action="delete_comment.php" method="POST">
 									<input type="hidden" name="comment_id" value="<?php echo $comment['id'];?>">
 									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
@@ -92,20 +96,21 @@
 							<?php } ?>
 						</div>
 					<?php } ?>
+					
+					<?php if(isset($_SESSION['id'])){ ?>
+						<div>
+							<a class="load-comment-button" href="load_comments.js">Load more comments</a>
+						</div>
 
-					<div>
-						<a class="load-comment-button" href="load_comments.js">Load more comments</a>
-					</div>
-
-					<div class="comment-wrapper">
-						<form class="comment-wrapper" action="comment.php" method="POST">
-							<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
-							<input type="hidden" name="author_id" value="<?php echo $post['user_id'];?>">
-							<input name="text" class="comment-box" type="text" placeholder="Write a comment">
-							<button class="comment-button" name="comment_btn" type="submit">Publish</button>
-						</form>
-					</div>
-					</div>
+						<div class="comment-wrapper">
+							<form class="comment-wrapper" action="comment.php" method="POST">
+								<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+								<input type="hidden" name="author_id" value="<?php echo $post['user_id'];?>">
+								<input name="text" class="comment-box" type="text" placeholder="Write a comment">
+								<button class="comment-button" name="comment_btn" type="submit">Publish</button>
+							</form>
+						</div>
+					<?php } ?>
 				</div>
 			<?php } ?>
 			<nav class="pagination mt-6" role="navigation" aria-label="pagination">
@@ -140,10 +145,8 @@
 				exit;
 			}
 			$conn = null;
+			require_once('footer.php');
 			?>
-			<div class="my-footer">
-				<p><em>Made with ❤️ by Katarina Slotova. Hive Helsinki 2022.</em></p>
-			</div>
 		</div>
 	</section>
 </body>

@@ -92,5 +92,8 @@
 			</nav>
 		</div>
 	</main>
+	<div style="padding-bottom: 20px;">
+		<?php require_once('footer.php');?>
+	</div>
 </body>
 </html>

@@ -12,20 +12,17 @@ try{
 	$stmt = $conn->prepare("SELECT other_user_id FROM followings WHERE user_id = ?");
 	$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 	$stmt->execute();
-	$ids_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	// Store the ids in an array  
-/* 	$ids_array = array();
-	$result = $stmt->get_result();
-	while($row = $result->fetch_array(MYSQLI_NUM)){
+
+	while($row = $stmt->fetch(PDO::FETCH_NUM)){
 		foreach($row as $r){
 			$ids_array[] = $r;
 		}
-	} */
+	}
 
 	if(empty($ids_array)){
 		$info = "You are not following anyone yet.";
 	}else{
-		//$following_ids = join(",", $ids_array);
+		$following_ids = join(",", $ids_array);
 		
 		// Pagination of my followers list 
 		if(isset($_GET['page_no']) && $_GET['page_no'] != ""){
@@ -36,12 +33,8 @@ try{
 		
 		try{
 			$conn = connect_db();
-			$following_ids = str_repeat('?,', count($ids_array) - 1) . '?';
 			$stmt = $conn->prepare("SELECT COUNT(*) as all_users FROM users WHERE id in ($following_ids)");
-			$stmt->execute($ids_array);
-/* 			$stmt->bind_result($all_users);
-			$stmt->store_result();
-			$stmt->fetch(); */
+			$stmt->execute();
 			$all_users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} catch (PDOException $error) {
 			echo $error->getMessage(); 

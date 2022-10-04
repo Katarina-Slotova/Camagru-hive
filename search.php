@@ -52,6 +52,9 @@ if(isset($_POST['search_input'])){
 		<?php } ?>
 		</ul>
 	</div>
+	<div style="padding-top: 550px;">
+		<?php require_once('footer.php');?>
+	</div>
 
 </body>
 </html>
