@@ -122,7 +122,7 @@ if(isset($_POST['signup_btn'])){
 		exit;
 	}
 }else{
-	header('location: signup.php?error_message=error occured HERE');
+	header('location: signup.php?error_message=error occured');
 	exit;
 }
 
