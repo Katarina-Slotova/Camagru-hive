@@ -69,11 +69,11 @@
 						$stmt->execute();
 						$posts = $stmt->fetchAll();
 						
-						$conn = connect_db();
+/* 						$conn = connect_db();
 						$stmt = $conn->prepare("SELECT COUNT(*) as all_comments FROM comments WHERE post_id = ?");
 						$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 						$stmt->execute();
-						$stmt->fetchAll();
+						$stmt->fetchAll(); */
 
 						$conn = connect_db();
 						$stmt = $conn->prepare("SELECT * FROM comments WHERE post_id = ?");
@@ -99,10 +99,6 @@
 					<?php } ?>
 					
 					<?php if(isset($_SESSION['id'])){ ?>
-						<div>
-							<a class="load-comment-button" href="load_comments.js">Load more comments</a>
-						</div>
-
 						<div class="comment-wrapper">
 							<form class="comment-wrapper" action="comment.php" method="POST">
 								<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
@@ -117,27 +113,25 @@
 			<nav class="pagination mt-6" role="navigation" aria-label="pagination">
 				<ul class="my-pagination-list" class="pagination-list">
 					<li class="my-pagination">
-						<a <?php if($page_no <= 1){echo 'is-disabled';}?> class="pagination-previous" title="This is the first page" href="<?php if($page_no <= 1){echo '#';}else{echo '?page_no='.$page_no-1;}?>">Previous</a>
+						<a <?php if($page_no <= 1){ ?> disabled <?php } ?> class="pagination-previous" href="<?php if($page_no <= 1){echo '#';}else{echo 'home.php?page_no='.$page_no-1;}?>">Previous</a>
 					</li>
 					<li>
-						<a class="pagination-link" aria-label="Page 1" aria-current="page" href="?page_no=1">1</a>
+						<a class="pagination-link" aria-label="Page 1" aria-current="page" href="home.php?page_no=1">1</a>
 					</li>
 					<li>
-						<a class="pagination-link" aria-label="Goto page 2" href="?page_no=2">2</a>
+						<a class="pagination-link" aria-label="Goto page 2" href="home.php?page_no=2">2</a>
 					</li>
 					<li>
-						<a class="pagination-link" aria-label="Goto page 3" href="?page_no=3">3</a>
+						<a class="pagination-link" aria-label="Goto page 3" href="home.php?page_no=3">3</a>
 					</li>
 					<?php if($page_no >= 3){ ?>
 						<li>
 							<a class="pagination-link" aria-label="Pages after page 3" href="#">...</a>
 						</li>
-						<li>
-							<a class="pagination-link" aria-label="Goto pages after page 3" href="<?php echo "?page_no=".$page_no; ?>"></a>
-						</li>
-						<?php } ?>
+					<?php } ?>
 					<li class="my-pagination">
-						<a <?php if($page_no >= $all_posts){echo 'is-disabled';}?> class="pagination-next" href="<?php if($page_no >= $all_posts){echo '#';}else{echo '?page_no='.$page_no+1;}?>">Next</a>
+						<a <?php if($page_no >= $all_pages){ ?> disabled <?php } ?> class="pagination-next" href="<?php if($page_no >= $all_pages){echo '#';}else{echo 'home.php?page_no='.$page_no+1;}?>">Next</a>
+						<?php echo $all_pages;?>
 					</li>
 				</ul>
 			</nav>

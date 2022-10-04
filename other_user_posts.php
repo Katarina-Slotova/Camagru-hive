@@ -2,7 +2,7 @@
 
 require_once('connection.php');
 
-if(isset($_GET['page_no']) && $_GET['page_no'] != ""){
+if(isset($_GET['page_no'])){
 	$page_no = $_GET['page_no'];
 }else{
 	$page_no = 1;
@@ -14,9 +14,6 @@ try {
 	$stmt->bindParam(1, $other_user_id, PDO::PARAM_INT);
 	$stmt->execute();
 	$all_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-/* 	$stmt->bind_result($all_posts);
-	$stmt->store_result();
-	$stmt->fetch(); */
 } catch (PDOException $error) {
 	echo $error->getMessage(); 
 	exit;
@@ -40,16 +37,4 @@ try {
 }
 $conn = null;
 
-/* include('connection.php');
-
-$user_id = $other_user_id;
-
-$stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? LIMIT 6");
-$stmt->bind_param("i", $user_id);
-if($stmt->execute()){
-	$get_posts = $stmt->get_result(); // Get result from prepared statement
-}else{
-	$get_posts = [];
-}
- */
 ?>

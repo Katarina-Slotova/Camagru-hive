@@ -48,9 +48,7 @@
 										<li class="gallery-item-style"><span><?php echo $post['likes']; ?></span>
 											<i class="lar la-heart"></i>
 										</li>
-										<li class="gallery-item-style"><span></span>
-											<i class="las la-comments"></i>
-										</li>
+
 										<li>
 											<form action="delete_post.php" method="POST">
 												<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
@@ -63,7 +61,7 @@
 						</div>
 				<?php } ?>
 			</div>
-			<nav class="pagination mt-6" role="navigation" aria-label="pagination">
+			<!-- <nav class="pagination mt-6" role="navigation" aria-label="pagination">
 				<ul class="my-pagination-list" class="pagination-list">
 					<li class="my-pagination">
 						<a <?php if($page_no <= 1){echo 'is-disabled';}?> class="pagination-previous" title="This is the first page" href="<?php if($page_no <= 1){echo '#';}else{echo '?page_no='.$page_no-1;}?>">Previous</a>
@@ -89,7 +87,7 @@
 						<a <?php if($page_no >= $all_posts){echo 'is-disabled';}?> class="pagination-next" href="<?php if($page_no >= $all_posts){echo '#';}else{echo '?page_no='.$page_no+1;}?>">Next</a>
 					</li>
 				</ul>
-			</nav>
+			</nav> -->
 		</div>
 	</main>
 	<div style="padding-bottom: 20px;">
