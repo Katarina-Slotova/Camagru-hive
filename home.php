@@ -55,7 +55,8 @@
 							</div>
 						<?php } ?>
 						<p class="likes"><?php echo $post['likes']?> likes</p>
-						<p class="description"><span><?php echo $post['caption']; ?></span><?php echo $post['hashtags']; ?></p>
+						<p class="description"><span><?php echo $post['caption']; ?></span></p>
+						<p style="margin-bottom: 15px;"><?php echo $post['hashtags']; ?></p>
 						<p class="time"><?php echo $post['date']; ?></p>
 					</div>
 

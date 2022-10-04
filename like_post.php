@@ -22,14 +22,14 @@ if(isset($_POST['like_btn'])){
 		$stmt->execute();
 		$stmt1->execute();
 
-		header('location: home.php?ok_message=Post liked!');
+		header('location:'.$_SERVER['HTTP_REFERER'].'&ok_message=Post liked!');
 	} catch (PDOException $error) {
 		echo $error->getMessage(); 
 		exit;
 	}
 	$conn = null;
 }else{
-	header('location: home.php?error_message=Error occured');
+	header('location:'.$_SERVER['HTTP_REFERER'].'&error_message=Error occured');
 }
 
 

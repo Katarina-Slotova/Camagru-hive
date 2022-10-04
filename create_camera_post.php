@@ -35,7 +35,7 @@ if(isset($_POST['webcam_img_btn'])){
 	$decoded_stickers_url = base64_decode($data);
 	$dest = imagecreatefromstring($decoded_stickers_url);
 
-	imagecopy($destination, $dest, 0, 0, 0, 0, 700, 500);
+	imagecopy($destination, $dest, 40, 0, 0, 0, 700, 500);
 
 	// Create post
 	try {

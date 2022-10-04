@@ -36,7 +36,7 @@ if(isset($_POST['comment_btn'])){
 	$date = $date->format('Y-m-d H:i:s');
 
 	if(strlen($text) > 20){
-		header('location: home.php?post_id='.$post_id.'error_message=Comment too long');
+		header('location:'.$_SERVER['HTTP_REFERER'].'&error_message=Comment too long');
 		exit;
 	}
 	try{
@@ -62,9 +62,9 @@ if(isset($_POST['comment_btn'])){
 			$notif = $stmt2->fetchColumn();
 			if ($notif === 1)
 				send_notification_email($email);
-			header('location: home.php?ok_message=Comment posted');
+			header('location:'.$_SERVER['HTTP_REFERER'].'&ok_message=Comment posted');
 		}else{
-			header('location: home.php?error_message=Comment posting failed');
+			header('location:'.$_SERVER['HTTP_REFERER'].'&error_message=Comment posting failed');
 		}
 		exit;
 	} catch (PDOException $error) {
@@ -73,7 +73,7 @@ if(isset($_POST['comment_btn'])){
 	}
 	$conn = null;
 }else{
-	header('location: home.php?post_id='.$post_id.'error_message=Error occured');
+	header('location: home.php?error_message=Error occured');
 	exit;
 }
 
