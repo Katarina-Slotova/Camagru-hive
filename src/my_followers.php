@@ -47,7 +47,7 @@ try {
 							<span><?php echo substr($user['bio'],0,20); ?></span>
 						</div>
 						<div class="search-result-item-btn">
-							<form action="user_profile.php" method="POST ">
+							<form action="user_profile.php" method="POST">
 								<input type="hidden" name="other_user_id" value="<?php echo $user['id']; ?>">
 								<button type="submit">See profile</button>
 							</form>

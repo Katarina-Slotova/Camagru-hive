@@ -11,6 +11,7 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 	}else{
 		$other_user_id = $_SESSION['other_user_id'];
 	}
+
 	try {
 		$conn = connect_db();
 		$stmt = $conn->prepare('SELECT * FROM users WHERE id = ?');
