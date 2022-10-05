@@ -21,7 +21,7 @@
 			<form action="update_profile.php" method="POST" enctype="multipart/form-data">
 				<div class="mb-5">
 					<label for="image" class="label">Profile picture</label>
-					<img src="<?php echo "assets/imgs/".$_SESSION['image']; ?>" class="edit-profile-img" alt="profile-img">
+					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" class="edit-profile-img" alt="profile-img">
 					<div class="control">
 						<input type="file" class="my-input input" name="image">
 					</div>

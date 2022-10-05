@@ -10,7 +10,7 @@
 			<?php } ?>
 			<div class="profile">
 				<div class="profile-img">
-					<img src="<?php echo "assets/imgs/".$_SESSION['image']; ?>" alt=""> 
+					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" alt=""> 
 				</div>
 				<div class="profile-user-settings">
 					<h1 class="profile-user-name"><?php echo $_SESSION['username']; ?></h1>
@@ -42,7 +42,7 @@
 				<?php require_once('user_posts.php'); ?>
 					<?php foreach($get_posts as $post){ ?>
 						<div class="gallery-item">
-							<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
+							<img src="<?php echo "../assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
 								<div class="gallery-item-info">
 									<ul>
 										<li class="gallery-item-style"><span><?php echo $post['likes']; ?></span>

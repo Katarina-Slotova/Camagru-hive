@@ -33,12 +33,12 @@ require_once('header.php');
 						<p class="sticker-description">Wanna jazz up your awesome picture? Add a sticker!</p>
 						<div class="stickers-box">
 							<div class="stickers-container">
-								<img class="sticker" src="assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
-								<img class="sticker" src="assets/stickers/kitten.png" alt="kitten-sticker" id="sticker2">
-								<img class="sticker" src="assets/stickers/monster.png" alt="monster-sticker" id="sticker3">
-								<img class="sticker" src="assets/stickers/so-hot.png" alt="hot-sticker" id="sticker4">
-								<img class="sticker" src="assets/stickers/unicorn.png" alt="unicorn-sticker" id="sticker5">
-								<img class="sticker" src="assets/stickers/watermelon.png" alt="watermalon-sticker" id="sticker6">
+								<img class="sticker" src="../assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
+								<img class="sticker" src="../assets/stickers/kitten.png" alt="kitten-sticker" id="sticker2">
+								<img class="sticker" src="../assets/stickers/monster.png" alt="monster-sticker" id="sticker3">
+								<img class="sticker" src="../assets/stickers/so-hot.png" alt="hot-sticker" id="sticker4">
+								<img class="sticker" src="../assets/stickers/unicorn.png" alt="unicorn-sticker" id="sticker5">
+								<img class="sticker" src="../assets/stickers/watermelon.png" alt="watermalon-sticker" id="sticker6">
 							</div>
 						</div>
 					</div>
@@ -71,7 +71,7 @@ require_once('header.php');
 
 							foreach($get_posts as $post){ 
 						?>
-							<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
+							<img src="<?php echo "../assets/imgs/".$post['image']; ?>" alt="user-post">
 						<?php } ?>
 							
 				</div>

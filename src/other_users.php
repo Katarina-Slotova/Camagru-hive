@@ -10,7 +10,7 @@
 				<div class="status-card">
 					<input type="hidden" name="other_user_id" value="<?php echo $user['id'];?>">
 					<div class="profile-pic">
-						<img onclick="document.getElementById('other_user_form'+<?php echo $user['id'];?> ).submit();" src="<?php echo "assets/imgs/".$user['image']?>" alt="profile-pic"/>
+						<img onclick="document.getElementById('other_user_form'+<?php echo $user['id'];?> ).submit();" src="<?php echo "../assets/imgs/".$user['image']?>" alt="profile-pic"/>
 					</div>
 					<p class="usrname"><?php echo $user['username'];?></p>
 				</div>

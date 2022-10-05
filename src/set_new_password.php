@@ -4,9 +4,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css"></style>
 	<title>Camagru</title>
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-	<link rel="stylesheet" href="assets/line-awesome/css/line-awesome.min.css"> 
+	<link rel="stylesheet" href="../assets/line-awesome/css/line-awesome.min.css"> 
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 </head>
 <html lang="en">

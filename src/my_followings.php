@@ -51,7 +51,7 @@ $conn = null;
 			<?php foreach($users as $user){ ?>
 				<?php if($user['id'] != $_SESSION['id']){ ?>
 					<li class="list-item search-result-item">
-						<img src="<?php echo "assets/imgs/".$user['image']; ?>" alt="profile-img">
+						<img src="<?php echo "../assets/imgs/".$user['image']; ?>" alt="profile-img">
 						<div>
 							<p><?php echo $user['username']; ?></p>
 							<span><?php echo substr($user['bio'],0,20); ?></span>

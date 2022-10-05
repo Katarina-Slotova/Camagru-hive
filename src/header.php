@@ -11,15 +11,15 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css"></style>
 	<title>Camagru</title>
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-	<link rel="stylesheet" href="assets/line-awesome/css/line-awesome.min.css"> 
-	<link rel="icon" type="image/png" sizes="16x16" href="assets/imgs/favicon-16x16.png">
+	<link rel="stylesheet" href="../assets/line-awesome/css/line-awesome.min.css"> 
+	<link rel="icon" type="image/png" sizes="16x16" href="../assets/imgs/favicon-16x16.png">
 </head>
 <body>
 	<nav class="navbar">
 		<div class="navbar-wrapper">
-			<img src="assets/imgs/camagru_logo.png" class="logo">
+			<img src="../assets/imgs/camagru_logo.png" class="logo">
 			<?php if(isset($_SESSION['id'])){ ?>
 				<form>
 					<a class="search-icon" href="search.php"><i class="las la-search"></i> SEARCH</a>

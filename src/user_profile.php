@@ -37,7 +37,7 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 			<?php } ?>
 				<div class="profile">
 					<div class="profile-img">
-						<img src="<?php echo "assets/imgs/".$user['image'];?>" alt="profile-picture">
+						<img src="<?php echo "../assets/imgs/".$user['image'];?>" alt="profile-picture">
 					</div>
 					<div class="profile-user-settings">
 						<h1 class="profile-user-name"><?php echo $user['username'];?></h1>
@@ -74,7 +74,7 @@ if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 			<?php require_once('other_user_posts.php'); ?>
 				<?php foreach($get_posts as $post){ ?>
 					<div class="gallery-item">
-						<img src="<?php echo "assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
+						<img src="<?php echo "../assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
 							<div class="gallery-item-info">
 								<ul>
 									<li class="gallery-item-likes"><span><?php echo $post['likes'];?></span>

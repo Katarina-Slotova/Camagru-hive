@@ -102,7 +102,7 @@ function updateUserProfile($conn, $username, $password, $email, $image, $image_n
 
 	if($stmt->execute()){
 		if($image != ""){
-			move_uploaded_file($image, "assets/imgs/".$image_name); //Store image in the imgs folder
+			move_uploaded_file($image, "../assets/imgs/".$image_name); //Store image in the imgs folder
 		}
 		// Update session with the new updated data (from variables)
 		$_SESSION['username'] = $username;

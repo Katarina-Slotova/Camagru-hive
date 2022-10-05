@@ -26,13 +26,13 @@
 					<div class="info">
 						<div class="user">
 							<div class="profile-pic">
-								<img src="<?php echo "assets/imgs/".$post['profile_image']; ?>" alt="profile-image">
+								<img src="<?php echo "../assets/imgs/".$post['profile_image']; ?>" alt="profile-image">
 							</div>
 							<p class="usrname"><?php echo $post['username'];?></p>
 						</div>
 					</div>
 					<!--POST CONTENT-->
-					<img class="post-img" src="<?php echo "assets/imgs/".$post['image'];?>" alt="post-image">
+					<img class="post-img" src="<?php echo "../assets/imgs/".$post['image'];?>" alt="post-image">
 					<div class="post-content">
 						<?php if(isset($_SESSION['id'])){ ?>
 							<div class="reaction-wrapper">
@@ -79,7 +79,7 @@
 
 					<?php foreach($comments as $comment){?>
 						<div class="comment-item">
-							<img src="<?php echo "assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
+							<img src="<?php echo "../assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
 							<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo $comment['username']; ?></p>
 							<p><?php echo $comment['comment_text']; ?><span><?php echo $comment['date']; ?></span></p>
 							<?php if(isset($_SESSION['id']) && $comment['user_id'] == $_SESSION['id']){ ?>

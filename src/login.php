@@ -10,9 +10,9 @@ session_start();
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<style type="text/css"></style>
-		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="../assets/css/style.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-		<link rel="stylesheet" href="assets/line-awesome/css/line-awesome.min.css"> 
+		<link rel="stylesheet" href="../assets/line-awesome/css/line-awesome.min.css"> 
 		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 		<title>Log in</title>
 	</head>
@@ -30,7 +30,7 @@ session_start();
 				<div class="form-container">
 					<div class="form-content box">
 						<div class="logo">
-							<img src="assets/imgs/camagru_logo.png" class="logo-img" alt="camagru-logo">
+							<img src="../assets/imgs/camagru_logo.png" class="logo-img" alt="camagru-logo">
 						</div>
 						<form class="login-form" id="login_form" method="POST" action="process_login.php">
 							<?php if(isset($_GET['error_msg'])){ ?>

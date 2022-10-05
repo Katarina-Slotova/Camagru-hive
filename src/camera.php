@@ -19,12 +19,12 @@ require_once('header.php');
 							<p class="sticker-description">1. Choose a sticker to jazz up your awesome photo!</p>
 							<div class="stickers-box">
 								<div class="stickers-container">
-									<img class="sticker" src="assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
-									<img class="sticker" src="assets/stickers/kitten.png" alt="kitten-sticker" id="sticker2">
-									<img class="sticker" src="assets/stickers/monster.png" alt="monster-sticker" id="sticker3">
-									<img class="sticker" src="assets/stickers/so-hot.png" alt="hot-sticker" id="sticker4">
-									<img class="sticker" src="assets/stickers/unicorn.png" alt="unicorn-sticker" id="sticker5">
-									<img class="sticker" src="assets/stickers/watermelon.png" alt="watermelon-sticker" id="sticker6">
+									<img class="sticker" src="../assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
+									<img class="sticker" src="../assets/stickers/kitten.png" alt="kitten-sticker" id="sticker2">
+									<img class="sticker" src="../assets/stickers/monster.png" alt="monster-sticker" id="sticker3">
+									<img class="sticker" src="../assets/stickers/so-hot.png" alt="hot-sticker" id="sticker4">
+									<img class="sticker" src="../assets/stickers/unicorn.png" alt="unicorn-sticker" id="sticker5">
+									<img class="sticker" src="../assets/stickers/watermelon.png" alt="watermelon-sticker" id="sticker6">
 								</div>
 							</div>
 						</div>
@@ -40,7 +40,6 @@ require_once('header.php');
 								<canvas class="is-hidden" width="700" height="500" id="canvas"></canvas>
 								<input type="hidden" id="webcam-file" value="" name="webcam_file">
 							</div>
-							<!-- <p style="margin-top: 30px;" class="sticker-description">The stickers you have chosen:</p> -->
 							<div style="position:relative; ">
 								<canvas class="is-hidden" width="700" height="500" id="stickers_canvas"></canvas>
 								<input type="hidden" id="sticker-canvas" value="" name="sticker-canvas">
@@ -87,7 +86,7 @@ require_once('header.php');
 
 							foreach($get_posts as $post){ 
 						?>
-							<img src="<?php echo "assets/imgs/".$post['image']; ?>" alt="user-post">
+							<img src="<?php echo "../assets/imgs/".$post['image']; ?>" alt="user-post">
 						<?php } ?>		
 				</div>
 			</div>
@@ -137,27 +136,27 @@ require_once('header.php');
 			switch (sticker){
 				case 'sticker1':
 					stickers_ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
-					sticker1.value = "assets/stickers/bee.png"
+					sticker1.value = "../assets/stickers/bee.png"
 					break;
 				case 'sticker2':
 					stickers_ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
-					sticker2.value = "assets/stickers/kitten.png"
+					sticker2.value = "../assets/stickers/kitten.png"
 					break;
 				case 'sticker3':
 					stickers_ctx.drawImage(Selectedsticker, 150, 220, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
-					sticker3.value = "assets/stickers/monster.png"
+					sticker3.value = "../assets/stickers/monster.png"
 					break;
 				case 'sticker4':
 					stickers_ctx.drawImage(Selectedsticker, 170, 80, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
-					sticker4.value = "assets/stickers/so-hot.png"
+					sticker4.value = "../assets/stickers/so-hot.png"
 					break;
 				case 'sticker5':
 					stickers_ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
-					sticker5.value = "assets/stickers/unicorn.png"
+					sticker5.value = "../assets/stickers/unicorn.png"
 					break;
 				case 'sticker6':
 					stickers_ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
-					sticker6.value = "assets/stickers/watermelon.png"
+					sticker6.value = "../assets/stickers/watermelon.png"
 					break;
 			}
 			let stickersUrl = stickers_canvas.toDataURL();	

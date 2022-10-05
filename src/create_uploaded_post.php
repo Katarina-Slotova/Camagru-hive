@@ -69,9 +69,9 @@ if(isset($_POST['upload_img_btn'])){
 		$stmt->bindParam(9, $webcam, PDO::PARAM_STR);
 		if($stmt->execute()){
 			if($src){
-				imagepng($src, "assets/imgs/".$image_name); //Store image in folder
+				imagepng($src, "../assets/imgs/".$image_name); //Store image in folder
 			} else {
-				imagepng($destination, "assets/imgs/".$image_name);
+				imagepng($destination, "../assets/imgs/".$image_name);
 			}
 			
 			//increase the number of posts and update session with the new number of posts
