@@ -1,13 +1,5 @@
 <?php
 
-/* $conn = mysqli_connect('localhost', 'root', '123', 'camagru', 0, "/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock");
-if (!$conn) {
-	echo "Failed to connect to MySQL: " . mysql_errno() . " - " . mysql_error();
-	exit();
-  } */
-
-//include('config/database.php');
-
 function connect_db()
 {
 	$DB_DSN = "mysql:host=localhost;dbname=camagru_db";

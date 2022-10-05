@@ -68,12 +68,6 @@
 						$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 						$stmt->execute();
 						$posts = $stmt->fetchAll();
-						
-/* 						$conn = connect_db();
-						$stmt = $conn->prepare("SELECT COUNT(*) as all_comments FROM comments WHERE post_id = ?");
-						$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
-						$stmt->execute();
-						$stmt->fetchAll(); */
 
 						$conn = connect_db();
 						$stmt = $conn->prepare("SELECT * FROM comments WHERE post_id = ?");

@@ -29,7 +29,7 @@ if(isset($_POST['follow_btn'])){
 	
 		$_SESSION['following'] = $_SESSION['following']+1;
 	
-		header('location:'.$_SERVER['HTTP_REFERER'].'&ok_message=You now follow this user!');
+		header('location:'.$_SERVER['HTTP_REFERER'].'?ok_message=You now follow this user!');
 	} catch (PDOException $error) {
 		echo $error->getMessage(); 
 		exit;

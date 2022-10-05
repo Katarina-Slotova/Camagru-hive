@@ -48,7 +48,6 @@
 										<li class="gallery-item-style"><span><?php echo $post['likes']; ?></span>
 											<i class="lar la-heart"></i>
 										</li>
-
 										<li>
 											<form action="delete_post.php" method="POST">
 												<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
@@ -61,33 +60,6 @@
 						</div>
 				<?php } ?>
 			</div>
-			<!-- <nav class="pagination mt-6" role="navigation" aria-label="pagination">
-				<ul class="my-pagination-list" class="pagination-list">
-					<li class="my-pagination">
-						<a <?php if($page_no <= 1){echo 'is-disabled';}?> class="pagination-previous" title="This is the first page" href="<?php if($page_no <= 1){echo '#';}else{echo '?page_no='.$page_no-1;}?>">Previous</a>
-					</li>
-					<li>
-						<a class="pagination-link" aria-label="Page 1" aria-current="page" href="?page_no=1">1</a>
-					</li>
-					<li>
-						<a class="pagination-link" aria-label="Goto page 2" href="?page_no=2">2</a>
-					</li>
-					<li>
-						<a class="pagination-link" aria-label="Goto page 3" href="?page_no=3">3</a>
-					</li>
-					<?php if($page_no >= 3){ ?>
-						<li>
-							<a class="pagination-link" aria-label="Pages after page 3" href="#">...</a>
-						</li>
-						<li>
-							<a class="pagination-link" aria-label="Goto pages after page 3" href="<?php echo "?page_no=".$page_no; ?>"></a>
-						</li>
-					<?php } ?>
-					<li class="my-pagination">
-						<a <?php if($page_no >= $all_posts){echo 'is-disabled';}?> class="pagination-next" href="<?php if($page_no >= $all_posts){echo '#';}else{echo '?page_no='.$page_no+1;}?>">Next</a>
-					</li>
-				</ul>
-			</nav> -->
 		</div>
 	</main>
 	<div style="padding-bottom: 20px;">

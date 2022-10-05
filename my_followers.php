@@ -15,15 +15,6 @@ try {
 	$stmt->execute();
 	$ids_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-/* 	// Store the ids in an array  
-	$ids_array = array();
-	//$result = $stmt->get_result();
-	while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-		foreach($row as $r){
-			$ids_array[] = $r;
-		}
-	} */
-
 	if(empty($ids_array)){
 		$info = "You do not have any followers yet.";
 	}else{
@@ -40,9 +31,6 @@ try {
 		$stmt = $conn->prepare("SELECT COUNT(*) as all_users FROM users WHERE id in ($followers_ids)");
 		$stmt->execute();
 		$all_users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-/* 		$stmt->bind_result($all_users);
-		$stmt->store_result();
-		$stmt->fetch(); */
 		
 		$users_per_page = 2;
 		// where to continue posting the posts on the main feed

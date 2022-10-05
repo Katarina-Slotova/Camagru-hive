@@ -32,7 +32,6 @@ if(isset($_POST['update_profile_btn'])){
 			$stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
 			$stmt->execute();
-			//$image_name = $_POST['username'] . ".jpg";
 		
 			if($res = $stmt->fetch(PDO::FETCH_ASSOC)){
 				header("location: edit_profile.php?error_message=Username already exists.");
