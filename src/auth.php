@@ -12,12 +12,12 @@ function activate_user(string $email): bool
 				activated_at = CURRENT_TIMESTAMP
 			WHERE email=:email';
 
-	$statement = $conn->prepare($sql);
-	$statement->bindValue(':email', $email, PDO::PARAM_STR);
+	$stmt = $conn->prepare($sql);
+	$stmt->bindValue(':email', $email, PDO::PARAM_STR);
 
-	$statement->execute();
+	$stmt->execute();
 
-	return $statement->rowCount();
+	return $stmt->rowCount();
 }
 
 if (activate_user($email)) {
