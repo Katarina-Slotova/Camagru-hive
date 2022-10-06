@@ -38,7 +38,7 @@ session_start();
 							<?php } ?>
 							<div class="form-info">
 								<div class="login-input">
-									<input type="email" name="email" placeholder="Your email" required>
+									<input type="username" name="username" placeholder="Your username" required>
 								</div>
 							</div>
 							<div class="form-info">

@@ -4,17 +4,13 @@ session_start();
 
 require_once('connection.php');
 
-function send_notification_email(string $email): void
+function send_notification_email(string $email)
 {	
 	$SENDER_EMAIL_ADDRESS = 'no-reply@email.com';
-	// create the activation link
 
 	// set email subject & body
 	$subject = 'Your post got a new comment!';
-	$message = <<<MESSAGE
-			Hi!
-			Someone just commented on your post, go check it out!
-			MESSAGE;
+	$message = "Hi! Someone just commented on your post, go check it out!";
 	// email header
 	$header = "From:" . $SENDER_EMAIL_ADDRESS;
 
@@ -72,7 +68,7 @@ if(isset($_POST['comment_btn'])){
 		exit;
 	}
 	$conn = null;
-}else{
+} else{
 	header('location: home.php?error_message=Error occured');
 	exit;
 }
