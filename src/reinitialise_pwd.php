@@ -30,13 +30,19 @@
 		try
 		{
 			$conn = connect_db();
+			
 			$stmt = $conn->prepare("SELECT username FROM users WHERE email = ?");
+			$stmt1 = $conn->prepare("UPDATE users SET activation_code = ? WHERE email = ?");
+
 			$stmt->bindParam(1, $email, PDO::PARAM_STR);
+			$stmt1->bindParam(1, $reset_code, PDO::PARAM_STR);
+			$stmt1->bindParam(2, $email, PDO::PARAM_STR);
+			
 			$stmt->execute();
-			if ($stmt->rowCount()){
+
+			if ($stmt->rowCount() && $stmt1->execute()){
 				send_reset_email($email, $reset_code);
 				header('location: login.php?ok_message=Reinitialisation email was sent to your mailbox.');
-				//require_once('create_new_password.php');
 			} else {
 				header('location: reset_password.php?error_message=No such email found.');
 			}

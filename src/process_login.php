@@ -15,19 +15,31 @@ function is_user_active($username)
 
 if(isset($_POST['login_btn'])){
 	$username = $_POST['username'];
-	$password = hash("whirlpool", $_POST['password']);
+	$password = $_POST['password'];
+
+	try {
+		$conn = connect_db();
+		$stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+		$stmt->bindParam(1, $username, PDO::PARAM_STR);
+		$stmt->execute();
+		$password_hash = $stmt->fetchColumn();
+	} catch (PDOException $error) {
+		echo $error->getMessage(); 
+		exit;
+	}
+
 	
 	try {
 		$conn = connect_db();
-		$stmt = $conn->prepare("SELECT id, username, password, email, image, followers, following, posts, bio, active FROM users WHERE username = ? AND password = ?");
+		$stmt = $conn->prepare("SELECT id, username, password, email, image, followers, following, posts, bio, active FROM users WHERE username = ?");
 		$stmt->bindParam(1, $username, PDO::PARAM_STR);
-		$stmt->bindParam(2, $password, PDO::PARAM_STR);
 		$stmt->execute();
 		
 		// Check if user with this username and passwd is in db
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$result = is_user_active($row['username']);
-		if($row && $result){
+		$checked_password = password_verify($password, $password_hash);
+		if($row && $result && $checked_password){
 			
 			// Save the result in session
 			$_SESSION['id'] = $row['id'];
@@ -41,7 +53,7 @@ if(isset($_POST['login_btn'])){
 			
 			header('location: home.php');
 		}else{
-			header('location: login.php?error_msg=Incorrect username or password.');
+			header('location: login.php?error_msg=Incorrect username or password.'.$checked_password);
 			exit;
 		}
 	} catch (PDOException $error) {

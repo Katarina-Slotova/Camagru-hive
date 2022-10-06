@@ -86,7 +86,7 @@ if(isset($_POST['signup_btn'])){
 				$stmt = $conn->prepare("INSERT INTO users (username, email, password, activation_code, activation_expiry) VALUES (?, ?, ?, ?, ?)");
 
 				// If user account created, return the user information to frontend
-				if($stmt->execute([$username, $email, hash("whirlpool", $password), password_hash($activation_code, PASSWORD_DEFAULT), $activation_expiry])){
+				if($stmt->execute([$username, $email, password_hash($password, PASSWORD_DEFAULT), password_hash($activation_code, PASSWORD_DEFAULT), $activation_expiry])){
 					send_activation_email($email, $activation_code);
 					header("location: login.php?ok_message=Verify your account by clicking the verification link sent to your mailbox.");
 				}else{
