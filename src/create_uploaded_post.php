@@ -9,8 +9,8 @@ if(isset($_POST['upload_img_btn'])){
 	$id = $_SESSION['id'];
 	$profile_image = $_SESSION['image']; 
 	$image = $_FILES['image']['tmp_name'];
-	$caption = $_POST['caption'];
-	$hashtags = $_POST['hashtags'];
+	$caption = htmlspecialchars($_POST['caption']);
+	$hashtags = htmlspecialchars($_POST['hashtags']);
 	$likes = 0;
 	$tz = 'Europe/Helsinki';
 	$timestamp = time();
@@ -68,11 +68,7 @@ if(isset($_POST['upload_img_btn'])){
 		$stmt->bindParam(8, $profile_image, PDO::PARAM_STR);
 		$stmt->bindParam(9, $webcam, PDO::PARAM_STR);
 		if($stmt->execute()){
-			if($src){
-				imagepng($src, "../assets/imgs/".$image_name); //Store image in folder
-			} else {
-				imagepng($destination, "../assets/imgs/".$image_name);
-			}
+			imagepng($destination, "../assets/imgs/".$image_name);
 			
 			//increase the number of posts and update session with the new number of posts
 			try {

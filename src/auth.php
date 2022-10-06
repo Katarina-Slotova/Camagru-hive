@@ -31,4 +31,5 @@ if (activate_user($email)) {
 } else {
 	header("location: login.php?error_message=You account has not been verified yet.");
 }
+
 ?>

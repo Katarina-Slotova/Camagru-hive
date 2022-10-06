@@ -9,9 +9,9 @@ if(isset($_POST['update_profile_btn'])){
 	$id = $_SESSION['id'];
 	$image = $_FILES['image']['tmp_name'];
 	$email = $_POST['email'];
-	$username = $_POST['username'];
+	$username = htmlspecialchars($_POST['username']);
 	$password = $_POST['password'];
-	$bio = $_POST['bio'];
+	$bio = htmlspecialchars($_POST['bio']);
 
 	if($image != ""){
 		$image_name = $_SESSION['username'] . ".jpg";
@@ -20,11 +20,16 @@ if(isset($_POST['update_profile_btn'])){
 	}
 
 	if($email != ""){
-		$email = $email;
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			header('location: edit_profile.php?error_message=Invalid email format.');
+			exit;
+		} else {
+			$email = $email;
+		}
 	}else{
 		$email = $_SESSION['email'];
 	}
-	
+
 	if($username != ""){
 		// Username has to be unique
 		try{
@@ -43,6 +48,7 @@ if(isset($_POST['update_profile_btn'])){
 		}
 		$conn = null;
 	}else{
+		$conn = connect_db();
 		$username = $_SESSION['username'];
 		updateUserProfile($conn, $username, $password, $email, $image, $image_name, $bio, $id);
 	}
@@ -53,6 +59,7 @@ if(isset($_POST['update_profile_btn'])){
 		$bio = $_SESSION['bio'];
 	}
 
+	$conn = connect_db();
 	updateUserProfile($conn, $username, $password, $email, $image, $image_name, $bio, $id);
 
 }else{
@@ -70,11 +77,12 @@ function updateUserProfile($conn, $username, $password, $email, $image, $image_n
 			header('location: edit_profile.php?error_message=password too long, maximum 20 characters allowed.');
 			exit;
 		}
+		$final_password = hash("whirlpool", $password);
 		try{
 			$conn = connect_db();
 			$stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, image = ?, bio = ? WHERE id = ?");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
-			$stmt->bindParam(2, hash("whirlpool", $password), PDO::PARAM_STR);
+			$stmt->bindParam(2, $final_password, PDO::PARAM_STR);
 			$stmt->bindParam(3, $email, PDO::PARAM_STR);
 			$stmt->bindParam(4, $image_name, PDO::PARAM_STR);
 			$stmt->bindParam(5, $bio, PDO::PARAM_STR);

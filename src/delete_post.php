@@ -20,9 +20,9 @@ if(isset($_POST['delete_post_btn'])){
 	
 		if($stmt->execute() && $stmt1->execute()){
 			$_SESSION['posts'] = $_SESSION['posts']-1;
-			header('location:'.$_SERVER['HTTP_REFERER'].'&ok_message=Post was deleted.');
+			header('location:'.$_SERVER['HTTP_REFERER']);
 		}else{
-			header('location:'.$_SERVER['HTTP_REFERER'].'&error_message=Error occured.');
+			header('location:'.$_SERVER['HTTP_REFERER'].'?error_message=Error occured.');
 		}
 		exit;
 	} catch (PDOException $error) {

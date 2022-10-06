@@ -15,7 +15,7 @@ require_once('header.php');
 			<div class="camera-img" style="display:flex;">
 			<div style="width:90%;">
 
-				<form runat="server" action="create_uploaded_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
+				<form action="create_uploaded_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
 					<p class="sticker-description">🌟 Your awesome picture 🌟</p>
 					<div class="canvas-container">
 						<img id="picture">
@@ -90,7 +90,9 @@ require_once('header.php');
 			if (file) {
 				picture.src = URL.createObjectURL(file);
 				setTimeout(() => {
-						if(picture.width < picture.height){
+					if(picture.height < 400)
+						alert("Stickers will not show properly on images of this size. Choose a different image if you wish to add stickers.");
+					if(picture.width < picture.height){
 						let maxHeight = 700;
 						let maxWidth = 500;
 						if (picture.width > maxWidth || picture.height > maxHeight) {
@@ -101,9 +103,9 @@ require_once('header.php');
 									} else {
 										picture.width = maxWidth*ratio;
 										picture.height = maxHeight;
-								}
+									}
+						}
 					}
-				}
 				}, 50);
 			}
 		}
@@ -144,7 +146,6 @@ require_once('header.php');
 			let finalImage = document.getElementById("upload-file");
 			finalImage.value = canvasUrl;
 		}
-
 	</script>
 </body>
 </html>

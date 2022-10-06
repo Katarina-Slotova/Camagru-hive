@@ -8,8 +8,8 @@ require_once("connection.php");
 if(isset($_POST['webcam_img_btn'])){
 	$id = $_SESSION['id'];
 	$profile_image = $_SESSION['image']; 
-	$caption = $_POST['caption'];
-	$hashtags = $_POST['hashtags'];
+	$caption = htmlspecialchars($_POST['caption']);
+	$hashtags = htmlspecialchars($_POST['hashtags']);
 	$likes = 0;
 	$tz = 'Europe/Helsinki';
 	$timestamp = time();

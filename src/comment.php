@@ -22,17 +22,17 @@ if(isset($_POST['comment_btn'])){
 	$post_id = $_POST['post_id'];
 	$author_id = $_POST['author_id'];
 	$user_id = $_SESSION['id'];
-	$username = $_SESSION['username'];
+	$username = htmlspecialchars($_SESSION['username']);
 	$profile_image = $_SESSION['image'];
-	$text = $_POST['text'];
+	$text = htmlspecialchars($_POST['text']);
 	$tz = 'Europe/Helsinki';
 	$timestamp = time();
 	$date = new DateTime("now", new DateTimeZone($tz));
 	$date->setTimestamp($timestamp);
 	$date = $date->format('Y-m-d H:i:s');
 
-	if(strlen($text) > 20){
-		header('location:'.$_SERVER['HTTP_REFERER'].'&error_message=Comment too long');
+	if(strlen($text) > 1000){
+		header('location:'.$_SERVER['HTTP_REFERER'].'?error_message=Comment too long');
 		exit;
 	}
 	try{

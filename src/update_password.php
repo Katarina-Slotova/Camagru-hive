@@ -24,13 +24,14 @@ if(isset($_POST['new_pwd_btn'])){
 	}
 
 	// Update db with new password
+	$final_password = hash("whirlpool", $password);
 	try {
 		$conn = connect_db();
 		$stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
-		$stmt->bindParam(1, hash("whirlpool", $password), PDO::PARAM_STR);
+		$stmt->bindParam(1, $final_password, PDO::PARAM_STR);
 		$stmt->bindParam(2, $email, PDO::PARAM_STR);
 		if($stmt->execute()){
-			header('location: login.php?ok_message=Your password was updated, you can login now!'.$email);
+			header('location: login.php?ok_message=Your password was updated, you can login now!');
 		}else{
 			header('location: login.php?error_message=Error occured');
 			exit;

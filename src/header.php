@@ -33,8 +33,8 @@ session_start();
 						<div class="dropdown-menu" id="dropdown-menu4" role="menu">
 							<div class="dropdown-content">
 							<div class="dropdown-item">
-									<p><a style="color: rgb(82, 82, 82);" href="upload.php">Upload a photo</i></a></p>
-									<p><a style="color: rgb(82, 82, 82);" href="camera.php">Take a photo</i></a></p>						
+								<p><a style="color: rgb(82, 82, 82);" href="upload.php">Upload a photo</i></a></p>
+								<p><a style="color: rgb(82, 82, 82);" href="camera.php">Take a photo</i></a></p>
 							</div>
 							</div>
 						</div>
