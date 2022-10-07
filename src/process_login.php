@@ -37,7 +37,9 @@ if(isset($_POST['login_btn'])){
 		
 		// Check if user with this username and passwd is in db
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$result = is_user_active($row['username']);
+		if(isset($row['username'])){
+			$result = is_user_active($row['username']);
+		}
 		$checked_password = password_verify($password, $password_hash);
 		if($row && $result && $checked_password){
 			
@@ -53,7 +55,7 @@ if(isset($_POST['login_btn'])){
 			
 			header('location: home.php');
 		}else{
-			header('location: login.php?error_msg=Incorrect username or password.'.$checked_password);
+			header('location: login.php?error_msg=Error occured.');
 			exit;
 		}
 	} catch (PDOException $error) {

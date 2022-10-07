@@ -9,8 +9,7 @@ function activate_user(string $email): bool
 	try{
 		$conn = connect_db();
 		$sql = 'UPDATE users
-				SET active = 1,
-					activated_at = CURRENT_TIMESTAMP
+				SET active = 1
 				WHERE email=:email';
 	
 		$stmt = $conn->prepare($sql);

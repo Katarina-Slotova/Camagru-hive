@@ -1,6 +1,10 @@
 <?php
 
 require_once('header.php');
+if(!isset($_SESSION['id'])){
+	header("location: login.php");
+	exit;
+}
 
 ?>
 	<div class="camera-container">

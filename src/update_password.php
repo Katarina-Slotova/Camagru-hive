@@ -6,7 +6,6 @@ function check_reset_code($activation_code)
 {
 	try{
 		$conn = connect_db();
-	
 		$stmt = $conn->prepare("SELECT * FROM users WHERE activation_code = ?");
 		$stmt->bindParam(1, $activation_code, PDO::PARAM_STR);
 		$stmt->execute();
@@ -43,7 +42,7 @@ if(isset($_POST['new_pwd_btn'])){
 
 	// Update db with new password
 	if(check_reset_code($activation_code)){
-		$final_password = hash("whirlpool", $password);
+		$final_password = password_hash($password, PASSWORD_DEFAULT);
 		try {
 			$conn = connect_db();
 			$stmt = $conn->prepare("UPDATE users SET password = ? WHERE activation_code = ?");
@@ -60,7 +59,8 @@ if(isset($_POST['new_pwd_btn'])){
 			exit;
 		}
 	} else {
-		echo "wrong, reset code is: ".$activation_code;
+		header('location: login.php?error_message=You are not authorized to perform this operation.');
+		exit;
 	}
 }else{
 	header('location: login.php?error_message=Error occured');

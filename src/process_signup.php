@@ -55,8 +55,8 @@ if(isset($_POST['signup_btn'])){
 	}
 
 	// Check the length of username
-	if(strlen($username) > 50){
-		header('location: signup.php?error_message=Username too long, maximum 50 characters allowed.');
+	if(strlen($username) > 30){
+		header('location: signup.php?error_message=Username too long, maximum 30 characters allowed.');
 		exit;
 	}
 
@@ -83,10 +83,10 @@ if(isset($_POST['signup_btn'])){
 		}else{
 			try {
 				$conn = connect_db();
-				$stmt = $conn->prepare("INSERT INTO users (username, email, password, activation_code, activation_expiry) VALUES (?, ?, ?, ?, ?)");
+				$stmt = $conn->prepare("INSERT INTO users (username, email, password, activation_code) VALUES (?, ?, ?, ?)");
 
 				// If user account created, return the user information to frontend
-				if($stmt->execute([$username, $email, password_hash($password, PASSWORD_DEFAULT), password_hash($activation_code, PASSWORD_DEFAULT), $activation_expiry])){
+				if($stmt->execute([$username, $email, password_hash($password, PASSWORD_DEFAULT), $activation_code])){
 					send_activation_email($email, $activation_code);
 					header("location: login.php?ok_message=Verify your account by clicking the verification link sent to your mailbox.");
 				}else{

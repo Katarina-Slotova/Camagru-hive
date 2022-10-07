@@ -31,7 +31,7 @@ if(isset($_POST['comment_btn'])){
 	$date->setTimestamp($timestamp);
 	$date = $date->format('Y-m-d H:i:s');
 
-	if(strlen($text) > 1000){
+	if(strlen($text) > 500){
 		header('location:'.$_SERVER['HTTP_REFERER'].'?error_message=Comment too long');
 		exit;
 	}

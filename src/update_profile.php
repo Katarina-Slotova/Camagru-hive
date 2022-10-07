@@ -77,7 +77,7 @@ function updateUserProfile($conn, $username, $password, $email, $image, $image_n
 			header('location: edit_profile.php?error_message=password too long, maximum 20 characters allowed.');
 			exit;
 		}
-		$final_password = hash("whirlpool", $password);
+		$final_password = password_hash($password, PASSWORD_DEFAULT);
 		try{
 			$conn = connect_db();
 			$stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, image = ?, bio = ? WHERE id = ?");
@@ -92,7 +92,44 @@ function updateUserProfile($conn, $username, $password, $email, $image, $image_n
 			exit;
 		}
 		$conn = null;
-	}else{
+	} else if ($username){
+		if(strlen($username) > 30){
+			header('location: edit_profile.php?error_message=username must be shorter than 30 characters');
+			exit;
+		}
+		try {
+			$conn = connect_db();
+			$stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, image = ?, bio = ? WHERE id = ?");
+			$stmt->bindParam(1, $username, PDO::PARAM_STR);
+			$stmt->bindParam(2, $email, PDO::PARAM_STR);
+			$stmt->bindParam(3, $image_name, PDO::PARAM_STR);
+			$stmt->bindParam(4, $bio, PDO::PARAM_STR);
+			$stmt->bindParam(5, $id, PDO::PARAM_INT);
+		} catch (PDOException $error) {
+			echo $error->getMessage(); 
+			exit;
+		}
+		$conn = null;
+	} else if ($bio){
+		if(strlen($bio) > 300){
+			header('location: edit_profile.php?error_message=bio must be shorter than 300 characters');
+			exit;
+		}
+		try {
+			$conn = connect_db();
+			$stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, image = ?, bio = ? WHERE id = ?");
+			$stmt->bindParam(1, $username, PDO::PARAM_STR);
+			$stmt->bindParam(2, $email, PDO::PARAM_STR);
+			$stmt->bindParam(3, $image_name, PDO::PARAM_STR);
+			$stmt->bindParam(4, $bio, PDO::PARAM_STR);
+			$stmt->bindParam(5, $id, PDO::PARAM_INT);
+		} catch (PDOException $error) {
+			echo $error->getMessage(); 
+			exit;
+		}
+		$conn = null;
+	}
+	else{
 		try {
 			$conn = connect_db();
 			$stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, image = ?, bio = ? WHERE id = ?");

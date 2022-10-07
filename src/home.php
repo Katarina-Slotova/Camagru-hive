@@ -55,7 +55,7 @@
 							</div>
 						<?php } ?>
 						<p class="likes"><?php echo $post['likes']?> likes</p>
-						<p class="description"><span><?php echo $post['caption']; ?></span></p>
+						<p class="description"><span style="overflow-wrap:anywhere;"><?php echo $post['caption']; ?></span></p>
 						<p style="margin-bottom: 15px;"><?php echo $post['hashtags']; ?></p>
 						<p class="time"><?php echo $post['date']; ?></p>
 					</div>
@@ -79,11 +79,16 @@
 
 					<?php foreach($comments as $comment){?>
 						<div class="comment-item">
-							<img src="<?php echo "../assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
-							<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo $comment['username']; ?></p>
-							<p><?php echo $comment['comment_text']; ?><span><?php echo $comment['date']; ?></span></p>
+								<img src="<?php echo "../assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
+								<div style="min-width:100px;">
+									<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo $comment['username']; ?></p>
+								</div>
+							<div style="display:flex; justify-content:center; align-items:center;">
+								<p><?php echo $comment['comment_text']; ?><span><?php echo $comment['date']; ?></span></p>
+							</div>
 							<?php if(isset($_SESSION['id']) && $comment['user_id'] == $_SESSION['id']){ ?>
 								<form action="delete_comment.php" method="POST">
+									<input type="hidden" name="user_id" value="<?php echo $comment['user_id'];?>">
 									<input type="hidden" name="comment_id" value="<?php echo $comment['id'];?>">
 									<input type="hidden" name="post_id" value="<?php echo $post['id'];?>">
 									<input class="delete-comment-btn" type="submit" name="delete_comment_btn" value="Delete">

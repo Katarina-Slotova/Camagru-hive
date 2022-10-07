@@ -22,6 +22,11 @@ if(isset($_POST['webcam_img_btn'])){
 	// Create a unique image name by using strval function that converts the timestamp into a string
 	$image_name = strval(time()) . ".jpg";
 
+	if(strlen($caption) > 300 || strlen($hashtags) > 100){
+		header('location: camera.php?error_message=Caption or hashtags too long.');
+		exit;
+	}
+
 	// Grab the photo with the stickers
 	$webcam_file = $_POST['webcam_file'];
 	list($type, $data_url) = explode(';', $webcam_file);
@@ -78,12 +83,6 @@ if(isset($_POST['webcam_img_btn'])){
 		exit;
 	}
 	$conn = null;
-
-	if(strlen($caption) > 300 || strlen($hashtags) > 100){
-		header('location: camera.php?error_message=Caption or hashtags too long.');
-		exit;
-	}
-	
 }else{
 	header('location: camera.php?error_message=Error occured.');
 	exit;

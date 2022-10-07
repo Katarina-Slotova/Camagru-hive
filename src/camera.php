@@ -1,6 +1,10 @@
 <?php
 
 require_once('header.php');
+if(!isset($_SESSION['id'])){
+	header("location: login.php");
+	exit;
+}
 
 ?>
 	<div class="camera-container">
@@ -52,10 +56,10 @@ require_once('header.php');
 							</div>
 						</div>
 						<div class="control">
-							<input type="text" class="my-input input" name="caption" placeholder="Write a caption here" required>
+							<input type="text" class="my-input input" name="caption" placeholder="Write a caption here" maxlength="300" required>
 						</div>
 						<div class="control" >
-							<input type="text" class="my-input input" name="hashtags" placeholder="Add hastags here" required>
+							<input type="text" class="my-input input" name="hashtags" placeholder="Add hastags here" maxlength="100" required>
 						</div>
 						<div>
 							<button type="submit" class="upload-btn" name="webcam_img_btn">Publish</button>
