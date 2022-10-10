@@ -13,7 +13,7 @@ function is_user_active($username)
 	return $stmt->fetchColumn();
 }
 
-if(isset($_POST['login_btn'])){
+if(isset($_POST['login_btn']) && !empty($_POST['username']) && !empty($_POST['password'])){
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 

@@ -11,7 +11,7 @@ if (empty($_SESSION['id'])) {
 	exit;
 }
 
-if(isset($_POST['search_input'])){
+if(!empty($_POST['search_input']) && isset($_POST['search_btn'])){
 	$search_input = $_POST['search_input'];
 	$find_this = strval("%".$search_input."%");
 

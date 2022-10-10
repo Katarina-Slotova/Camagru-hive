@@ -18,7 +18,7 @@ function check_reset_code($activation_code)
 	return $stmt->rowCount();
 }
 
-if(isset($_POST['new_pwd_btn'])){
+if(isset($_POST['new_pwd_btn']) && !empty($_POST['password']) && !empty($_POST['password_conf']) && !empty($_POST['activation_code'])){
 	$password = $_POST['password'];
 	$password_conf = $_POST['password_conf'];
 	$activation_code = $_POST['activation_code'];

@@ -18,7 +18,7 @@ function send_notification_email(string $email)
 	mail($email, $subject, nl2br($message), $header);
 }
 
-if(isset($_POST['comment_btn']) && !empty($_POST['text'])){
+if(isset($_POST['comment_btn']) && !empty($_POST['text']) && !empty($_POST['post_id']) && !empty($_POST['author_id'])){
 	$post_id = $_POST['post_id'];
 	$author_id = $_POST['author_id'];
 	$user_id = $_SESSION['id'];

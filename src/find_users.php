@@ -3,7 +3,7 @@
 require_once('connection.php');
 
 
-if(isset($_POST['search_input'])){
+if(isset($_POST['search_input']) && !empty($_POST['search_input'])){
 
 	$search_input = $_POST['search_input'];
 

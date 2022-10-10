@@ -4,7 +4,7 @@ session_start();
 
 require_once('connection.php');
 
-if(isset($_POST['delete_comment_btn']) && $_SESSION['id']){
+if(isset($_POST['delete_comment_btn']) && !empty($_POST['comment_id']) && !empty($_POST['post_id']) && !empty($_POST['user_id']) && $_SESSION['id']){
 	$comment_id = $_POST['comment_id'];
 	$post_id = $_POST['post_id'];
 	$user_id = $_POST['user_id'];

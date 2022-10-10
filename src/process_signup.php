@@ -11,7 +11,7 @@ function generate_activation_code(): string
 }
 
 // Check if user clicked signup_btn
-if(isset($_POST['signup_btn'])){
+if(isset($_POST['signup_btn']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['password_conf'])){
 	// Get the data about the user who wants to sign up
 	$username = htmlspecialchars($_POST['username']);
 	$email = $_POST['email'];

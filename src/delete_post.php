@@ -4,10 +4,10 @@ session_start();
 
 require_once('connection.php');
 
-if(isset($_POST['delete_post_btn']) && $_SESSION['id']){
+if(isset($_POST['delete_post_btn']) && !empty($_POST['post_id']) && !empty($_POST['my_id']) && !empty($_POST['user_id']) && $_SESSION['id']){
 	$post_id = $_POST['post_id'];
 	$my_id = $_POST['my_id']; // ID FROM SESSION, I.E. ID OF USER CURRENTLY LOGGED IN
-	$user_id = $_POST['user_id'];  // ID OF AUTHOR OF THE POST
+	$user_id = $_POST['user_id']; // ID OF AUTHOR OF THE POST
 
 	try{
 		$conn = connect_db();

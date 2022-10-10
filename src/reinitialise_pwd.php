@@ -23,7 +23,7 @@
 		return bin2hex(random_bytes(16));
 	}
 
-	if(isset($_POST['reset_pwd_btn']))
+	if(isset($_POST['reset_pwd_btn']) && !empty($_POST['email']))
 	{
 		$email = $_POST['email'];
 		$reset_code = generate_activation_code();

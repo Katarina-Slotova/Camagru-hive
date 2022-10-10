@@ -4,7 +4,7 @@ session_start();
 
 require_once('connection.php');
 
-if(isset($_POST['like_btn'])){
+if(isset($_POST['like_btn']) && !empty($_POST['post_id'])){
 	$user_id = $_SESSION['id'];
 	$post_id = $_POST['post_id'];
 
