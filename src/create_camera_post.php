@@ -4,6 +4,11 @@ session_start();
 
 require_once("connection.php");
 
+if (empty($_SESSION['id'])) {
+	header('location: home.php');
+	exit;
+}
+
 // Check if user clicked the publish button
 if(isset($_POST['webcam_img_btn'])){
 	$id = $_SESSION['id'];
