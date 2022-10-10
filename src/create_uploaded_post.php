@@ -4,11 +4,6 @@ session_start();
 
 require_once("connection.php");
 
-if (empty($_SESSION['id'])) {
-	header('location: login.php');
-	exit;
-}
-
 // Check if user clicked the publish button and the image is not empty
 if(isset($_POST['upload_img_btn']) && !empty($_FILES['image']['tmp_name']) && !empty($_POST['caption']) && !empty($_POST['hashtags'])){
 	$id = $_SESSION['id'];

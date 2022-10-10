@@ -1,6 +1,13 @@
 <?php
 
+session_start();
+
 require_once("connection.php");
+
+if(!isset($_SESSION['id'])){
+	header("location: login.php");
+	exit;
+}
 
 $email = $_GET['email'];
 

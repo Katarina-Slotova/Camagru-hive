@@ -3,11 +3,6 @@
 require_once('connection.php');
 session_start();
 
-if (empty($_SESSION['id'])) {
-	header('location: login.php');
-	exit;
-}
-
 $id = $_SESSION['id'];
 $yes = 1;
 $no = 0;

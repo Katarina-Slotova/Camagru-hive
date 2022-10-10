@@ -4,8 +4,6 @@ session_start();
 
 require_once('connection.php');
 
-
-
 if(isset($_POST['unfollow_btn'])){
 	$my_id = $_SESSION['id'];
 	$other_user_id = $_POST['other_user_id'];
@@ -41,7 +39,7 @@ if(isset($_POST['unfollow_btn'])){
 	$conn = null;
 
 }else{
-	header("location: home.php");
+	header("location: login.php?error_msg=Error occured.");
 	exit;
 }
 

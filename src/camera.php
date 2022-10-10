@@ -17,34 +17,31 @@ if(!isset($_SESSION['id'])){
 		<?php } ?>
 		<div class="camera">
 			<div class="camera-img" style="display:flex;">
-				<div style="width:90%;">
+				<div style="width:90%;">	
+					<p class="sticker-description">1. Choose a sticker to jazz up your awesome photo!</p>
+					<div class="stickers-box">
+						<div class="stickers-container">
+							<img class="sticker" src="../assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
+							<img class="sticker" src="../assets/stickers/kitten.png" alt="kitten-sticker" id="sticker2">
+							<img class="sticker" src="../assets/stickers/monster.png" alt="monster-sticker" id="sticker3">
+							<img class="sticker" src="../assets/stickers/so-hot.png" alt="hot-sticker" id="sticker4">
+							<img class="sticker" src="../assets/stickers/unicorn.png" alt="unicorn-sticker" id="sticker5">
+							<img class="sticker" src="../assets/stickers/watermelon.png" alt="watermelon-sticker" id="sticker6">
+						</div>
+					</div>
+					<button class="capture-btn" id="start-camera">Start Camera</button>
+					<p style="margin-top: 30px;" class="sticker-description">2. Take an awesome awesome photo!</p>
+					<div>
+						<video class="is-hidden" id="video" width="700" height="500" autoplay></video>
+					</div>
+					<button class="capture-btn" id="click-photo">Capture Photo</button>
 					<form style="width:95%;" action="create_camera_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
-						<div>
-							<p class="sticker-description">1. Choose a sticker to jazz up your awesome photo!</p>
-							<div class="stickers-box">
-								<div class="stickers-container">
-									<img class="sticker" src="../assets/stickers/bee.png" alt="bee-sticker" id="sticker1">
-									<img class="sticker" src="../assets/stickers/kitten.png" alt="kitten-sticker" id="sticker2">
-									<img class="sticker" src="../assets/stickers/monster.png" alt="monster-sticker" id="sticker3">
-									<img class="sticker" src="../assets/stickers/so-hot.png" alt="hot-sticker" id="sticker4">
-									<img class="sticker" src="../assets/stickers/unicorn.png" alt="unicorn-sticker" id="sticker5">
-									<img class="sticker" src="../assets/stickers/watermelon.png" alt="watermelon-sticker" id="sticker6">
-								</div>
-							</div>
-						</div>
-						<p style="margin-top: 30px;" class="sticker-description">2. Take an awesome awesome photo!</p>
-						<button class="capture-btn" id="start-camera">Start Camera</button>
-						<div>
-							<video class="is-hidden" id="video" width="700" height="500" autoplay></video>
-						</div>
-						<button class="capture-btn" id="click-photo">Capture Photo</button>
-						<p style="margin-top: 30px;" class="sticker-description">The awesome photo you have taken:</p>
 						<div style="position:relative;">
-							<div style="position:absolute; ">
-								<canvas class="is-hidden" width="700" height="500" id="canvas"></canvas>
+							<div style="position:absolute;">
+								<canvas style="margin-right:20px;" class="is-hidden" width="700" height="500" id="canvas"></canvas>
 								<input type="hidden" id="webcam-file" value="" name="webcam_file">
 							</div>
-							<div style="position:relative; ">
+							<div style="position:absolute; ">
 								<canvas class="is-hidden" width="700" height="500" id="stickers_canvas"></canvas>
 								<input type="hidden" id="sticker-canvas" value="" name="sticker-canvas">
 								<input type="hidden" id="sticker1_path" value="" name="sticker1_path">
@@ -128,7 +125,7 @@ if(!isset($_SESSION['id'])){
 
 		window.addEventListener('load', async () => {
 			try {
-				await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+				await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
 			} catch (e) {
 				alert("Please, enable your webcam.");
 			}
@@ -171,15 +168,13 @@ if(!isset($_SESSION['id'])){
 					sticker6.value = "../assets/stickers/watermelon.png"
 					break;
 			}
-			let stickersUrl = stickers_canvas.toDataURL();	
+			let stickersUrl = stickers_canvas.toDataURL();
 			let finalStickers = document.getElementById("sticker-canvas");
 			finalStickers.value = stickersUrl;		
 		}
 
 		capture_button.addEventListener('click', function() {
 			let canvas = document.getElementById("canvas");
-			canvas.classList.remove("is-hidden");
-			stickers_canvas.classList.remove("is-hidden");
 			let ctx = canvas.getContext("2d");
 			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 			let canvasUrl = canvas.toDataURL();

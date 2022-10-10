@@ -30,7 +30,7 @@ if(isset($_POST['like_btn'])){
 	}
 	$conn = null;
 }else{
-	header('location: home.php?error_message=Error occured');
+	header('location: login.php?error_message=Error occured');
 }
 
 
