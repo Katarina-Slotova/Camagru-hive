@@ -5,12 +5,12 @@ session_start();
 require_once("connection.php");
 
 if (empty($_SESSION['id'])) {
-	header('location: home.php');
+	header('location: login.php');
 	exit;
 }
 
 // Check if user clicked the publish button
-if(isset($_POST['webcam_img_btn'])){
+if(isset($_POST['webcam_img_btn']) && !empty($_POST['webcam_file']) && !empty($_POST['sticker-canvas']) && !empty($_POST['caption']) && !empty($_POST['hashtags'])){
 	$id = $_SESSION['id'];
 	$profile_image = $_SESSION['image']; 
 	$caption = htmlspecialchars($_POST['caption']);

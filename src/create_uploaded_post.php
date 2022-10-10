@@ -5,7 +5,7 @@ session_start();
 require_once("connection.php");
 
 if (empty($_SESSION['id'])) {
-	header('location: home.php');
+	header('location: login.php');
 	exit;
 }
 

@@ -125,6 +125,14 @@ if(!isset($_SESSION['id'])){
 				myCanvas(e.target.id);
 			})
 		}
+
+		window.addEventListener('load', async () => {
+			try {
+				await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+			} catch (e) {
+				alert("Please, enable your webcam.");
+			}
+		});
 		
 		camera_button.addEventListener('click', async function() {
 			let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });

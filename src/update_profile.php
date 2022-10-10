@@ -4,6 +4,11 @@ session_start();
 
 require_once('connection.php');
 
+if(!isset($_SESSION['id'])){
+	header("location: login.php");
+	exit;
+}
+
 // Check if user clicked the update button
 if(isset($_POST['update_profile_btn'])){
 	$id = $_SESSION['id'];

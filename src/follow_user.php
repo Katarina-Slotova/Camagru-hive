@@ -4,6 +4,11 @@ session_start();
 
 require_once('connection.php');
 
+if (empty($_SESSION['id'])) {
+	header('location: login.php');
+	exit;
+}
+
 if(isset($_POST['follow_btn'])){
 	$my_id = $_SESSION['id'];
 	$other_user_id = $_POST['other_user_id'];

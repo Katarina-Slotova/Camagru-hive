@@ -1,4 +1,12 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php'); 
+
+session_start();
+if(!isset($_SESSION['id'])){
+	header("location: login.php");
+	exit;
+}
+
+?>
 
 	<header class="profile-header">
 		<div class="profile-container">

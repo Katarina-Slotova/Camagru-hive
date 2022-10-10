@@ -2,6 +2,13 @@
 
 require_once('connection.php');
 
+session_start();
+
+if (empty($_SESSION['id'])) {
+	header('location: login.php');
+	exit;
+}
+
 if(isset($_GET['page_no'])){
 	$page_no = $_GET['page_no'];
 }else{

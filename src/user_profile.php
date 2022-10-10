@@ -2,7 +2,14 @@
 
 <?php 
 
+session_start();
+
 require_once('connection.php');
+
+if (empty($_SESSION['id'])) {
+	header('location: login.php');
+	exit;
+}
 
 if(isset($_POST['other_user_id']) || isset($_SESSION['other_user_id'])){
 	if(isset($_POST['other_user_id'])){

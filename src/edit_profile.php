@@ -1,4 +1,13 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php'); 
+
+session_start();
+
+if (empty($_SESSION['id'])) {
+	header('location: login.php');
+	exit;
+}
+
+?>
 
 	<section class="main">
 		<div class="main-wrapper">

@@ -18,12 +18,11 @@ if(!isset($_SESSION['id'])){
 		<div class="camera">
 			<div class="camera-img" style="display:flex;">
 			<div style="width:90%;">
-
 				<form action="create_uploaded_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
 					<p class="sticker-description">🌟 Your awesome picture 🌟</p>
-					<div class="canvas-container">
+					<div>
 						<img id="picture">
-						<canvas width="700" height="500" id="myCanvas"></canvas>
+						<canvas class="is-hidden" width="700" height="500" id="myCanvas"></canvas>
 						<input type="hidden" id="upload-file" value="" name="upload_file">
 					</div>
 					<input accept="image/*" type="file" class="my-input input" id="imgInp" name="image" required>

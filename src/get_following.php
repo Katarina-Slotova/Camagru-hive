@@ -1,6 +1,14 @@
 <?php 
 
+session_start();
+
 require_once('connection.php');
+
+if (empty($_SESSION['id'])) {
+	header('location: login.php');
+	exit;
+}
+
 // Get ids of users I am following
 $user_id = $_SESSION['id'];
 
