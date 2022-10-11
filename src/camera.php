@@ -66,7 +66,6 @@ if(!isset($_SESSION['id'])){
 				<div class="thumbnails-box">
 					<p>🌟 Your previous awesome photos 🌟</p>
 						<?php
-							 
 							require_once('connection.php');
 							
 							$user_id = $_SESSION['id'];
@@ -88,7 +87,7 @@ if(!isset($_SESSION['id'])){
 							foreach($get_posts as $post){ 
 						?>
 							<img src="<?php echo "../assets/imgs/".$post['image']; ?>" alt="user-post">
-						<?php } ?>		
+						<?php } ?>
 				</div>
 			</div>
 		</div>
