@@ -29,12 +29,12 @@ if(!isset($_SESSION['id'])){
 							<img class="sticker" src="../assets/stickers/watermelon.png" alt="watermelon-sticker" id="sticker6">
 						</div>
 					</div>
-					<button class="capture-btn" id="start-camera">Start Camera</button>
+					<button style="cursor: pointer;" class="capture-btn" id="start-camera">Start Camera</button>
 					<p style="margin-top: 30px;" class="sticker-description">2. Take an awesome awesome photo!</p>
 					<div>
 						<video class="is-hidden" id="video" width="700" height="500" autoplay></video>
 					</div>
-					<button class="capture-btn" id="click-photo">Capture Photo</button>
+					<button style="cursor: pointer;" class="capture-btn" id="click-photo">Capture Photo</button>
 					<form style="width:95%;" action="create_camera_post.php" method="POST" enctype="multipart/form-data" class="camera-form">
 						<div style="position:relative;">
 							<div style="position:absolute;">
@@ -59,7 +59,7 @@ if(!isset($_SESSION['id'])){
 							<input type="text" class="my-input input" name="hashtags" placeholder="Add hastags here" maxlength="100" required>
 						</div>
 						<div>
-							<button type="submit" class="upload-btn" name="webcam_img_btn">Publish</button>
+							<button style="cursor: pointer;" type="submit" class="upload-btn" name="webcam_img_btn">Publish</button>
 						</div>
 					</form>
 				</div>

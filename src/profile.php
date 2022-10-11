@@ -1,4 +1,4 @@
-<?php require_once('header.php'); 
+<?php require_once('header.php');
 
 session_start();
 if(!isset($_SESSION['id'])){
@@ -18,7 +18,7 @@ if(!isset($_SESSION['id'])){
 			<?php } ?>
 			<div class="profile">
 				<div class="profile-img">
-					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" alt=""> 
+					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" alt="profile-img"> 
 				</div>
 				<div class="profile-user-settings">
 					<h1 class="profile-user-name"><?php echo $_SESSION['username']; ?></h1>
@@ -48,25 +48,25 @@ if(!isset($_SESSION['id'])){
 		<div class="profile-container">
 			<div class="gallery">
 				<?php require_once('user_posts.php'); ?>
-					<?php foreach($get_posts as $post){ ?>
-						<div class="gallery-item">
-							<img src="<?php echo "../assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
-								<div class="gallery-item-info">
-									<ul>
-										<li class="gallery-item-style"><span><?php echo $post['likes']; ?></span>
-											<i class="lar la-heart"></i>
-										</li>
-										<li>
-											<form action="delete_post.php" method="POST">
-												<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
-												<input type="hidden" name="user_id" value="<?php echo $post['user_id']; ?>">
-												<input type="hidden" name="my_id" value="<?php echo $_SESSION['id']; ?>">
-												<input class="delete-btn" type="submit" name="delete_post_btn" value="Delete">
-											</form>
-										</li>
-									</ul>
-								</div>
+				<?php foreach($get_posts as $post){ ?>
+					<div class="gallery-item">
+						<img src="<?php echo "../assets/imgs/".$post['image']; ?>" class="gallery-img" alt="user-post">
+						<div class="gallery-item-info">
+							<ul>
+								<li class="gallery-item-style"><span><?php echo $post['likes']; ?></span>
+									<i class="lar la-heart"></i>
+								</li>
+								<li>
+									<form action="delete_post.php" method="POST">
+										<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+										<input type="hidden" name="user_id" value="<?php echo $post['user_id']; ?>">
+										<input type="hidden" name="my_id" value="<?php echo $_SESSION['id']; ?>">
+										<input class="delete-btn" type="submit" name="delete_post_btn" value="Delete">
+									</form>
+								</li>
+							</ul>
 						</div>
+					</div>
 				<?php } ?>
 			</div>
 		</div>
