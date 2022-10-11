@@ -1,7 +1,5 @@
 <?php require_once('header.php'); 
 
-session_start();
-
 if (empty($_SESSION['id'])) {
 	header('location: login.php');
 	exit;

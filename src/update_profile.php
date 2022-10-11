@@ -19,7 +19,25 @@ if(isset($_POST['update_profile_btn'])){
 	$bio = htmlspecialchars($_POST['bio']);
 
 	if($image != ""){
-		$image_name = $_SESSION['username'] . ".jpg";
+		$ext = pathinfo($image, PATHINFO_EXTENSION);
+		$image_size = getimagesize($image);
+		$can_upload = 1;
+		if($ext != "png" && $ext != "jpg" && $ext != "jpeg") {
+			$can_upload = 0;
+		}
+	
+		if($image_size){
+			$can_upload = 1;
+		} else {
+			$can_upload = 0;
+		}
+		
+		if($can_upload === 0){
+			header('location: edit_profile.php?error_message=File you are trying to upload is not valid.');
+			exit;
+		} else {
+			$image_name = $_SESSION['username'] . ".jpg";
+		}
 	}else{
 		$image_name = $_SESSION['image'];
 	}
@@ -29,6 +47,21 @@ if(isset($_POST['update_profile_btn'])){
 			header('location: edit_profile.php?error_message=Invalid email format.');
 			exit;
 		} else {
+			try{
+				$conn = connect_db();
+				$stmt = $conn->prepare("SELECT username FROM users WHERE email = ?");
+				$stmt->bindParam(1, $email, PDO::PARAM_STR);
+				$stmt->execute();
+			
+				if($res = $stmt->fetch(PDO::FETCH_ASSOC)){
+					header("location: edit_profile.php?error_message=Email already exists.");
+					exit;
+				}
+			} catch (PDOException $error) {
+				echo $error->getMessage(); 
+				exit;
+			}
+			$conn = null;
 			$email = $email;
 		}
 	}else{

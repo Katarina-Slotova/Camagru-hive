@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
 require_once('connection.php');
 
 // Get ids of users I am following

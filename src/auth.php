@@ -1,13 +1,6 @@
 <?php
 
-session_start();
-
 require_once("connection.php");
-
-if(!isset($_SESSION['id'])){
-	header("location: login.php");
-	exit;
-}
 
 $email = $_GET['email'];
 
@@ -32,10 +25,10 @@ function activate_user(string $email): bool
 	return $stmt->rowCount();
 }
 
-if (activate_user($email)) {
-	header("location: login.php?ok_message=You account was successfuly verified! Log in and start posting awesome pics!");
+if (!empty($_GET['email']) && activate_user($email)) {
+	header("location: login.php?ok_message=Your account was successfuly verified! Log in and start posting awesome pics!");
 } else {
-	header("location: login.php?error_message=You account has not been verified yet.");
+	header("location: login.php?error_message=Error occured.");
 }
 
 ?>
