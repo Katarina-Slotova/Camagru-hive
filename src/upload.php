@@ -27,10 +27,10 @@ if(!isset($_SESSION['id'])){
 					</div>
 					<input accept="image/*" type="file" class="my-input input" id="imgInp" name="image" required>
 					<div class="control">
-						<input type="text" class="my-input input" name="caption" placeholder="Write a caption here" required>
+						<input type="text" class="my-input input" name="caption" placeholder="Write a caption here" maxlength="300" required>
 					</div>
 					<div class="control">
-						<input type="text" class="my-input input" name="hashtags" placeholder="Add hastags here" required>
+						<input type="text" class="my-input input" name="hashtags" placeholder="Add hastags here" maxlength="100" required>
 					</div>
 					<div>
 						<p class="sticker-description">Wanna jazz up your awesome picture? Add a sticker!</p>

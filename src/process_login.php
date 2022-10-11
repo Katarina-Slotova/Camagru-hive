@@ -28,7 +28,6 @@ if(isset($_POST['login_btn']) && !empty($_POST['username']) && !empty($_POST['pa
 		exit;
 	}
 
-	
 	try {
 		$conn = connect_db();
 		$stmt = $conn->prepare("SELECT id, username, password, email, image, followers, following, posts, bio, active FROM users WHERE username = ?");

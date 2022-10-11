@@ -25,6 +25,11 @@ if(isset($_POST['upload_img_btn']) && !empty($_FILES['image']['tmp_name']) && !e
 	// Create a unique image name by using strval function that converts the timestamp into a string
 	$image_name = strval(time()) . ".jpg";
 
+	if(strlen($caption) > 300 || strlen($hashtags) > 100){
+		header('location: camera.php?error_message=Caption or hashtags too long.');
+		exit;
+	}
+
 	if($ext != "png" && $ext != "jpg" && $ext != "jpeg") {
 		$can_upload = 0;
 	}

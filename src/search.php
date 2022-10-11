@@ -33,7 +33,7 @@ if(!empty($_POST['search_input']) && isset($_POST['search_btn'])){
 	<div class="mt-5 mx-5">
 		<form action="search.php" method="POST">
 			<div class="control search-component">
-				<input type="text" class="input" name="search_input" placeholder="Who are you looking for?">
+				<input type="text" class="input" name="search_input" maxlength="30" placeholder="Who are you looking for?">
 				<button type="submit" class="btn search-btn" name="search_btn">Search</button>
 			</div>
 		</form>
