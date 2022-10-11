@@ -20,8 +20,23 @@ if(isset($_POST['delete_post_btn']) && !empty($_POST['post_id']) && !empty($_POS
 		echo $error->getMessage(); 
 		exit;
 	}
+	$conn = null;
+
+	try{
+		$conn = connect_db();
+		$stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
+		$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
+		$stmt->execute();
+		$img_info = $stmt->fetch();
+		$img_path = $img_info['image'];
+	} catch (PDOException $error) {
+		echo $error->getMessage(); 
+		exit;
+	}
+	$conn = null;
 
 	if ($post_id == $post_from_db['id'] && $_SESSION['id'] == $user_id){
+		unlink("../assets/imgs/".$img_path);
 		try {
 			$conn = connect_db();
 			$stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
