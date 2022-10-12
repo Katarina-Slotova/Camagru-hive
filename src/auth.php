@@ -2,9 +2,6 @@
 
 require_once("connection.php");
 
-$email = $_GET['email'];
-$activation_code = $_GET['activation_code'];
-
 function activate_user(string $email): bool
 {
 	try{
@@ -44,12 +41,17 @@ function check_reset_code($activation_code)
 	return $stmt->rowCount();
 }
 
-if(!empty($activation_code) && check_reset_code($activation_code)){
-	if (!empty($_GET['email']) && activate_user($email)) {
-		header("location: login.php?ok_message=Your account was successfuly verified! Log in and start posting awesome pics!");
-	} else {
-		header("location: login.php?error_message=Error occured.");
-		exit;
+if(isset($_GET['email']) && isset($_GET['activation_code'])){
+	$email = $_GET['email'];
+	$activation_code = $_GET['activation_code'];
+	
+	if(!empty($activation_code) && check_reset_code($activation_code)){
+		if (!empty($_GET['email']) && activate_user($email)) {
+			header("location: login.php?ok_message=Your account was successfuly verified! Log in and start posting awesome pics!");
+		} else {
+			header("location: login.php?error_message=Error occured.");
+			exit;
+		}
 	}
 } else {
 	header("location: login.php?error_message=Error occured.");
