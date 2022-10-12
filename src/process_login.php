@@ -14,7 +14,7 @@ function is_user_active($username)
 }
 
 if(isset($_POST['login_btn']) && !empty($_POST['username']) && !empty($_POST['password'])){
-	$username = $_POST['username'];
+	$username = htmlspecialchars($_POST['username']);
 	$password = $_POST['password'];
 
 	try {
