@@ -78,7 +78,7 @@ if(isset($_POST['signup_btn']) && !empty($_POST['username']) && !empty($_POST['e
 		$stmt->execute();
 
 		if($stmt->fetch(PDO::FETCH_ASSOC)){
-			header('location: signup.php?error_message=this user already exists');
+			header('location: signup.php?error_message=This user or email already exists');
 			exit;
 		}else{
 			try {

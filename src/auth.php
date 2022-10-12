@@ -44,10 +44,16 @@ function check_reset_code($activation_code)
 	return $stmt->rowCount();
 }
 
-if (!empty($_GET['email']) && activate_user($email) && check_reset_code($activation_code)) {
-	header("location: login.php?ok_message=Your account was successfuly verified! Log in and start posting awesome pics!");
+if(!empty($activation_code) && check_reset_code($activation_code)){
+	if (!empty($_GET['email']) && activate_user($email)) {
+		header("location: login.php?ok_message=Your account was successfuly verified! Log in and start posting awesome pics!");
+	} else {
+		header("location: login.php?error_message=Error occured.");
+		exit;
+	}
 } else {
 	header("location: login.php?error_message=Error occured.");
+	exit;
 }
 
 ?>

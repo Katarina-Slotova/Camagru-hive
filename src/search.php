@@ -36,7 +36,7 @@ if(!empty($_POST['search_input']) && isset($_POST['search_btn'])){
 			</div>
 		</form>
 		<ul class="list">
-		<?php if(isset($_POST['search_input'])){?>
+		<?php if(isset($_POST['search_input']) && !empty($_POST['search_input'])){?>
 			<?php foreach($results as $user){ ?>
 				<?php if(($user['id']) != $_SESSION['id']) { ?>
 				<li class="list-item search-result-item">
