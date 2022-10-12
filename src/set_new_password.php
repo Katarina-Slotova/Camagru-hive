@@ -29,7 +29,9 @@
 						<div class="mb-5 field">
 							<label for="password" class="label">Repeat new password</label>
 							<input type="password" name="password_conf" class="input" placeholder="Repeat new password" required></input>
-							<input type="hidden" name="activation_code" value="<?php echo $_GET['activation_code'];?>">
+							<?php if(isset($_GET['activation_code'])){ ?>
+								<input type="hidden" name="activation_code" value="<?php echo $_GET['activation_code'];?>">
+							<?php } ?>
 						</div>
 						<div class="mb-5">
 							<button name="new_pwd_btn" id="new_pwd_btn" class="update-profile-btn">Save my new password</button>
