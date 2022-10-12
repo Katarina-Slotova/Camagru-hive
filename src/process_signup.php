@@ -44,19 +44,15 @@ if(isset($_POST['signup_btn']) && !empty($_POST['username']) && !empty($_POST['e
 		exit;
 	}
 
-	if(strlen($password) < 8){
-		header('location: signup.php?error_message=Password is shorter than 8 characters');
-		exit;
-	}
-
-	if(strlen($password) > 20){
-		header('location: signup.php?error_message=Password too long, maximum 20 characters allowed.');
-		exit;
-	}
-
 	// Check the length of username
 	if(strlen($username) > 30){
 		header('location: signup.php?error_message=Username too long, maximum 30 characters allowed.');
+		exit;
+	}
+
+	$check_pwd_validity = preg_match('^\S*(?=\S{8,20})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$^', $password);
+	if(!$check_pwd_validity){
+		header('location: signup.php?error_message=Password does not meet the minimum requirements (8-20 characters, including at least one uppercase letter, one lowercase letter and one digit).');
 		exit;
 	}
 
