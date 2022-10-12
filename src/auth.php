@@ -3,6 +3,7 @@
 require_once("connection.php");
 
 $email = $_GET['email'];
+$activation_code = $_GET['activation_code'];
 
 function activate_user(string $email): bool
 {
@@ -25,7 +26,25 @@ function activate_user(string $email): bool
 	return $stmt->rowCount();
 }
 
-if (!empty($_GET['email']) && activate_user($email)) {
+function check_reset_code($activation_code)
+{
+	try{
+		$conn = connect_db();
+		$stmt = $conn->prepare("SELECT * FROM users WHERE activation_code = ?");
+		$stmt->bindParam(1, $activation_code, PDO::PARAM_STR);
+		$stmt->execute();
+
+	} catch (PDOException $error) {
+		echo $error->getMessage(); 
+		exit;
+	}
+
+	echo $stmt->rowCount();
+
+	return $stmt->rowCount();
+}
+
+if (!empty($_GET['email']) && activate_user($email) && check_reset_code($activation_code)) {
 	header("location: login.php?ok_message=Your account was successfuly verified! Log in and start posting awesome pics!");
 } else {
 	header("location: login.php?error_message=Error occured.");
