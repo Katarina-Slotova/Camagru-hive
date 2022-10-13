@@ -81,7 +81,7 @@
 						<div class="comment-item">
 								<img src="<?php echo "../assets/imgs/".$comment['profile_image']; ?>" alt="profile-pic" class="icon">
 								<div style="min-width:100px;">
-									<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo $comment['username']; ?></p>
+									<p style="font-weight:bold; font-size:14px; padding:0;"><?php echo htmlspecialchars_decode($comment['username']); ?></p>
 								</div>
 							<div style="display:flex; justify-content:center; align-items:center;">
 								<p><?php echo $comment['comment_text']; ?><span><?php echo $comment['date']; ?></span></p>

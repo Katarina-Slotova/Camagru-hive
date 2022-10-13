@@ -36,7 +36,7 @@ if(isset($_POST['update_profile_btn'])){
 			header('location: edit_profile.php?error_message=File you are trying to upload is not valid.');
 			exit;
 		} else {
-			$image_name = $_SESSION['username'] . ".jpg";
+			$image_name = $_SESSION['id'] . ".jpg";
 		}
 	}else{
 		$image_name = $_SESSION['image'];
