@@ -14,17 +14,17 @@
 		<section class="main">
 			<div class="main-wrapper">
 				<?php if(isset($_GET['ok_message'])){ ?>
-					<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+					<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 				<?php } ?>
 				<?php if(isset($_GET['error_message'])){ ?>
-					<p class="message is-danger has-text-centered"><?php echo $_GET['error_message']; ?></p>
+					<p class="message is-danger has-text-centered"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 				<?php } ?>
 				<h4 class="title is-4 mb-5">Reset your password</h4>
 				<form action="reinitialise_pwd.php" method="POST" enctype="multipart/form-data">
 					<div class="mb-5">
 						<div class="mb-5 field">
 							<label for="email" class="label">Email</label>
-							<input name="email" class="input" placeholder="Email" required></input>
+							<input type="email" name="email" class="input" placeholder="Email" required></input>
 						</div>
 						<div class="mb-5">
 							<button name="reset_pwd_btn" id="reset_pwd_btn" class="update-profile-btn">Send me a reinitialisation mail</button>

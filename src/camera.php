@@ -9,11 +9,11 @@ if(!isset($_SESSION['id'])){
 ?>
 	<div class="camera-container">
 		<?php if(isset($_GET['ok_message'])) { ?>
-			<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+			<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 		<?php } ?>
 
 		<?php if(isset($_GET['error_message'])) { ?>
-			<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
+			<p class="has-text-centered message is-danger"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 		<?php } ?>
 		<div class="camera">
 			<div class="camera-img" style="display:flex;">

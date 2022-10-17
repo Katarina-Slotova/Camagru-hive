@@ -10,10 +10,10 @@ if (empty($_SESSION['id'])) {
 	<section class="main">
 		<div class="main-wrapper">
 			<?php if(isset($_GET['ok_message'])){ ?>
-				<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+				<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 			<?php } ?>
 			<?php if(isset($_GET['error_message'])){ ?>
-				<p class="message is-danger has-text-centered"><?php echo $_GET['error_message']; ?></p>
+				<p class="message is-danger has-text-centered"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 			<?php } ?>
 			<h1 class="title is-3 mb-6">Edit Profile</h1>
 			<h4 class="title is-4 mb-5">Update your notification preferences</h4>
@@ -28,13 +28,13 @@ if (empty($_SESSION['id'])) {
 			<form action="update_profile.php" method="POST" enctype="multipart/form-data">
 				<div class="mb-5">
 					<label for="image" class="label">Profile picture</label>
-					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" class="edit-profile-img" alt="profile-img">
+					<img src="<?php echo "../assets/imgs/".htmlspecialchars($_SESSION['image'])?>" class="edit-profile-img" alt="profile-img">
 					<div class="control">
 						<input type="file" class="my-input input" name="image">
 					</div>
 					<div class="mb-5 field">
 						<label for="email" class="label">Email</label>
-						<input name="email" class="input" placeholder="Email"></input>
+						<input type="email" name="email" class="input" placeholder="Email"></input>
 					</div>
 					<div class="mb-5">
 						<label for="username" class="label">Username</label>

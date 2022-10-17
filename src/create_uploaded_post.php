@@ -26,7 +26,7 @@ if(isset($_POST['upload_img_btn']) && !empty($_FILES['image']['tmp_name']) && !e
 	$image_name = strval(time()) . ".jpg";
 
 	if(strlen($caption) > 300 || strlen($hashtags) > 100){
-		header('location: camera.php?error_message=Caption or hashtags too long.');
+		header('location: upload.php?error_message=Caption or hashtags too long.');
 		exit;
 	}
 
@@ -47,20 +47,18 @@ if(isset($_POST['upload_img_btn']) && !empty($_FILES['image']['tmp_name']) && !e
 		$max_height = 500;
 		$max_width = 500;
 		list($orig_width, $orig_height) = getimagesize($image);
-		if($orig_width > $max_width || $orig_height > $max_height){
-			$ratio = $orig_width/$orig_height;
-			if($ratio > 1) {
-				$width = $max_width;
-				$height = $max_height/$ratio;
-			} else {
-				$width = $max_width*$ratio;
-				$height = $max_height;
-			}
-			$source = imagecreatefromstring(file_get_contents($image));
-			$destination = imagecreatetruecolor($width, $height);
-			imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $orig_width, $orig_height);
+		$ratio = $orig_width/$orig_height;
+		if($ratio > 1) {
+			$width = $max_width;
+			$height = $max_height/$ratio;
+		} else {
+			$width = $max_width*$ratio;
+			$height = $max_height;
 		}
-	
+		$source = imagecreatefromstring(file_get_contents($image));
+		$destination = imagecreatetruecolor($width, $height);
+		imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $orig_width, $orig_height);
+
 		// Grab the stickers, if no stickers selected by user, this if statement will be skipped
 		$upload_file = $_POST['upload_file'];
 		if($upload_file){

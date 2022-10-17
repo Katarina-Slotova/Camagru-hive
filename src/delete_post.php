@@ -24,41 +24,47 @@ if(isset($_POST['delete_post_btn']) && !empty($_POST['post_id']) && !empty($_POS
 
 	try{
 		$conn = connect_db();
-		$stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
+		$stmt = $conn->prepare("SELECT image FROM posts WHERE id = ?");
 		$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
 		$stmt->execute();
-		$img_info = $stmt->fetch();
-		$img_path = $img_info['image'];
+		$img_path = $stmt->fetch();
 	} catch (PDOException $error) {
 		echo $error->getMessage(); 
 		exit;
 	}
 	$conn = null;
 
-	if ($post_id == $post_from_db['id'] && $_SESSION['id'] == $user_id){
-		unlink("../assets/imgs/".$img_path);
-		try {
-			$conn = connect_db();
-			$stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
-			$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
-		
-			// lower the amount of posts 
-			$conn = connect_db();
-			$stmt1 = $conn->prepare("UPDATE users SET posts = posts-1 WHERE id = ?");
-			$stmt1->bindParam(1, $my_id, PDO::PARAM_INT);
-		
-			if($stmt->execute() && $stmt1->execute()){
-				$_SESSION['posts'] = $_SESSION['posts']-1;
-				header('location:'.$_SERVER['HTTP_REFERER']);
-			}else{
-				header('location:'.$_SERVER['HTTP_REFERER'].'?error_message=Error occured.');
+	if(isset($post_from_db['id'])){
+		if ($post_id == $post_from_db['id'] && $_SESSION['id'] == $user_id){
+			$path = $img_path['image'];
+			unlink("../assets/imgs/".$path);
+			try {
+				$conn = connect_db();
+				$stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
+				$stmt->bindParam(1, $post_id, PDO::PARAM_INT);
+			
+				// lower the amount of posts 
+				$conn = connect_db();
+				$stmt1 = $conn->prepare("UPDATE users SET posts = posts-1 WHERE id = ?");
+				$stmt1->bindParam(1, $my_id, PDO::PARAM_INT);
+			
+				if($stmt->execute() && $stmt1->execute()){
+					$_SESSION['posts'] = $_SESSION['posts']-1;
+					header('location:'.$_SERVER['HTTP_REFERER']);
+				}else{
+					header('location:'.$_SERVER['HTTP_REFERER'].'?error_message=Error occured.');
+				}
+				exit;
+			} catch (PDOException $error) {
+				echo $error->getMessage(); 
+				exit;
 			}
-			exit;
-		} catch (PDOException $error) {
-			echo $error->getMessage(); 
+			$conn = null;
+		}
+		else {
+			header('location: home.php?error_message=You are not authorized to perform this operation.');
 			exit;
 		}
-		$conn = null;
 	} else {
 		header('location: home.php?error_message=You are not authorized to perform this operation.');
 		exit;

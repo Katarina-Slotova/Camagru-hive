@@ -10,14 +10,14 @@ if(!isset($_SESSION['id'])){
 	<header class="profile-header">
 		<div class="profile-container">
 			<?php if(isset($_GET['ok_message'])){ ?>
-				<p class="message is-success has-text-centered"><?php echo $_GET['ok_message']; ?></p>
+				<p class="message is-success has-text-centered"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 			<?php } ?>
 			<?php if(isset($_GET['error_msg'])){ ?>
-				<p class="message is-danger has-text-centered"><?php echo($_GET['error_msg']);?></p>
+				<p class="message is-danger has-text-centered"><?php echo htmlspecialchars($_GET['error_msg'])?></p>
 			<?php } ?>
 			<div class="profile">
 				<div class="profile-img">
-					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" alt="profile-img"> 
+					<img src="<?php echo "../assets/imgs/".$_SESSION['image']; ?>" alt="profile-img">
 				</div>
 				<div class="profile-user-settings">
 					<h1 class="profile-user-name"><?php echo $_SESSION['username']; ?></h1>

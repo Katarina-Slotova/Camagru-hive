@@ -5,10 +5,10 @@
 	<section class="main">
 		<div class="main-wrapper">
 			<?php if(isset($_GET['ok_message'])) { ?>
-				<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+				<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 			<?php } ?>
 			<?php if(isset($_GET['error_message'])) { ?>
-				<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
+				<p class="has-text-centered message is-danger"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 			<?php } ?>
 					
 			<!--OTHER USERS-->
@@ -102,7 +102,7 @@
 							<form class="comment-wrapper" action="comment.php" method="POST">
 								<input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
 								<input type="hidden" name="author_id" value="<?php echo $post['user_id'];?>">
-								<input name="text" class="comment-box" type="text" placeholder="Write a comment">
+								<input name="text" class="comment-box" type="text" placeholder="Write a comment" maxlength="500">
 								<button class="comment-button" name="comment_btn" type="submit">Publish</button>
 							</form>
 						</div>

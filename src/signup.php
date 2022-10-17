@@ -20,7 +20,7 @@
 					</div>
 					<form class="login-form" id="signup_form" action="process_signup.php" method="POST">
 						<?php if(isset($_GET['error_message'])){ ?>
-							<p id="error_message" class="message is-danger has-text-centered"><?php echo $_GET['error_message'];?></p>
+							<p id="error_message" class="message is-danger has-text-centered"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 						<?php } ?>
 						<div class="form-info">
 							<div class="login-input">

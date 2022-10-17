@@ -35,6 +35,7 @@ if(isset($_POST['comment_btn']) && !empty($_POST['text']) && !empty($_POST['post
 		header('location:'.$_SERVER['HTTP_REFERER'].'?error_message=Comment too long');
 		exit;
 	}
+
 	try{
 		$conn = connect_db();
 		

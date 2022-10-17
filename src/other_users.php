@@ -1,7 +1,7 @@
 <?php require_once('get_following.php');?>
 
 <?php if(!isset($other_users)){ ?>
-	
+
 <?php }else{ ?>
 	<div class="status-wrapper">
 		

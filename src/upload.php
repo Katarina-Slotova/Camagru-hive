@@ -9,11 +9,11 @@ if(!isset($_SESSION['id'])){
 ?>
 	<div class="camera-container">
 		<?php if(isset($_GET['ok_message'])) { ?>
-			<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+			<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 		<?php } ?>
 
 		<?php if(isset($_GET['error_message'])) { ?>
-			<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
+			<p class="has-text-centered message is-danger"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 		<?php } ?>
 		<div class="camera">
 			<div class="camera-img" style="display:flex;">
@@ -94,19 +94,20 @@ if(!isset($_SESSION['id'])){
 				picture.src = URL.createObjectURL(file);
 				setTimeout(() => {
 					if(picture.height < 400)
-						alert("Stickers will not show properly on images of this size. Choose a different image if you wish to add stickers.");
+						alert("Stickers may not show properly on images of this size. Choose a different image if you wish to add stickers.");
 					if(picture.width < picture.height){
 						let maxHeight = 700;
 						let maxWidth = 500;
 						if (picture.width > maxWidth || picture.height > maxHeight) {
 							let ratio = picture.width/picture.height;
-								if(ratio > 1) {
-										picture.width = maxWidth;
-										picture.height = maxHeight/ratio;
-									} else {
-										picture.width = maxWidth*ratio;
-										picture.height = maxHeight;
-									}
+							if(ratio > 1) {
+									picture.width = maxWidth;
+									picture.height = maxHeight/ratio;
+							} else {
+								picture.width = maxWidth*ratio;
+								picture.height = maxHeight;
+								alert("Stickers may not show properly on images of this size. Choose a different image if you wish to add stickers.");
+							}
 						}
 					}
 				}, 50);
@@ -130,7 +131,7 @@ if(!isset($_SESSION['id'])){
 					ctx.drawImage(Selectedsticker, 30, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker2':
-					ctx.drawImage(Selectedsticker, 300, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
+					ctx.drawImage(Selectedsticker, 250, 40, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker3':
 					ctx.drawImage(Selectedsticker, 150, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
@@ -142,7 +143,7 @@ if(!isset($_SESSION['id'])){
 					ctx.drawImage(Selectedsticker, 30, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 				case 'sticker6':
-					ctx.drawImage(Selectedsticker, 300, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
+					ctx.drawImage(Selectedsticker, 250, 200, Selectedsticker.width * 0.8, Selectedsticker.height * 0.8);
 					break;
 			}
 			let canvasUrl = c.toDataURL();

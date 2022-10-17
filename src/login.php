@@ -12,11 +12,11 @@
 	</head>
 	<body>
 		<?php if(isset($_GET['ok_message'])) { ?>
-			<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+			<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 		<?php } ?>
 
 		<?php if(isset($_GET['error_message'])) { ?>
-			<p class="has-text-centered message is-danger"><?php echo $_GET['error_message']?></p>
+			<p class="has-text-centered message is-danger"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 		<?php } ?>
 
 		<div class="container">
@@ -28,7 +28,7 @@
 						</div>
 						<form class="login-form" id="login_form" method="POST" action="process_login.php">
 							<?php if(isset($_GET['error_msg'])){ ?>
-								<p id="error_msg" class="message is-danger has-text-centered"><?php echo($_GET['error_msg']);?></p>
+								<p id="error_msg" class="message is-danger has-text-centered"><?php echo htmlspecialchars($_GET['error_msg'])?></p>
 							<?php } ?>
 							<div class="form-info">
 								<div class="login-input">

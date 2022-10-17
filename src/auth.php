@@ -42,8 +42,8 @@ function check_reset_code($activation_code)
 }
 
 if(isset($_GET['email']) && isset($_GET['activation_code'])){
-	$email = $_GET['email'];
-	$activation_code = $_GET['activation_code'];
+	$email = htmlspecialchars($_GET['email']);
+	$activation_code = htmlspecialchars($_GET['activation_code']);
 
 	if(!empty($activation_code) && check_reset_code($activation_code)){
 		if (!empty($_GET['email']) && activate_user($email)) {

@@ -14,10 +14,10 @@
 		<section class="main">
 			<div class="main-wrapper">
 				<?php if(isset($_GET['ok_message'])){ ?>
-					<p class="has-text-centered message is-success"><?php echo $_GET['ok_message']?></p>
+					<p class="has-text-centered message is-success"><?php echo htmlspecialchars($_GET['ok_message'])?></p>
 				<?php } ?>
 				<?php if(isset($_GET['error_message'])){ ?>
-					<p class="message is-danger has-text-centered"><?php echo $_GET['error_message']; ?></p>
+					<p class="message is-danger has-text-centered"><?php echo htmlspecialchars($_GET['error_message'])?></p>
 				<?php } ?>
 				<h4 class="title is-4 mb-5">Set a new password</h4>
 				<form action="update_password.php" method="POST" enctype="multipart/form-data">
@@ -30,7 +30,7 @@
 							<label for="password" class="label">Repeat new password</label>
 							<input type="password" name="password_conf" class="input" placeholder="Repeat new password" required></input>
 							<?php if(isset($_GET['activation_code'])){ ?>
-								<input type="hidden" name="activation_code" value="<?php echo $_GET['activation_code'];?>">
+								<input type="hidden" name="activation_code" value="<?php echo htmlspecialchars($_GET['activation_code'])?>">
 							<?php } ?>
 						</div>
 						<div class="mb-5">
