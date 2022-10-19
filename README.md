@@ -34,11 +34,11 @@ For more information about the project, check out the [subject](https://github.c
 ## How to install and run the app
 </hr>
 
-First, install [MAMP](https://bitnami.com/stack/mamp) or [XAMPP](https://www.apachefriends.org/download.html) on your device.
+First, install [MAMP](https://bitnami.com/stack/mamp) on your device.
 
 Then `cd` into the `htdocs` directory and run `https://github.com/Katarina-Slotova/Camagru-hive.git camagru`. The directory where you clone the project ***must*** be called **camagru**.
 
-Once you have the project cloned, check the `camagru/config/database.php` and `camagru/src/connection.php` files and change the password for `root` to whatever you set it to when you installed MAMP/XAMPP.
+Once you have the project cloned, check the `camagru/config/database.php` and `camagru/src/connection.php` files and change the password for `root` to whatever you set it to when you installed MAMP.
 
 Then open your browser and proceed to [localhost:8080/camagru/index.php](http://localhost:8080/camagru/index.php), which will redirect you to the home page and creates the databse at the same time.
 </br>
