@@ -1,6 +1,7 @@
 # Camagru-hive
 </hr>
 <img width="193" alt="camagru-final-grade" src="https://user-images.githubusercontent.com/66918113/196616188-07d80818-53c3-4400-859f-410adb70581a.png">
+</br>
 
 ## About the project
 </hr>
@@ -12,6 +13,7 @@ The gallery with all the pictures is public, so people can see them without crea
 XSS and SQL injction attacks are rather difficult to achieve, since I prevent all kinds of shenanigans 😁 
 
 For more information about the project, check out the [subject](https://github.com/Katarina-Slotova/Camagru-hive/blob/main/subject.pdf).
+</br>
 
 ## Technologies used in the project
 </hr>
@@ -26,6 +28,7 @@ For more information about the project, check out the [subject](https://github.c
 
 ✔️  Database:
   - **MySQL**
+</br>
 
 ## How to install and run the app
 </hr>
@@ -37,6 +40,9 @@ Then `cd` into the `htdocs` directory and run `https://github.com/Katarina-Sloto
 Once you have the project cloned, check the `camagru/config/database.php` and `camagru/src/connection.php` files and change the password for `root` to whatever you set it to when you installed MAMP/XAMPP.
 
 Then open your browser and proceed to [localhost:8080/camagru/index.php](http://localhost:8080/camagru/index.php), which will redirect you to the home page and creates the databse at the same time.
+</br>
+
+
 
 
 
