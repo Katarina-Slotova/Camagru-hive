@@ -32,7 +32,7 @@ For more information about the project, check out the [subject].
 
 First, install [MAMP](https://bitnami.com/stack/mamp) or [XAMPP](https://www.apachefriends.org/download.html) on your device.
 
-Then `cd` into the htdocs directory and run `git clone `. The directory where you clone the project ***must*** be called **camagru**.
+Then `cd` into the htdocs directory and run `https://github.com/Katarina-Slotova/Camagru-hive.git camagru`. The directory where you clone the project ***must*** be called **camagru**.
 
 Once you have the project cloned, check the `camagru/config/database.php` and `camagru/src/connection.php` files and change the password for `root` to whatever you set it to when you installed MAMP/XAMPP.
 
