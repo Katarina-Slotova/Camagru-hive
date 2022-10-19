@@ -2,7 +2,7 @@
 </hr>
 <img width="193" alt="camagru-final-grade" src="https://user-images.githubusercontent.com/66918113/196616188-07d80818-53c3-4400-859f-410adb70581a.png">
 
-# About the project
+## About the project
 </hr>
 
 Camagru is the first project of the Web Development branch at Hive Helsinki, which I created from scratch all by myself. It allows user to create an account, which is verified via an email with unique link. After that, user can log in, upload pictures with none, one or more predefined images (stickers), take a picture using their webcam and jazz it up with one or more stickers, like pictures and comment on them, edit their profile, and search for other users and follow them. Every time someone comments on user's picture, user will receive a notification email. User can turn off these notifications in their profile, under notification preferences. 
@@ -13,7 +13,7 @@ XSS and SQL injction attacks are rather difficult to achieve, since I prevent al
 
 For more information about the project, check out the [subject](https://github.com/Katarina-Slotova/Camagru-hive/blob/main/subject.pdf).
 
-# Technologies used in the project
+## Technologies used in the project
 </hr>
 
 ✔️ Languages allowed by the project's subject:
@@ -27,7 +27,7 @@ For more information about the project, check out the [subject](https://github.c
 ✔️  Database:
   - **MySQL**
 
-# How to install and run the app
+## How to install and run the app
 </hr>
 
 First, install [MAMP](https://bitnami.com/stack/mamp) or [XAMPP](https://www.apachefriends.org/download.html) on your device.
