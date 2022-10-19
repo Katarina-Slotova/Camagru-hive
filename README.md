@@ -1,4 +1,4 @@
-# Camagru-hive
+# Camagru-hive 📸
 </hr>
 <img width="193" alt="camagru-final-grade" src="https://user-images.githubusercontent.com/66918113/196616188-07d80818-53c3-4400-859f-410adb70581a.png">
 </br>
