@@ -16,15 +16,15 @@ For more information about the project, check out the [subject].
 # Technologies used in the project
 </hr>
 
-• Languages allowed by the project's subject:
+✔️ Languages allowed by the project's subject:
   - Server: **PHP**
   - Client: **HTML**, **CSS**, **JavaScript** (only with browser natives API)
 
-•  Frameworks allowed by the project's subject:
+✔️  Frameworks allowed by the project's subject:
   - Server: None
   - Client: CSS Frameworks tolerated, unless it adds forbidden JavaScript. My framework of choice was **Bulma**, since it uses only CSS and no JS.
 
-•  Database:
+✔️  Database:
   - **MySQL**
 
 # How to install and run the app
