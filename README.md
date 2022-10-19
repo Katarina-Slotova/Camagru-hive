@@ -13,6 +13,7 @@ The gallery with all the pictures is public, so people can see them without crea
 XSS and SQL injction attacks are rather difficult to achieve, since I prevent all kinds of shenanigans 😁 
 
 For more information about the project, check out the [subject](https://github.com/Katarina-Slotova/Camagru-hive/blob/main/subject.pdf).
+
 </br>
 
 ## Technologies used in the project
