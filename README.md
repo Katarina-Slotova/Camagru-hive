@@ -75,7 +75,7 @@ Then open your browser and proceed to [localhost:8080/camagru/index.php](http://
 <img width="1088" alt="Screen Shot 2022-12-12 at 9 27 15 AM" src="https://user-images.githubusercontent.com/66918113/206990474-fe6836fd-290b-415f-b1d6-3348d47d156b.png">
 </br>
 
-### Home page
+### Home page with all photos of all users (visible also when not logged in)
 </hr>
 <img width="906" alt="Screen Shot 2022-12-12 at 9 32 28 AM" src="https://user-images.githubusercontent.com/66918113/206990516-c2bf9aa6-a40c-4f8d-ba06-0130a7f89ce0.png">
 </br>
