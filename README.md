@@ -43,8 +43,45 @@ Once you have the project cloned, check the `camagru/config/database.php` and `c
 Then open your browser and proceed to [localhost:8080/camagru/index.php](http://localhost:8080/camagru/index.php), which will redirect you to the home page and creates the databse at the same time.
 </br>
 
+## What are Camagru's awesome features?
 
+### Signup
+</hr>
+<img width="968" alt="Screen Shot 2022-12-12 at 9 24 38 AM" src="https://user-images.githubusercontent.com/66918113/206990097-877be2d8-b669-41ef-b58f-f744eb66a92c.png">
+</br>
 
+### Login
+</hr>
+<img width="1164" alt="Screen Shot 2022-12-12 at 9 24 26 AM" src="https://user-images.githubusercontent.com/66918113/206990139-ea07bf3b-1cef-43d1-9185-f033b89e08fb.png">
+</br>
 
+### Upload pictures and optionally add filters (stickers)
+</hr>
+<img width="1596" alt="Screen Shot 2022-12-12 at 9 28 57 AM" src="https://user-images.githubusercontent.com/66918113/206990172-60f0f18c-ce8b-47a8-a321-b5d583af23b9.png">
+</br>
 
+### Take photos with filters (stickers)
+</hr>
+<img width="1585" alt="Screen Shot 2022-12-12 at 9 54 22 AM" src="https://user-images.githubusercontent.com/66918113/206992011-db3ff799-7cec-4fed-b928-987481cec34c.png">
+</br>
+
+### User's profile with their own photos, where they can see who follows them and who they follow
+</hr>
+<img width="1820" alt="Screen Shot 2022-12-12 at 9 31 46 AM" src="https://user-images.githubusercontent.com/66918113/206990425-7b3f43b3-415c-4914-8627-9eb59715ddc8.png">
+</br>
+
+### Edit information and email notification preferences
+</hr>
+<img width="1088" alt="Screen Shot 2022-12-12 at 9 27 15 AM" src="https://user-images.githubusercontent.com/66918113/206990474-fe6836fd-290b-415f-b1d6-3348d47d156b.png">
+</br>
+
+### Home page
+</hr>
+<img width="906" alt="Screen Shot 2022-12-12 at 9 32 28 AM" src="https://user-images.githubusercontent.com/66918113/206990516-c2bf9aa6-a40c-4f8d-ba06-0130a7f89ce0.png">
+</br>
+
+### Search for other users
+</hr>
+<img width="2532" alt="Screen Shot 2022-12-12 at 9 35 13 AM" src="https://user-images.githubusercontent.com/66918113/206990539-9281c226-251f-43fb-9c39-422dccae32b6.png">
+</br>
   
