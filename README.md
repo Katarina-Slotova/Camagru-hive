@@ -34,7 +34,7 @@ For more information about the project, check out the [subject](https://github.c
 ## How to install and run the app
 </hr>
 
-First, install [MAMP](https://bitnami.com/stack/mamp) on your device.
+First, install [MAMP](https://bitnami.com/stack/mamp) on your device and start the server.
 
 Then `cd` into the `htdocs` directory and run `https://github.com/Katarina-Slotova/Camagru-hive.git camagru`. The directory where you clone the project ***must*** be called **camagru**.
 
